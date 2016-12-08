@@ -1,0 +1,10 @@
+{{#if hasBlock}}
+    {{yield this}}
+{{else}}
+    {{input type="text" id=(concat elementId '-input') class="form-control" disabled=disabled name=textFieldName placeholder=placeholder}}
+{{/if}}
+{{#if showCalendarIcon}}
+    <span class="input-group-addon">
+        <span class="{{iconCalendar}}"></span>
+    </span>
+{{/if}}

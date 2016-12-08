@@ -1,0 +1,27 @@
+<button type="button" role="button" class="page-item {{btnClass}} {{if noPrevPage btnDisabledClass}}" aria-label="First" {{action 'firstPage'}}>
+    <span class="fa fa-angle-double-left" aria-hidden="true"></span>
+    <span class="sr-only">First</span>
+</button>
+
+<button type="button" role="button" class="page-item {{btnClass}} {{if noPrevPage btnDisabledClass}}" aria-label="Previous" {{action 'prevPage'}}>
+    <span class="fa fa-angle-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+</button>
+
+{{#if showPageLinks}}
+  {{#each pageNumbers as |idx|}}
+    <button type="button" role="button" class="page-item {{btnClass}} hidden-sm-down {{if (paged-list-equal-helper idx currentPage) btnActiveClass}}" {{action 'changePage' idx}} aria-label="Page {{idx}}">
+        <span class="sr-only">Page</span> {{idx}}
+    </button>
+  {{/each}}
+{{/if}}
+
+<button type="button" role="button" class="page-item {{btnClass}} {{if noNextPage btnDisabledClass}}" aria-label="Next" {{action 'nextPage'}}>
+    <span class="fa fa-angle-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+</button>
+
+<button type="button" role="button" class="page-item {{btnClass}} {{if noNextPage btnDisabledClass}}" aria-label="Last" {{action 'lastPage'}}>
+    <span class="fa fa-angle-double-right" aria-hidden="true"></span>
+    <span class="sr-only">Last</span>
+</button>

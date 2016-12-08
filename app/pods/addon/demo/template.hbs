@@ -1,0 +1,5 @@
+{{#if (is-component (concat 'addon/demo/components/' model.name))}}
+    {{component (concat 'addon/demo/components/' model.name) model=model}}
+{{else}}
+    <p>No demo documentation has been created for <code>{{model.prettyName}}</code> yet. Check back soon!</p>
+{{/if}}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>lib/collapse-pane/addon/components/collapse-pane-toggle.js - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h1 class="file-heading">File: lib/collapse-pane/addon/components/collapse-pane-toggle.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import ComponentChildMixin from &#x27;component-utils/mixins/component-child&#x27;;
+
+/**
+ *
+ * @class CollapsePaneToggle
+ * @namespace Components
+ * @module collapse-pane
+ * @submodule components
+ * @extends Ember.Component
+ * @uses Mixins.ComponentChild
+ */
+export default Ember.Component.extend(ComponentChildMixin, {
+    tagName: &#x27;button&#x27;,
+    attributeBindings: [&#x27;data-test-id&#x27;, &#x27;aria-expanded&#x27;, &#x27;aria-controls&#x27;, &#x27;type&#x27;, &#x27;targetParent.disabled:disabled&#x27;],
+
+    /**
+     * A string attribute that will be added to the root node of the collapse pane toggle to act
+     * as a fixed query selector for testing purposes.
+     *
+     * @property data-test-id
+     * @type string
+     * @default &quot;collapse-pane-toggle&quot;
+     */
+    &#x27;data-test-id&#x27;: &#x27;collapse-pane-toggle&#x27;,
+
+
+    /**
+     * The ARIA expanded attribute for this element that will toggle based on the collapse-pane&#x27;s current &#x60;open&#x60; state.
+     *
+     * @property aria-expanded
+     * @type string
+     * @default &quot;true&quot;
+     * @readOnly
+     */
+    &#x27;aria-expanded&#x27;: Ember.computed(&#x27;targetParent.open&#x27;, function(){
+        return this.get(&#x27;targetParent.open&#x27;)? &#x27;true&#x27; : &#x27;false&#x27;;
+    }).readOnly(),
+
+
+    /**
+     * The ARIA controls attribute for this element that will be equal to the elementId of the collapse-pane-body once
+     * it is initialized.
+     *
+     * @property aria-controls
+     * @type string
+     * @default null
+     * @readOnly
+     */
+    &#x27;aria-controls&#x27;: Ember.computed(&#x27;targetParent.body.elementId&#x27;, function(){
+        return this.get(&#x27;targetParent.body.elementId&#x27;);
+    }).readOnly(),
+
+
+    /**
+     * The type attribute, useful for the default implementation of the component as a button element, that
+     * gives the browser contextual information about its usage.
+     *
+     * @property type
+     * @type string
+     * @default &quot;button&quot;
+     */
+    type: &#x27;button&#x27;,
+
+
+    /**
+     * An optional string that will be added as the content of the collapse panel toggle component, instead of
+     * creating block content. This will be ignored if block content is supplied.
+     *
+     * @property text
+     * @type string
+     * @default null
+     */
+    text: null,
+
+
+    /**
+     * The Ember event that handles click interactions on the collapse panel toggle.
+     *
+     * @event click
+     * @private
+     */
+    click() {
+        if(!this.get(&#x27;targetParent.disabled&#x27;)){
+            this.toggleProperty(&#x27;targetParent.open&#x27;);
+        }
+    }
+});
+    </pre>
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

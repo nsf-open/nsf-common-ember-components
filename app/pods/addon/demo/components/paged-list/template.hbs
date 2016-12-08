@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-xs-6">
+      {{#paged-list records=records currentPage=currentPage pageSize=pageSize as |pager|}}
+        {{pager.toolbar class='btn-group' btnClass='btn btn-secondary'}}
+
+          <p>Currently viewing {{pager.start}} through {{pager.end}} of {{pager.total}}.</p>
+
+          <ul>
+            {{#each pager.pageRecords as |record|}}
+                <li>{{record.name}}</li>
+            {{/each}}
+          </ul>
+      {{/paged-list}}
+    </div>
+
+    <div class="col-xs-6">
+        <div class="card">
+            <h4 class="card-header">Parameters</h4>
+            <div class="card-block">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Current Page</label>
+                    <div class="col-sm-9">
+                      {{input type="number" class="form-control" value=currentPage}}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Page Size</label>
+                    <div class="col-sm-9">
+                        {{input type="number" class="form-control" value=pageSize}}
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary btn-block" onclick={{action 'addRecord'}}>Add New Record</button>
+            </div>
+        </div>
+    </div>
+</div>

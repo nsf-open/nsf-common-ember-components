@@ -1,0 +1,1566 @@
+{
+    "project": {
+        "name": "NSF Ember Commons",
+        "description": "Small description for nsf-ember-commons goes here",
+        "version": "1.0.0",
+        "url": ""
+    },
+    "files": {
+        "lib/anchor-to/addon/components/anchor-to.js": {
+            "name": "lib/anchor-to/addon/components/anchor-to.js",
+            "modules": {},
+            "classes": {
+                "Components.AnchorTo": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "lib/ck-editor/addon/components/ck-editor-inline.js": {
+            "name": "lib/ck-editor/addon/components/ck-editor-inline.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/ck-editor/addon/components/ck-editor.js": {
+            "name": "lib/ck-editor/addon/components/ck-editor.js",
+            "modules": {},
+            "classes": {
+                "Components.CKEditor": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "lib/collapse-pane/addon/components/collapse-pane-body.js": {
+            "name": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "modules": {},
+            "classes": {
+                "Components.CollapsePaneBody": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "lib/collapse-pane/addon/components/collapse-pane-toggle.js": {
+            "name": "lib/collapse-pane/addon/components/collapse-pane-toggle.js",
+            "modules": {},
+            "classes": {
+                "Components.CollapsePaneToggle": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "lib/collapse-pane/addon/components/collapse-pane.js": {
+            "name": "lib/collapse-pane/addon/components/collapse-pane.js",
+            "modules": {},
+            "classes": {
+                "Components.CollapsePane": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "lib/component-utils/addon/mixins/component-child.js": {
+            "name": "lib/component-utils/addon/mixins/component-child.js",
+            "modules": {},
+            "classes": {
+                "Mixins.ComponentChild": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Mixins": 1
+            }
+        },
+        "lib/component-utils/addon/mixins/component-parent.js": {
+            "name": "lib/component-utils/addon/mixins/component-parent.js",
+            "modules": {},
+            "classes": {
+                "Mixins.ComponentParent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Mixins": 1
+            }
+        },
+        "lib/component-utils/addon/mixins/window-scroll-observer.js": {
+            "name": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "modules": {},
+            "classes": {
+                "Mixins.WindowScrollObserver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Mixins": 1
+            }
+        },
+        "lib/component-utils/addon/index.js": {
+            "name": "lib/component-utils/addon/index.js",
+            "modules": {
+                "component-utils": 1,
+                "mixins": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/tool-tip/addon/components/tool-tip.js": {
+            "name": "lib/tool-tip/addon/components/tool-tip.js",
+            "modules": {},
+            "classes": {
+                "Components.ToolTip": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            }
+        },
+        "lib/tree-view/addon/components/tree-view-node.js": {
+            "name": "lib/tree-view/addon/components/tree-view-node.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "anchor-to": {
+            "name": "anchor-to",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Components.AnchorTo": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            },
+            "file": "lib/anchor-to/addon/components/anchor-to.js",
+            "line": 3
+        },
+        "components": {
+            "name": "components",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Components.AnchorTo": 1,
+                "Components.CKEditor": 1,
+                "Components.CollapsePaneBody": 1,
+                "Components.CollapsePaneToggle": 1,
+                "Components.CollapsePane": 1,
+                "Components.ToolTip": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "tool-tip",
+            "namespace": "",
+            "description": "The AnchorTo component lets you simulate the functionality of using an anchor to jump to another area of content within the\nsame document while using [Ember's \"hash\"](http://emberjs.com/api/classes/Ember.Location.html) location type.\n\nA simple example:\n\n    {{anchor-to href=\"#mainContent\"}}Jump to content{{anchor-to}}\n\n    .\n    .\n    .\n\n    {{!Further down the page}}\n    <div id=\"mainContent\">\n        <p>Hello World!</p>\n    </div>",
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 3
+        },
+        "ck-editor": {
+            "name": "ck-editor",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Components.CKEditor": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1
+            },
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 5
+        },
+        "collapse-pane": {
+            "name": "collapse-pane",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Components.CollapsePaneBody": 1,
+                "Components.CollapsePaneToggle": 1,
+                "Components.CollapsePane": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Components": 1,
+                "Mixins": 1
+            },
+            "file": "lib/collapse-pane/addon/components/collapse-pane.js",
+            "line": 6
+        },
+        "component-utils": {
+            "name": "component-utils",
+            "submodules": {
+                "mixins": 1
+            },
+            "elements": {},
+            "classes": {
+                "Mixins.ComponentChild": 1,
+                "Mixins.ComponentParent": 1,
+                "Mixins.WindowScrollObserver": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "Mixins": 1,
+                "Components": 1
+            },
+            "tag": "main",
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 3,
+            "description": "Reusable mixins and utilities for Ember components.",
+            "itemtype": "main"
+        },
+        "mixins": {
+            "name": "mixins",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Mixins.ComponentChild": 1,
+                "Mixins.ComponentParent": 1,
+                "Mixins.WindowScrollObserver": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "component-utils",
+            "namespace": "",
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 3,
+            "description": "Component mixins.",
+            "tag": "main",
+            "itemtype": "main"
+        },
+        "tool-tip": {
+            "name": "tool-tip",
+            "submodules": {
+                "components": 1
+            },
+            "elements": {},
+            "classes": {
+                "Components.ToolTip": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 3
+        }
+    },
+    "classes": {
+        "Components.AnchorTo": {
+            "name": "Components.AnchorTo",
+            "shortname": "Components.AnchorTo",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "anchor-to",
+            "namespace": "Components",
+            "file": "lib/anchor-to/addon/components/anchor-to.js",
+            "line": 3,
+            "description": "The AnchorTo component lets you simulate the functionality of using an anchor to jump to another area of content within the\nsame document while using [Ember's \"hash\"](http://emberjs.com/api/classes/Ember.Location.html) location type.\n\nA simple example:\n\n    {{anchor-to href=\"#mainContent\"}}Jump to content{{anchor-to}}\n\n    .\n    .\n    .\n\n    {{!Further down the page}}\n    <div id=\"mainContent\">\n        <p>Hello World!</p>\n    </div>",
+            "submodule": "components",
+            "extends": "Ember.Component",
+            "access": "public",
+            "tagname": ""
+        },
+        "Components.CKEditor": {
+            "name": "Components.CKEditor",
+            "shortname": "Components.CKEditor",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ck-editor",
+            "namespace": "Components",
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 5,
+            "description": "The CKEditor component provides the minimal bootstrapping needed to load an instance of the CKEditor WYSIWYG into\nan Ember application.",
+            "submodule": "components",
+            "extends": "Ember.Component",
+            "access": "public",
+            "tagname": ""
+        },
+        "Components.CollapsePaneBody": {
+            "name": "Components.CollapsePaneBody",
+            "shortname": "Components.CollapsePaneBody",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "collapse-pane",
+            "namespace": "Components",
+            "file": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "line": 4,
+            "submodule": "components",
+            "extends": "Ember.Component",
+            "uses": [
+                "Mixins.ComponentChild"
+            ]
+        },
+        "Components.CollapsePaneToggle": {
+            "name": "Components.CollapsePaneToggle",
+            "shortname": "Components.CollapsePaneToggle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "collapse-pane",
+            "namespace": "Components",
+            "file": "lib/collapse-pane/addon/components/collapse-pane-toggle.js",
+            "line": 4,
+            "submodule": "components",
+            "extends": "Ember.Component",
+            "uses": [
+                "Mixins.ComponentChild"
+            ]
+        },
+        "Components.CollapsePane": {
+            "name": "Components.CollapsePane",
+            "shortname": "Components.CollapsePane",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "collapse-pane",
+            "namespace": "Components",
+            "file": "lib/collapse-pane/addon/components/collapse-pane.js",
+            "line": 6,
+            "submodule": "components",
+            "extends": "Ember.Component",
+            "uses": [
+                "Mixins.ComponentParent"
+            ]
+        },
+        "Mixins.ComponentChild": {
+            "name": "Mixins.ComponentChild",
+            "shortname": "Mixins.ComponentChild",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "Components.CollapsePaneBody",
+                "Components.CollapsePaneToggle"
+            ],
+            "module": "component-utils",
+            "namespace": "Mixins",
+            "file": "lib/component-utils/addon/mixins/component-child.js",
+            "line": 4,
+            "description": "The ComponentChild mixin provides a bindable reference to its closest ComponentParent ancestor.",
+            "submodule": "mixins",
+            "extends": "Ember.Mixin"
+        },
+        "Mixins.ComponentParent": {
+            "name": "Mixins.ComponentParent",
+            "shortname": "Mixins.ComponentParent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "Components.CollapsePane"
+            ],
+            "module": "component-utils",
+            "namespace": "Mixins",
+            "file": "lib/component-utils/addon/mixins/component-parent.js",
+            "line": 4,
+            "description": "The ComponentParent mixin provides a reference array to all of its registered ComponentChild instances.",
+            "submodule": "mixins",
+            "extends": "Ember.Mixin"
+        },
+        "Mixins.WindowScrollObserver": {
+            "name": "Mixins.WindowScrollObserver",
+            "shortname": "Mixins.WindowScrollObserver",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component-utils",
+            "namespace": "Mixins",
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 3,
+            "description": "The WindowScrollObserver mixin aims to make vertical scroll events in the browser easy to detect without being too taxing.\nIt does this by wrapping jQuery's scroll event and then periodically polling its data for changes, which is important since\na large volume of scroll events may be emitted (depending on the browser).\n\nIn the implementing component, a `onWindowScroll()` callback method is provided which will be executed, at most, only as\noften as the `windowScrollCheckFrequency` property is set to. E.g. if `windowScrollCheckFrequency=500` then at most `onWindowScroll()`\nwill only be executed every 500 milliseconds while scrolling occurs.\n\nThe additional `windowScrollCoolOffPeriod` property will further temper the execution of `onWindowScroll()` by delaying its execution\nuntil a set time after the last scroll event has been emitted. E.g. if `windowScrollCoolOffPeriod=250` then `onWindowScroll()` will\nnot be executed until 250 milliseconds after the last scroll event occurred. If additional scroll events are emitted during that interm\nthe timer will reset.",
+            "submodule": "mixins",
+            "extends": "Ember.Mixins"
+        },
+        "Components.ToolTip": {
+            "name": "Components.ToolTip",
+            "shortname": "Components.ToolTip",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "tool-tip",
+            "namespace": "Components",
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 3,
+            "description": "Component that creates a tooltip.",
+            "submodule": "components",
+            "extends": "Ember.Component",
+            "access": "public",
+            "tagname": ""
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "lib/anchor-to/addon/components/anchor-to.js",
+            "line": 31,
+            "description": "The href attribute value for the link. Unlike a normal anchor, this fancy fellow can be any jQuery selector string.",
+            "itemtype": "property",
+            "name": "href",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.AnchorTo",
+            "module": "anchor-to",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/anchor-to/addon/components/anchor-to.js",
+            "line": 41,
+            "description": "An optional title attribute for the link.",
+            "itemtype": "property",
+            "name": "title",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.AnchorTo",
+            "module": "anchor-to",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/anchor-to/addon/components/anchor-to.js",
+            "line": 51,
+            "description": "An optional text property whose value will be used if this component has not been given a content block.",
+            "itemtype": "property",
+            "name": "text",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.AnchorTo",
+            "module": "anchor-to",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor-inline.js",
+            "line": 4,
+            "description": "actions:\n  - ready: called after all the 'instanceReady' events of each created editor fires.\n  - focusChange: called when a new editor gains focus. Useful for always knowing what the last selected editor was.",
+            "class": "Components.CKEditor",
+            "module": "anchor-to"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor-inline.js",
+            "line": 137,
+            "class": "Components.CKEditor",
+            "module": "anchor-to"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor-inline.js",
+            "line": 158,
+            "description": "Creates a string comprised of a random assortment of uppercase, lowercase, and numbers prefixed with \"editor-\".\nThese results cannot be guaranteed perfectly unique, but it is quick, and the likelihood of ID collisions is\npretty darn low.",
+            "params": [
+                {
+                    "name": "length",
+                    "description": "",
+                    "type": "Int",
+                    "optional": true,
+                    "optdefault": "8"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Components.CKEditor",
+            "module": "anchor-to"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 18,
+            "description": "Configuration options for the CKEditor instance. Note that this property is not bound to the created editor instance\nand is only used when first initializing CKEditor.\n\nSee [CKEditor.config](http://docs.ckeditor.com/#!/api/CKEDITOR.config) for more information.",
+            "itemtype": "property",
+            "name": "options",
+            "type": "object",
+            "default": "null",
+            "writeonce": "",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 32,
+            "description": "The editor instance content as a string. Note that this property is one-way: you can set it to update the contents of the\neditor instance, but it will not be updated as the editor content is modified. Use the `save()` callback hook provided\nby the `ready` action to retrieve the latest content from the editor.",
+            "itemtype": "property",
+            "name": "content",
+            "type": "string",
+            "default": "null",
+            "access": "public",
+            "tagname": "",
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 44,
+            "description": "A boolean flag set once the CKEditor instance has finished initializing (via its instanceReady event).",
+            "itemtype": "property",
+            "name": "isInitialized",
+            "type": "boolean",
+            "default": "false",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 54,
+            "description": "A reference to the CKEditor instance being hosted by this component.",
+            "itemtype": "property",
+            "name": "instance",
+            "type": "CKEDITOR.editor",
+            "default": "null",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 64,
+            "description": "Signals that the content property has been updated internally.",
+            "itemtype": "property",
+            "name": "ignoreContentAttrUpdate",
+            "type": "boolean",
+            "default": "false",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 74,
+            "description": "The unique ID of the CKEditor instance.",
+            "itemtype": "property",
+            "name": "editorId",
+            "type": "string",
+            "readonly": "",
+            "access": "protected",
+            "tagname": "",
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 99,
+            "description": "Action called when the `destroy()` is about to be called on the editor instance because the component is\nbeing destroyed. This is useful for cleaning up anything that was bound to or relied on the editor instance\noutside of the component.",
+            "itemtype": "event",
+            "name": "willDestroyEditor",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "A reference to the CKEDITOR.editor instance.",
+                    "type": "CKEDITOR.editor"
+                }
+            ],
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 132,
+            "description": "Creates an object of bound callback methods for this CKEditor instance.",
+            "itemtype": "method",
+            "name": "_getFunctionPackage",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 157,
+            "description": "Handles the creation of a CKEditor instance and its startup callbacks.",
+            "itemtype": "method",
+            "name": "_initializeEditor",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 169,
+            "description": "Action called when the editor instance emits its `pluginsLoaded` event.",
+            "itemtype": "event",
+            "name": "pluginsLoaded",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "A reference to the CKEDITOR.editor instance.",
+                    "type": "CKEDITOR.editor"
+                }
+            ],
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 180,
+            "description": "Action called when the editor instance emits its `langLoaded` event.",
+            "itemtype": "event",
+            "name": "langLoaded",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "A reference to the CKEDITOR.editor instance.",
+                    "type": "CKEDITOR.editor"
+                }
+            ],
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 191,
+            "description": "Action called when the editor instance emits its `configLoaded` event.",
+            "itemtype": "event",
+            "name": "configLoaded",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "A reference to the CKEDITOR.editor instance.",
+                    "type": "CKEDITOR.editor"
+                }
+            ],
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 202,
+            "description": "Action called when the editor instance emits its `loaded` event.",
+            "itemtype": "event",
+            "name": "loaded",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "A reference to the CKEDITOR.editor instance.",
+                    "type": "CKEDITOR.editor"
+                }
+            ],
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/ck-editor/addon/components/ck-editor.js",
+            "line": 213,
+            "description": "Action called when the editor instance emits its `instanceReady` event.",
+            "itemtype": "event",
+            "name": "ready",
+            "params": [
+                {
+                    "name": "editor",
+                    "description": "A reference to the CKEDITOR.editor instance.",
+                    "type": "CKEDITOR.editor"
+                },
+                {
+                    "name": "callbacks",
+                    "description": "An object containing bound function callbacks to make certain operations on the editor instance easier.\nThe following callbacks are provided:\n - `save`: Calls the editor instance's `getData()` method to serialize its current contents. Returns the serialized string\n after it has been sanitized.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Components.CKEditor",
+            "module": "ck-editor",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "line": 17,
+            "description": "A string attribute that will be added to the root node of the collapse pane body to act as a\nfixed query selector for testing purposes.",
+            "itemtype": "property",
+            "name": "data-test-id",
+            "type": "string",
+            "default": "\"collapse-pane-body\"",
+            "class": "Components.CollapsePaneBody",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "line": 28,
+            "description": "The amount of time that it will take the jQuery animations to either fully show or fully hide the collapse pane body, in milliseconds.\nThis is split equally between the fade and slide portions of the animation.",
+            "itemtype": "property",
+            "name": "duration",
+            "type": "number",
+            "default": "500",
+            "class": "Components.CollapsePaneBody",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "line": 39,
+            "description": "The jQuery animation easing function that will be used for both slide and fade effects.",
+            "itemtype": "property",
+            "name": "easing",
+            "type": "string",
+            "default": "swing",
+            "class": "Components.CollapsePaneBody",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "line": 49,
+            "description": "A string indicating whether the collapse pane body is currently in its 'open' or 'close' state (including transitions into that state). A value of\n'open' will coincide to the parent collapse pane's open property being equal to true, and 'close' will coincide to that property being false.",
+            "itemtype": "property",
+            "name": "transitionDirection",
+            "type": "string",
+            "default": "open",
+            "readonly": "",
+            "class": "Components.CollapsePaneBody",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "line": 61,
+            "description": "A boolean indicating whether the collapse pane body is currently in a state of transition. I.E. it is actively being opened or closed.",
+            "itemtype": "property",
+            "name": "isTransitioning",
+            "type": "boolean",
+            "default": "false",
+            "readonly": "",
+            "class": "Components.CollapsePaneBody",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "line": 72,
+            "description": "A class name applied to the collapse panel body root element which reflects its current state. May be either\n'opened', 'opening', 'closing', or 'closed'.",
+            "itemtype": "property",
+            "name": "transitioningClassName",
+            "type": "String",
+            "default": "\"opened\"",
+            "readonly": "",
+            "class": "Components.CollapsePaneBody",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "line": 94,
+            "description": "Ember component lifecycle hook that handles setting up the initial state of the collapse pane body when the component is first created.",
+            "itemtype": "method",
+            "name": "didInsertElement",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.CollapsePaneBody",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "line": 112,
+            "description": "Animates the body to its open state by first animating its height and then the opacity of its children.",
+            "itemtype": "method",
+            "name": "openBody",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.CollapsePaneBody",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-body.js",
+            "line": 138,
+            "description": "Animates the body to its close state by first animating the opacity of its children and then its height.",
+            "itemtype": "method",
+            "name": "openBody",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.CollapsePaneBody",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-toggle.js",
+            "line": 17,
+            "description": "A string attribute that will be added to the root node of the collapse pane toggle to act\nas a fixed query selector for testing purposes.",
+            "itemtype": "property",
+            "name": "data-test-id",
+            "type": "string",
+            "default": "\"collapse-pane-toggle\"",
+            "class": "Components.CollapsePaneToggle",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-toggle.js",
+            "line": 28,
+            "description": "The ARIA expanded attribute for this element that will toggle based on the collapse-pane's current `open` state.",
+            "itemtype": "property",
+            "name": "aria-expanded",
+            "type": "string",
+            "default": "\"true\"",
+            "readonly": "",
+            "class": "Components.CollapsePaneToggle",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-toggle.js",
+            "line": 41,
+            "description": "The ARIA controls attribute for this element that will be equal to the elementId of the collapse-pane-body once\nit is initialized.",
+            "itemtype": "property",
+            "name": "aria-controls",
+            "type": "string",
+            "default": "null",
+            "readonly": "",
+            "class": "Components.CollapsePaneToggle",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-toggle.js",
+            "line": 55,
+            "description": "The type attribute, useful for the default implementation of the component as a button element, that\ngives the browser contextual information about its usage.",
+            "itemtype": "property",
+            "name": "type",
+            "type": "string",
+            "default": "\"button\"",
+            "class": "Components.CollapsePaneToggle",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-toggle.js",
+            "line": 66,
+            "description": "An optional string that will be added as the content of the collapse panel toggle component, instead of\ncreating block content. This will be ignored if block content is supplied.",
+            "itemtype": "property",
+            "name": "text",
+            "type": "string",
+            "default": "null",
+            "class": "Components.CollapsePaneToggle",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane-toggle.js",
+            "line": 77,
+            "description": "The Ember event that handles click interactions on the collapse panel toggle.",
+            "itemtype": "event",
+            "name": "click",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.CollapsePaneToggle",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane.js",
+            "line": 19,
+            "description": "A string attribute that will be added to the root node of the collapse pane to act as a fixed\nquery selector for testing purposes.",
+            "itemtype": "property",
+            "name": "data-test-id",
+            "type": "string",
+            "default": "collapse-pane",
+            "class": "Components.CollapsePane",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane.js",
+            "line": 30,
+            "description": "A boolean indicating the state of the collapse pane body.",
+            "itemtype": "property",
+            "name": "open",
+            "type": "boolean",
+            "default": "true",
+            "class": "Components.CollapsePane",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane.js",
+            "line": 40,
+            "description": "A boolean indicating whether or not the toggling functionality of this collapse-pane is disabled.",
+            "itemtype": "property",
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "class": "Components.CollapsePane",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane.js",
+            "line": 50,
+            "description": "A reference to the collapse pane's toggle child component, if it exists.",
+            "itemtype": "property",
+            "name": "toggle",
+            "type": "CollapsePaneToggle",
+            "default": "null",
+            "readonly": "",
+            "class": "Components.CollapsePane",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane.js",
+            "line": 63,
+            "description": "A reference to the collapse pane's body child component, if it exists.",
+            "itemtype": "property",
+            "name": "body",
+            "type": "CollapsePaneBody",
+            "default": "null",
+            "readonly": "",
+            "class": "Components.CollapsePane",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/collapse-pane/addon/components/collapse-pane.js",
+            "line": 76,
+            "description": "An Ember observer that watches for changes in the open/close state of the collapse panel and dispatches actions\naccordingly.",
+            "itemtype": "method",
+            "name": "_onStateChange",
+            "access": "private",
+            "tagname": "",
+            "class": "Components.CollapsePane",
+            "module": "collapse-pane",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/component-child.js",
+            "line": 14,
+            "description": "A reference to the ancestor ComponentParent to which this component belongs.",
+            "itemtype": "property",
+            "name": "targetParent",
+            "type": "ComponentUtils.ComponentParent",
+            "class": "Mixins.ComponentChild",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/component-child.js",
+            "line": 24,
+            "description": "Listener for the 'didInsertElement' component lifecycle hook which registers this component\nwith its ComponentParent ancestor.",
+            "itemtype": "method",
+            "name": "_onDidInsertElement",
+            "access": "private",
+            "tagname": "",
+            "final": 1,
+            "class": "Mixins.ComponentChild",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/component-child.js",
+            "line": 42,
+            "description": "Listener for the 'willDestroyElement' component lifecycle hook which de-registers this component\nfrom its ComponentParent ancestor.",
+            "itemtype": "method",
+            "name": "_onWillDestroyElement",
+            "access": "private",
+            "tagname": "",
+            "final": 1,
+            "class": "Mixins.ComponentChild",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/component-parent.js",
+            "line": 15,
+            "description": "An array of ComponentChild instances which are descendants of this component.",
+            "itemtype": "property",
+            "name": "children",
+            "type": "array",
+            "access": "protected",
+            "tagname": "",
+            "class": "Mixins.ComponentParent",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/component-parent.js",
+            "line": 25,
+            "description": "Listener for the 'init' component lifecycle hook which prepares the children array.",
+            "itemtype": "method",
+            "name": "_onInit",
+            "access": "private",
+            "tagname": "",
+            "final": 1,
+            "class": "Mixins.ComponentParent",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/component-parent.js",
+            "line": 38,
+            "description": "Register a component as a child of this parent",
+            "itemtype": "method",
+            "name": "registerChild",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "",
+                    "type": "ComponentUtils.ComponentChild"
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "class": "Mixins.ComponentParent",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/component-parent.js",
+            "line": 52,
+            "description": "Remove the child component from this parent component",
+            "itemtype": "method",
+            "name": "removeChild",
+            "params": [
+                {
+                    "name": "child",
+                    "description": "",
+                    "type": "ComponentUtils.ComponentChild"
+                }
+            ],
+            "access": "public",
+            "tagname": "",
+            "class": "Mixins.ComponentParent",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 25,
+            "description": "The frequency, in milliseconds, to poll for scroll updates.",
+            "itemtype": "property",
+            "name": "windowScrollCheckFrequency",
+            "type": "int",
+            "default": "500",
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 35,
+            "description": "The amount of time to wait, in milliseconds, between when the last scroll event was emitted, and the 'onWindowScroll()' callback\nshould be executed.",
+            "itemtype": "property",
+            "name": "windowScrollCoolOffPeriod",
+            "type": "int",
+            "default": "250",
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 46,
+            "description": "If true, `windowScrollCheckFrequency` and `windowScrollCoolOffPeriod` will be ignored, and `onWindowScroll()` will be executed as\noften as scroll events are emitted.",
+            "itemtype": "property",
+            "name": "windowScrollEmitContinuous",
+            "type": "boolean",
+            "default": "false",
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 57,
+            "itemtype": "property",
+            "name": "windowScrollEnabled",
+            "type": "boolean",
+            "default": "true",
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 67,
+            "itemtype": "property",
+            "name": "_windowScrollDestroyer",
+            "type": "Function",
+            "default": "null",
+            "access": "private",
+            "tagname": "",
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 78,
+            "itemtype": "method",
+            "name": "_onDidInsertElement",
+            "access": "private",
+            "tagname": "",
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 93,
+            "description": "Detach listeners and clear the interval when the component is destroyed.",
+            "itemtype": "method",
+            "name": "_onWillDestroyElement",
+            "access": "private",
+            "tagname": "",
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 105,
+            "itemtype": "method",
+            "name": "windowScrollEnable",
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 117,
+            "itemtype": "method",
+            "name": "windowScrollDisable",
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 129,
+            "itemtype": "method",
+            "name": "windowScrollDestroy",
+            "access": "private",
+            "tagname": "",
+            "final": 1,
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/component-utils/addon/mixins/window-scroll-observer.js",
+            "line": 146,
+            "itemtype": "method",
+            "name": "_buildWindowScrollInvervalMachination",
+            "access": "private",
+            "tagname": "",
+            "final": 1,
+            "class": "Mixins.WindowScrollObserver",
+            "module": "component-utils",
+            "submodule": "mixins"
+        },
+        {
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 18,
+            "description": "The data attribute set on the root element to be used for testing.",
+            "itemtype": "property",
+            "name": "data-test-id",
+            "type": "string",
+            "default": "\"tooltip\"",
+            "static": 1,
+            "class": "Components.ToolTip",
+            "module": "tool-tip",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 28,
+            "description": "Indicates whether an HTML button element which closes the tooltip should be rendered. This is only\npotentially useful for tooltips which are not triggered via hover.",
+            "itemtype": "property",
+            "name": "showCloseButton",
+            "type": "boolean",
+            "default": "true",
+            "class": "Components.ToolTip",
+            "module": "tool-tip",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 38,
+            "itemtype": "property",
+            "name": "text",
+            "type": "string",
+            "default": "null",
+            "class": "Components.ToolTip",
+            "module": "tool-tip",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 47,
+            "itemtype": "property",
+            "name": "title",
+            "type": "string",
+            "default": "null",
+            "class": "Components.ToolTip",
+            "module": "tool-tip",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 56,
+            "itemtype": "property",
+            "name": "content",
+            "type": "string",
+            "default": "null",
+            "class": "Components.ToolTip",
+            "module": "tool-tip",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 65,
+            "itemtype": "property",
+            "name": "enabled",
+            "type": "boolean",
+            "default": "true",
+            "class": "Components.ToolTip",
+            "module": "tool-tip",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 74,
+            "itemtype": "property",
+            "name": "tipTextAttr",
+            "type": "string",
+            "default": "\"data-tooltip-content\"",
+            "class": "Components.ToolTip",
+            "module": "tool-tip",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/tool-tip/addon/components/tool-tip.js",
+            "line": 83,
+            "itemtype": "property",
+            "name": "ariaHidden",
+            "type": "boolean",
+            "default": "true",
+            "readonly": "",
+            "class": "Components.ToolTip",
+            "module": "tool-tip",
+            "submodule": "components"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 25,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 31,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 39,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 85,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 93,
+            "description": "Boolean indicating whether this node's data contains a children array which is not empty (making it a `branch` instead\nof a `leaf`).",
+            "itemtype": "property",
+            "name": "hasChildren",
+            "type": "boolean",
+            "default": "false",
+            "readonly": "",
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 107,
+            "description": "The type of this node, either `branch` (if it has children) or `leaf` (if it does not have children).",
+            "itemtype": "property",
+            "name": "nodeType",
+            "type": "string",
+            "default": "\"branch\"|\"leaf\"",
+            "readonly": "",
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 120,
+            "description": "The value of the ARIA hasPopup attribute for the icon of this node, if this node has children and can be collapsed.",
+            "itemtype": "property",
+            "name": "iconAriaHasPopup",
+            "type": "boolean",
+            "default": "false",
+            "readonly": "",
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 133,
+            "description": "The value of the ARIA isExpanded attribute for the icon of this node. If this node has children and can be\ncollapsed then this boolean value will toggle to reflect its current state.",
+            "itemtype": "property",
+            "name": "iconAriaIsExpanded",
+            "type": "string|boolean",
+            "default": "false",
+            "readonly": "",
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 151,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 159,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 171,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 179,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 187,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 195,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 211,
+            "description": "The class name given to the element which wraps the node icon, if one is present. The wrapper is needed for accessibility\nif the icon can be interacted with. The generated string will be equal to either the `branchClass` or `leafClass`\nproperties set on the tree-view root - dependant on which type of node this is - suffixed with '-icon-wrapper'.",
+            "itemtype": "property",
+            "name": "iconWrapperClass",
+            "type": "string",
+            "default": "\"tv-branch-icon-wrapper\"|\"tv-leaf-icon-wrapper\"",
+            "readonly": "",
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 226,
+            "description": "The class name given to this element when it is disabled and not allowed to be interacted with. The generated string\nwill be equal to either the `branchClass` or `leafClass` properties set on the tree-view root - dependant on which\ntype of node this is - suffixed with '-disabled'.",
+            "itemtype": "property",
+            "name": "disabledClass",
+            "type": "string",
+            "default": "\"tv-branch-disabled\"|\"tv-leaf-disabled\"",
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 240,
+            "description": "The class name given to this element when it is able to trigger nodeClick actions for the tree-view root. The generated\nstring will be equal to either the `branchClass` or `leafClass` properties set on the tree-view root - dependant on which\ntype of node this is - suffixed with '-clickable'.",
+            "itemtype": "property",
+            "name": "clickableClass",
+            "type": "string",
+            "default": "null|\"tv-branch-clickable\"|\"tv-leaf-clickable\"",
+            "readonly": "",
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 259,
+            "description": "The class name given to this element when it is able to toggle a collapse event (a branch node which is not disabled).\nThe generated string will be equal to the `branchClass` property set on the tree-view root suffixed with '-collapsible'.",
+            "itemtype": "property",
+            "name": "collapsibleClass",
+            "type": "string",
+            "default": "null|\"tv-branch-collapsible\"",
+            "readonly": "",
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 273,
+            "description": "The class name given to this element to indicate its current collapse state (opened or closed). Only elements that are\nable to toggle a collapse event (a branch node which is not disabled) will be given this class. The generated string\nwill be equal to the `branchClass` property set on the tree-view root suffixed with either '-collapse-close', or '-collapse-open'\ndepending on the current value of the `isCollapsed` property.",
+            "itemtype": "property",
+            "name": "collapsibleStateClass",
+            "type": "string",
+            "default": "null|\"tv-branch-collapse-close\"",
+            "readonly": "",
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 293,
+            "description": "Creates the data object which is added to the provided event before it bubbles up to the tree-view root. That root then uses the\nproperties of this data object to determine which actions to fire.",
+            "itemtype": "method",
+            "name": "eventBuilder",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "The event object to annotate if needed.",
+                    "type": "Event"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 338,
+            "class": "",
+            "module": "tool-tip"
+        },
+        {
+            "file": "lib/tree-view/addon/components/tree-view-node.js",
+            "line": 350,
+            "class": "",
+            "module": "tool-tip"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib/ck-editor/addon/components/ck-editor-inline.js:158"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " lib/ck-editor/addon/components/ck-editor.js:132"
+        },
+        {
+            "message": "replacing incorrect tag: extend with extends",
+            "line": " lib/component-utils/addon/mixins/window-scroll-observer.js:3"
+        },
+        {
+            "message": "Missing item type\nactions:\n  - ready: called after all the 'instanceReady' events of each created editor fires.\n  - focusChange: called when a new editor gains focus. Useful for always knowing what the last selected editor was.",
+            "line": " lib/ck-editor/addon/components/ck-editor-inline.js:4"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/ck-editor/addon/components/ck-editor-inline.js:137"
+        },
+        {
+            "message": "Missing item type\nCreates a string comprised of a random assortment of uppercase, lowercase, and numbers prefixed with \"editor-\".\nThese results cannot be guaranteed perfectly unique, but it is quick, and the likelihood of ID collisions is\npretty darn low.",
+            "line": " lib/ck-editor/addon/components/ck-editor-inline.js:158"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:25"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:31"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:39"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:85"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:151"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:159"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:171"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:179"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:187"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:195"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:338"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/tree-view/addon/components/tree-view-node.js:350"
+        }
+    ]
+}

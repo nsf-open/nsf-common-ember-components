@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-xs-3">
+      {{tree-view data=model.mergeFields ready=(action 'treeViewReady') onLeafDragStart=(action 'leafDragStart')}}
+    </div>
+
+    <div class="col-xs-9">
+      {{ck-editor content=model.editorContent options=editorOptions ready=(action 'editorReady')}}
+    </div>
+</div>

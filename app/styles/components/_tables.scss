@@ -1,0 +1,178 @@
+$data-grid-header-bg: #2F4356 !default;
+$data-grid-header-color: #FFFFFF !default;
+$data-grid-border-width: $table-border-width !default;
+$data-grid-cell-padding-y: 0.4rem !default;
+$data-grid-cell-padding-x: 0.5rem !default;
+$data-grid-border-color: #DADFE3 !default;
+$data-grid-even-row-bg: #F2F5F7 !default;
+$data-grid-odd-row-bg: #FFFFFF !default;
+
+
+.data-grid{
+  table.table{
+    border: none;
+    border-collapse: collapse;
+
+    thead{
+      tr{
+        border-left: solid $data-grid-border-width $data-grid-header-bg;
+        border-right: solid $data-grid-border-width $data-grid-header-bg;
+      }
+
+      th{
+        background-color: $data-grid-header-bg;
+        border-bottom: none;
+        border-top-color: $data-grid-header-bg;
+        color: $data-grid-header-color;
+        font-weight: normal;
+        padding: $data-grid-cell-padding-y $data-grid-cell-padding-x;
+      }
+    }
+
+    tbody{
+      tr{
+        td{
+          border-bottom: none;
+          border-top: none;
+          padding: $data-grid-cell-padding-y $data-grid-cell-padding-x;
+        }
+
+        td:first-child{
+          border-left: solid $data-grid-border-width $data-grid-border-color;
+        }
+
+        td:last-child{
+          border-right: solid $data-grid-border-width $data-grid-border-color;
+        }
+
+        &:last-child{
+          td{
+            border-bottom: solid $data-grid-border-width $data-grid-border-color;
+          }
+        }
+
+        &:nth-of-type(even), &.data-grid-even-row{
+          background-color: $data-grid-even-row-bg;
+        }
+
+        &:nth-of-type(odd), &.data-grid-odd-row{
+          background-color: $data-grid-odd-row-bg;
+        }
+      }
+    }
+  }
+
+
+  &.data-grid-v-scroll{
+    table.table{
+      position: relative;
+      width: 100%;
+      z-index: 1;
+
+      thead{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 3;
+
+        tr{
+          background-color: $data-grid-header-bg;
+          float: left;
+          width: 100%;
+          display: block;
+
+          th{
+            white-space: nowrap;
+            overflow: hidden;
+            float: left;
+          }
+        }
+      }
+
+      tbody{
+        border-bottom: solid $data-grid-border-width $data-grid-border-color;
+        border-right: solid $data-grid-border-width $data-grid-border-color;
+        position: relative;
+        display: block;
+        width: 100%;
+        overflow: auto;
+        z-index: 2;
+
+        tr{
+          float: left;
+          width: 100%;
+          display: block;
+
+          td{
+            float: left;
+          }
+
+          td:last-child{
+            border-right: none;
+          }
+
+          &:last-child{
+            td{
+              border-bottom: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.table{
+  .th-sort{
+    cursor: pointer;
+
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+
+    &:after{
+      @include icon(sort);
+
+      opacity: 0.5;
+      margin-left: $spacer-x;
+    }
+
+    &:hover{
+      &:after{
+        opacity: 1;
+      }
+    }
+
+    &.th-sort-asc:after{
+      @include icon(sort-asc);
+    }
+
+    &.th-sort-desc:after{
+      @include icon(sort-desc);
+    }
+
+    // Push the caret icons to the right edge of the header cell.
+    &.th-sort-ra{
+      position: relative;
+
+      &:after{
+        position: absolute;
+        right: $table-cell-padding;
+        top: $table-cell-padding + 0.2;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.table.table-sm{
+  .th-sort.th-sort-ra:after{
+    right: $table-sm-cell-padding;
+    top: $table-sm-cell-padding + 0.2;
+  }
+}

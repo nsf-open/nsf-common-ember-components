@@ -1,0 +1,237 @@
+<h2>{{name}} Class</h2>
+<hr />
+
+<table class="properties-table mb-2">
+    <tbody>
+        {{#if extends}}
+            <tr role="row">
+                <th width="1%">Extends</th>
+                <td>{{#crossLink extends}}{{/crossLink}}</td>
+            </tr>
+        {{/if}}
+
+        {{#if uses}}
+            <tr role="row">
+                <th width="1%">Uses</th>
+                <td>
+                    <ul class="list-inline mb-0">
+                        {{#uses}}
+                            <li class="list-inline-item"><a href="{{.}}.html">{{.}}</a></li>
+                        {{/uses}}
+                    </ul>
+                </td>
+            </tr>
+        {{/if}}
+
+        {{#if foundAt}}
+            <tr role="row">
+                <th width="1%">Defined in</th>
+                <td><a href="{{foundAt}}">`{{{file}}}:{{{line}}}`</a></td>
+            </tr>
+        {{/if}}
+
+        {{#if module}}
+            {{#if submodule}}
+                <tr role="row">
+                    <th width="1%">Module</th>
+                    <td>{{#crossLinkModule submodule}}{{/crossLinkModule}}</td>
+                </tr>
+                <tr role="row">
+                    <th width="1%">Parent Module</th>
+                    <td>{{#crossLinkModule module}}{{/crossLinkModule}}</td>
+                </tr>
+            {{else}}
+                <tr role="row">
+                    <th width="1%">Module</th>
+                    <td>{{#crossLinkModule module}}{{/crossLinkModule}}</td>
+                </tr>
+            {{/if}}
+        {{/if}}
+
+        {{#if since}}
+            <tr role="row">
+                <th width="1%">Available since</th>
+                <td>{{since}}</td>
+            </tr>
+        {{/if}}
+
+        {{#if deprecated}}
+            <tr role="row">
+                <th width="1%">Deprecated</th>
+                <td>
+                    {{#if deprecationMessage}}{{deprecationMessage}}{{else}}<span class="tag tag-danger">Deprecated</span>{{/if}}
+                </td>
+            </tr>
+        {{/if}}
+    </tbody>
+</table>
+
+{{#if classDescription}}
+    <div class="description">
+        {{{classDescription}}}
+    </div>
+{{/if}}
+
+
+{{#example}}
+    <div class="card">
+        <h3 class="card-header">Example</h3>
+        <div class="card-block">
+            <pre class="code prettyprint linenums">
+{{.}}
+            </pre>
+        </div>
+    </div>
+{{/example}}
+
+
+{{#is_constructor}}
+    <div class="card">
+        <h3 class="card-header">Constructor</h3>
+        <div class="card-block">
+            {{>method}}
+        </div>
+    </div>
+{{/is_constructor}}
+
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs float-xs-left">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#index" role="tab">Index</a></li>
+
+            {{#if methods}}
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods" role="tab">Methods</a></li>
+            {{/if}}
+            {{#if properties}}
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties" role="tab">Properties</a></li>
+            {{/if}}
+            {{#if attrs}}
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#attrs" role="tab">Attributes</a></li>
+            {{/if}}
+            {{#if events}}
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events" role="tab">Events</a></li>
+            {{/if}}
+        </ul>
+    </div>
+
+    <div class="card-block">
+        <div class="tab-content">
+            <div class="tab-pane active" id="index" role="tabpanel">
+                <h3>Index</h3>
+
+                {{#if methods}}
+                    <div class="index-list methods">
+                        <h4>Methods</h4>
+                        <ul>
+                            {{#methods}}
+                                <li class="{{#if access}}{{access}}{{/if}}{{#if deprecated}} deprecated{{/if}}{{#if overwritten_from}} inherited{{/if}}{{#if extended_from}} inherited{{/if}}">
+                                    <a href="#method_{{name}}">{{name}}</a>
+
+                                    {{#if static}}
+                                        <span class="tag tag-warning">static</span>
+                                    {{/if}}
+
+                                    {{#if deprecated}}
+                                        <span class="tag tag-danger">deprecated</span>
+                                    {{/if}}
+                                </li>
+                            {{/methods}}
+                        </ul>
+                    </div>
+                {{/if}}
+
+                {{#if properties}}
+                    <div class="index-list properties">
+                        <h4>Properties</h4>
+                        <ul>
+                            {{#properties}}
+                                <li class="{{#if access}}{{access}}{{/if}}{{#if deprecated}} deprecated{{/if}}{{#if overwritten_from}} inherited{{/if}}{{#if extended_from}} inherited{{/if}}">
+                                    <a href="#property_{{name}}">{{name}}</a>
+
+                                    {{#if static}}
+                                        <span class="tag tag-warning">static</span>
+                                    {{/if}}
+
+                                    {{#if deprecated}}
+                                        <span class="tag tag-danger">deprecated</span>
+                                    {{/if}}
+                                </li>
+                            {{/properties}}
+                        </ul>
+                    </div>
+                {{/if}}
+
+                {{#if attrs}}
+                    <div class="index-list attributes">
+                        <h4>Attributes</h4>
+                        <ul>
+                            {{#attrs}}
+                                <li class="{{#if access}}{{access}}{{/if}}{{#if deprecated}} deprecated{{/if}}{{#if overwritten_from}} inherited{{/if}}{{#if extended_from}} inherited{{/if}}">
+                                    <a href="#attr_{{name}}">{{name}}</a>
+                                </li>
+                            {{/attrs}}
+                        </ul>
+                    </div>
+                {{/if}}
+
+                {{#if events}}
+                    <div class="index-list events">
+                        <h4>Events</h4>
+                        <ul>
+                            {{#events}}
+                                <li class="{{#if access}}{{access}}{{/if}}{{#if deprecated}} deprecated{{/if}}{{#if overwritten_from}} inherited{{/if}}{{#if extended_from}} inherited{{/if}}">
+                                    <a href="#event_{{name}}">{{name}}</a>
+
+                                    {{#if static}}
+                                        <span class="tag tag-warning">static</span>
+                                    {{/if}}
+
+                                    {{#if deprecated}}
+                                        <span class="tag tag-danger">deprecated</span>
+                                    {{/if}}
+                                </li>
+                            {{/events}}
+                        </ul>
+                    </div>
+                {{/if}}
+            </div>
+
+            {{#if methods}}
+                <div class="tab-pane" id="methods" role="tabpanel">
+                    <h3>Methods</h3>
+                    {{#methods}}
+                        {{>method}}
+                    {{/methods}}
+                </div>
+            {{/if}}
+
+            {{#if properties}}
+                <div class="tab-pane" id="properties" role="tabpanel">
+                    <h3>Properties</h3>
+                    {{#properties}}
+                        {{>props}}
+                    {{/properties}}
+                </div>
+            {{/if}}
+
+            {{#if attrs}}
+                <div class="tab-pane" id="attrs" role="tabpanel">
+                    <h3>Attributes</h3>
+                    {{#attrs}}
+                        {{>attributes}}
+                    {{/attrs}}
+                </div>
+            {{/if}}
+
+            {{#if events}}
+                <div class="tab-pane" id="events" role="tabpanel">
+                    <h3>Events</h3>
+                    {{#events}}
+                        {{>events}}
+                    {{/events}}
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</div>

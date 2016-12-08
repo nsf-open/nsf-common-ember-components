@@ -1,0 +1,24 @@
+{{#if label}}
+    <label for={{selectId}} class="control-label{{if labelSrOnly ' sr-only'}}">{{label}}</label>
+{{/if}}
+
+{{#if isLoading}}
+    <div class="select-input-loading">
+        {{#if loadingIcon}}<i class={{loadingIcon}} aria-hidden="true"></i> {{/if}}{{loadingMessage}}
+    </div>
+{{else}}
+    {{#if isError}}
+        <div class="select-input-error">
+            {{#if errorIcon}}<i class={{errorIcon}} aria-hidden="true"></i> {{/if}}{{errorMessage}}
+        </div>
+    {{else}}
+        <div class="input-group{{if disabled ' disabled'}}">
+            <select id={{selectId}} class="form-control" disabled={{disabled}} {{action 'onChange' on='change'}}>
+                {{#each _options as |option|}}
+                    <option value="{{option.value}}" selected={{select-input-is-equal option.value selected}}>{{option.text}}</option>
+                {{/each}}
+            </select>
+            <div class="input-group-addon" aria-hidden="true"><i class="{{caretIcon}}"></i></div>
+        </div>
+    {{/if}}
+{{/if}}

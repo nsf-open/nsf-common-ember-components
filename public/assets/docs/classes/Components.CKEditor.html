@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Components.CKEditor - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h2>Components.CKEditor Class</h2>
+<hr />
+
+<table class="properties-table mb-2">
+    <tbody>
+            <tr role="row">
+                <th width="1%">Extends</th>
+                <td>Ember.Component</td>
+            </tr>
+
+
+            <tr role="row">
+                <th width="1%">Defined in</th>
+                <td><a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l5"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:5</code></a></td>
+            </tr>
+
+                <tr role="row">
+                    <th width="1%">Module</th>
+                    <td><a href="../modules/components.html">components</a></td>
+                </tr>
+                <tr role="row">
+                    <th width="1%">Parent Module</th>
+                    <td><a href="../modules/ck-editor.html">ck-editor</a></td>
+                </tr>
+
+
+    </tbody>
+</table>
+
+    <div class="description">
+        <p>The CKEditor component provides the minimal bootstrapping needed to load an instance of the CKEditor WYSIWYG into
+an Ember application.</p>
+
+    </div>
+
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs float-xs-left">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#index" role="tab">Index</a></li>
+
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods" role="tab">Methods</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties" role="tab">Properties</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#events" role="tab">Events</a></li>
+        </ul>
+    </div>
+
+    <div class="card-block">
+        <div class="tab-content">
+            <div class="tab-pane active" id="index" role="tabpanel">
+                <h3>Index</h3>
+
+                    <div class="index-list methods">
+                        <h4>Methods</h4>
+                        <ul>
+                                <li class="private">
+                                    <a href="#method__getFunctionPackage">_getFunctionPackage</a>
+
+
+                                </li>
+                                <li class="private">
+                                    <a href="#method__initializeEditor">_initializeEditor</a>
+
+
+                                </li>
+                        </ul>
+                    </div>
+
+                    <div class="index-list properties">
+                        <h4>Properties</h4>
+                        <ul>
+                                <li class="public">
+                                    <a href="#property_content">content</a>
+
+
+                                </li>
+                                <li class="protected">
+                                    <a href="#property_editorId">editorId</a>
+
+
+                                </li>
+                                <li class="private">
+                                    <a href="#property_ignoreContentAttrUpdate">ignoreContentAttrUpdate</a>
+
+
+                                </li>
+                                <li class="protected">
+                                    <a href="#property_instance">instance</a>
+
+
+                                </li>
+                                <li class="protected">
+                                    <a href="#property_isInitialized">isInitialized</a>
+
+
+                                </li>
+                                <li class="public">
+                                    <a href="#property_options">options</a>
+
+
+                                </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="index-list events">
+                        <h4>Events</h4>
+                        <ul>
+                                <li class="">
+                                    <a href="#event_configLoaded">configLoaded</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#event_langLoaded">langLoaded</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#event_loaded">loaded</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#event_pluginsLoaded">pluginsLoaded</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#event_ready">ready</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#event_willDestroyEditor">willDestroyEditor</a>
+
+
+                                </li>
+                        </ul>
+                    </div>
+            </div>
+
+                <div class="tab-pane" id="methods" role="tabpanel">
+                    <h3>Methods</h3>
+                        <div id="method__getFunctionPackage" class="method item private">
+                            <h3 class="name"><code>_getFunctionPackage</code></h3>
+                        
+                                <span class="paren">()</span>
+                        
+                                <span class="returns-inline">
+                                    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                </span>
+                        
+                        
+                                <span class="flag private">private</span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l132"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:132</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Creates an object of bound callback methods for this CKEditor instance.</p>
+                        
+                            </div>
+                        
+                        
+                                <div class="returns">
+                                    <h4>Returns:</h4>
+                        
+                                    <div class="returns-description">
+                                                <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                                    </div>
+                                </div>
+                        
+                        
+                        </div>
+                        <div id="method__initializeEditor" class="method item private">
+                            <h3 class="name"><code>_initializeEditor</code></h3>
+                        
+                                <span class="paren">()</span>
+                        
+                        
+                        
+                                <span class="flag private">private</span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l157"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:157</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Handles the creation of a CKEditor instance and its startup callbacks.</p>
+                        
+                            </div>
+                        
+                        
+                        
+                        
+                        </div>
+                </div>
+
+                <div class="tab-pane" id="properties" role="tabpanel">
+                    <h3>Properties</h3>
+                        <div id="property_content" class="property item public">
+                            <h3 class="h5 name">
+                                <code>content</code> <small><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></small>
+                            </h3>
+                        
+                            <span class="tag tag-outline"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        
+                        
+                        
+                                <span class="flag public">public</span>
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l32"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:32</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>The editor instance content as a string. Note that this property is one-way: you can set it to update the contents of the
+                        editor instance, but it will not be updated as the editor content is modified. Use the <code>save()</code> callback hook provided
+                        by the <code>ready</code> action to retrieve the latest content from the editor.</p>
+                        
+                            </div>
+                        
+                                <p><strong>Default:</strong> null</p>
+                        
+                        
+                        </div>
+                        <div id="property_editorId" class="property item protected">
+                            <h3 class="h5 name">
+                                <code>editorId</code> <small><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></small>
+                            </h3>
+                        
+                            <span class="tag tag-outline"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        
+                        
+                        
+                                <span class="flag protected">protected</span>
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l74"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:74</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>The unique ID of the CKEditor instance.</p>
+                        
+                            </div>
+                        
+                        
+                        
+                        </div>
+                        <div id="property_ignoreContentAttrUpdate" class="property item private">
+                            <h3 class="h5 name">
+                                <code>ignoreContentAttrUpdate</code> <small><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></small>
+                            </h3>
+                        
+                            <span class="tag tag-outline"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        
+                        
+                        
+                                <span class="flag private">private</span>
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l64"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:64</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Signals that the content property has been updated internally.</p>
+                        
+                            </div>
+                        
+                                <p><strong>Default:</strong> false</p>
+                        
+                        
+                        </div>
+                        <div id="property_instance" class="property item protected">
+                            <h3 class="h5 name">
+                                <code>instance</code> <small>CKEDITOR.editor</small>
+                            </h3>
+                        
+                            <span class="tag tag-outline">CKEDITOR.editor</span>
+                        
+                        
+                        
+                                <span class="flag protected">protected</span>
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l54"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:54</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>A reference to the CKEditor instance being hosted by this component.</p>
+                        
+                            </div>
+                        
+                                <p><strong>Default:</strong> null</p>
+                        
+                        
+                        </div>
+                        <div id="property_isInitialized" class="property item protected">
+                            <h3 class="h5 name">
+                                <code>isInitialized</code> <small><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></small>
+                            </h3>
+                        
+                            <span class="tag tag-outline"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        
+                        
+                        
+                                <span class="flag protected">protected</span>
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l44"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:44</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>A boolean flag set once the CKEditor instance has finished initializing (via its instanceReady event).</p>
+                        
+                            </div>
+                        
+                                <p><strong>Default:</strong> false</p>
+                        
+                        
+                        </div>
+                        <div id="property_options" class="property item public">
+                            <h3 class="h5 name">
+                                <code>options</code> <small><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></small>
+                            </h3>
+                        
+                            <span class="tag tag-outline"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        
+                        
+                        
+                                <span class="flag public">public</span>
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l18"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:18</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Configuration options for the CKEditor instance. Note that this property is not bound to the created editor instance
+                        and is only used when first initializing CKEditor.</p>
+                        <p>See <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.config">CKEditor.config</a> for more information.</p>
+                        
+                            </div>
+                        
+                                <p><strong>Default:</strong> null</p>
+                        
+                        
+                        </div>
+                </div>
+
+
+                <div class="tab-pane" id="events" role="tabpanel">
+                    <h3>Events</h3>
+                        <div id="event_configLoaded" class="events item">
+                            <h3 class="name"><code>configLoaded</code></h3>
+                            <span class="type"></span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l191"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:191</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Action called when the editor instance emits its <code>configLoaded</code> event.</p>
+                        
+                            </div>
+                        
+                                <div class="params">
+                                    <h4>Event Payload:</h4>
+                        
+                                    <ul class="params-list">
+                                        <li class="param">
+                                                <code class="param-name">editor</code>
+                                                <span class="type">CKEDITOR.editor</span>
+                        
+                        
+                                            <div class="param-description">
+                                                <p>A reference to the CKEDITOR.editor instance.</p>
+                        
+                                            </div>
+                        
+                                        </li>
+                                    </ul>
+                                </div>
+                        
+                        
+                        </div>
+                        <div id="event_langLoaded" class="events item">
+                            <h3 class="name"><code>langLoaded</code></h3>
+                            <span class="type"></span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l180"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:180</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Action called when the editor instance emits its <code>langLoaded</code> event.</p>
+                        
+                            </div>
+                        
+                                <div class="params">
+                                    <h4>Event Payload:</h4>
+                        
+                                    <ul class="params-list">
+                                        <li class="param">
+                                                <code class="param-name">editor</code>
+                                                <span class="type">CKEDITOR.editor</span>
+                        
+                        
+                                            <div class="param-description">
+                                                <p>A reference to the CKEDITOR.editor instance.</p>
+                        
+                                            </div>
+                        
+                                        </li>
+                                    </ul>
+                                </div>
+                        
+                        
+                        </div>
+                        <div id="event_loaded" class="events item">
+                            <h3 class="name"><code>loaded</code></h3>
+                            <span class="type"></span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l202"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:202</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Action called when the editor instance emits its <code>loaded</code> event.</p>
+                        
+                            </div>
+                        
+                                <div class="params">
+                                    <h4>Event Payload:</h4>
+                        
+                                    <ul class="params-list">
+                                        <li class="param">
+                                                <code class="param-name">editor</code>
+                                                <span class="type">CKEDITOR.editor</span>
+                        
+                        
+                                            <div class="param-description">
+                                                <p>A reference to the CKEDITOR.editor instance.</p>
+                        
+                                            </div>
+                        
+                                        </li>
+                                    </ul>
+                                </div>
+                        
+                        
+                        </div>
+                        <div id="event_pluginsLoaded" class="events item">
+                            <h3 class="name"><code>pluginsLoaded</code></h3>
+                            <span class="type"></span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l169"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:169</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Action called when the editor instance emits its <code>pluginsLoaded</code> event.</p>
+                        
+                            </div>
+                        
+                                <div class="params">
+                                    <h4>Event Payload:</h4>
+                        
+                                    <ul class="params-list">
+                                        <li class="param">
+                                                <code class="param-name">editor</code>
+                                                <span class="type">CKEDITOR.editor</span>
+                        
+                        
+                                            <div class="param-description">
+                                                <p>A reference to the CKEDITOR.editor instance.</p>
+                        
+                                            </div>
+                        
+                                        </li>
+                                    </ul>
+                                </div>
+                        
+                        
+                        </div>
+                        <div id="event_ready" class="events item">
+                            <h3 class="name"><code>ready</code></h3>
+                            <span class="type"></span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l213"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:213</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Action called when the editor instance emits its <code>instanceReady</code> event.</p>
+                        
+                            </div>
+                        
+                                <div class="params">
+                                    <h4>Event Payload:</h4>
+                        
+                                    <ul class="params-list">
+                                        <li class="param">
+                                                <code class="param-name">editor</code>
+                                                <span class="type">CKEDITOR.editor</span>
+                        
+                        
+                                            <div class="param-description">
+                                                <p>A reference to the CKEDITOR.editor instance.</p>
+                        
+                                            </div>
+                        
+                                        </li>
+                                        <li class="param">
+                                                <code class="param-name">callbacks</code>
+                                                <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        
+                        
+                                            <div class="param-description">
+                                                <p>An object containing bound function callbacks to make certain operations on the editor instance easier.
+                        The following callbacks are provided:</p>
+                        <ul>
+                        <li><code>save</code>: Calls the editor instance's <code>getData()</code> method to serialize its current contents. Returns the serialized string
+                        after it has been sanitized.</li>
+                        </ul>
+                        
+                                            </div>
+                        
+                                        </li>
+                                    </ul>
+                                </div>
+                        
+                        
+                        </div>
+                        <div id="event_willDestroyEditor" class="events item">
+                            <h3 class="name"><code>willDestroyEditor</code></h3>
+                            <span class="type"></span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_ck-editor_addon_components_ck-editor.js.html#l99"><code>lib&#x2F;ck-editor&#x2F;addon&#x2F;components&#x2F;ck-editor.js:99</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Action called when the <code>destroy()</code> is about to be called on the editor instance because the component is
+                        being destroyed. This is useful for cleaning up anything that was bound to or relied on the editor instance
+                        outside of the component.</p>
+                        
+                            </div>
+                        
+                                <div class="params">
+                                    <h4>Event Payload:</h4>
+                        
+                                    <ul class="params-list">
+                                        <li class="param">
+                                                <code class="param-name">editor</code>
+                                                <span class="type">CKEDITOR.editor</span>
+                        
+                        
+                                            <div class="param-description">
+                                                <p>A reference to the CKEDITOR.editor instance.</p>
+                        
+                                            </div>
+                        
+                                        </li>
+                                    </ul>
+                                </div>
+                        
+                        
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

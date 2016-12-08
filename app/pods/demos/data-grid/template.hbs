@@ -1,0 +1,71 @@
+<div class="row mb-1">
+  <div class="col-xs-12">
+    <button type="button" onclick={{action 'onModelRefresh'}}>Refresh Model</button>
+  </div>
+</div>
+
+{{#data-grid records=model pageSize=pageSize vScrollEnabled=vScrollEnabled as |grid|}}
+  <div class="row mb-1">
+      <div class="col-md-3">
+          {{#dropdown-list closeOnInteraction=false}}
+            {{dropdown-list-toggle 'Columns' class='btn btn-primary btn-block'}}
+
+            {{#dropdown-list-options}}
+                {{#each grid.columns as |column|}}
+                  <li class="dropdown-item">
+                    <label class="form-check-label">
+                      {{input type="checkbox" class="form-check-input" checked=column.isVisible}} {{column.label}}
+                    </label>
+                  </li>
+                {{/each}}
+            {{/dropdown-list-options}}
+          {{/dropdown-list}}
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-check-label">
+          {{input type="checkbox" class="form-check-input" checked=vScrollEnabled}} Vertical Scroll
+        </label>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-3">
+          {{select-input options=pageSizeOptions selected=10 action=(action grid.pager.changePageSize)}}
+      </div>
+
+      <div class="col-md-9">
+          <div class="float-xs-right pagination-block">
+              <p class="pagination-info"><span class="hidden-sm-down">showing </span><strong>{{grid.pager.start}} - {{grid.pager.end}}</strong> of {{grid.pager.total}}</p>
+
+              {{#if grid.pager.isPaged}}
+                {{grid.pager.toolbar class="btn-group" btnClass="btn btn-secondary"}}
+              {{/if}}
+          </div>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-xs-12">
+        {{#grid.table class="table" as |table|}}
+          {{#table.head as |head|}}
+            {{head.th label="First Name" width="20%"}}
+            {{head.th label="Last Name" width="20%"}}
+            {{head.th label="Character Class" width="20%"}}
+            {{head.th label="Rank" width="20%"}}
+            {{head.th label="Hours Played" width="20%"}}
+          {{/table.head}}
+
+          {{#table.body as |row|}}
+              <tr role="row">
+                <td class="{{unless grid.columns.0.isVisible 'hidden-xs-up'}}">{{row.firstName}}</td>
+                <td class="{{unless grid.columns.1.isVisible 'hidden-xs-up'}}">{{row.lastName}}</td>
+                <td class="{{unless grid.columns.2.isVisible 'hidden-xs-up'}}">{{row.character}}</td>
+                <td class="{{unless grid.columns.3.isVisible 'hidden-xs-up'}}">{{row.rank}}</td>
+                <td class="{{unless grid.columns.4.isVisible 'hidden-xs-up'}}">{{row.hours}}</td>
+              </tr>
+          {{/table.body}}
+        {{/grid.table}}
+      </div>
+  </div>
+{{/data-grid}}

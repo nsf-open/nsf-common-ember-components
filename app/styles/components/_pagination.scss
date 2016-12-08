@@ -1,0 +1,44 @@
+.pagination{
+  &.btn-group{
+    margin-top: 0;
+
+    .btn.page-item{
+      color: $pagination-color;
+      background-color: $pagination-bg;
+      border: solid $pagination-border-width $pagination-border-color;
+      padding: $pagination-padding-y $pagination-padding-x;
+
+      &.active{
+        background-color: $pagination-active-bg;
+        border-color: $pagination-active-border;
+        color: $pagination-active-color;
+      }
+
+      &:hover:not(.active):not(.disabled):not([disabled]),
+      &:focus:not(.active):not(.disabled):not([disabled]){
+        background-color: $pagination-hover-bg;
+        border-color: $pagination-hover-border;
+        color: $pagination-hover-color;
+      }
+
+      &.disabled, &[disabled]{
+        background-color: $pagination-disabled-bg;
+        border-color: $pagination-disabled-border;
+        color: $pagination-disabled-color;
+      }
+    }
+  }
+}
+
+.pagination-info{
+  display: inline-block;
+  line-height: $btn-line-height;
+  padding: $pagination-padding-y 0;
+  vertical-align: middle;
+}
+
+.pagination-block{
+  .pagination{
+    margin-left: $pagination-padding-x;
+  }
+}

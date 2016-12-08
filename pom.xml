@@ -1,0 +1,228 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- *********************************************************************** -->
+	<!-- Project Identification                                                  -->
+	<!-- *********************************************************************** -->
+	<groupId>gov.nsf.common.ui</groupId>
+	<artifactId>common-ember-components</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>NSF Common Ember Components</name>
+	<packaging>war</packaging>
+
+	<!-- *********************************************************************** -->
+	<!-- Project Properties                                                      -->
+	<!-- *********************************************************************** -->
+	<properties>
+		<frontend.plugin.version>1.0</frontend.plugin.version>
+		<node.version>v4.2.2</node.version>
+		<npm.version>2.14.10</npm.version>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+		<!-- build-prod will build for production -->
+		<!-- scripts are configured in package.json -->
+		<ember.build.script>build</ember.build.script>
+	</properties>
+
+	<!-- *********************************************************************** -->
+	<!-- Parent POM                                                              -->
+	<!-- *********************************************************************** -->
+	<parent>
+		<groupId>gov.nsf</groupId>
+		<artifactId>dis-pom</artifactId>
+		<version>1.0.1</version>
+	</parent>
+
+	<!-- *********************************************************************** -->
+	<!-- Project Dependencies                                                    -->
+	<!-- *********************************************************************** -->
+	<dependencies>
+		<!--  No Cache Filter -->
+		<dependency>
+			<groupId>com.samaxes.filter</groupId>
+			<artifactId>cachefilter</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.eirslett</groupId>
+			<artifactId>frontend-maven-plugin</artifactId>
+			<version>${frontend.plugin.version}</version>
+		</dependency>
+	</dependencies>
+
+	<!-- *********************************************************************** -->
+	<!-- Project Build Section                                                   -->
+	<!-- *********************************************************************** -->
+    <profiles>
+		<profile>
+			<id>frontend-build</id>
+			<activation>
+			  <activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<!-- If you're on windows you need to have git installed. Use git-scm. The install should put it on your path -->
+				<finalName>${project.artifactId}</finalName> <!-- named to match was is deployed on weblogic -->
+				<plugins>
+					<plugin>
+						<groupId>com.github.eirslett</groupId>
+						<artifactId>frontend-maven-plugin</artifactId>
+						<version>${frontend.plugin.version}</version>
+						<executions>
+							<execution>
+								<id>install-frontend-build-tools</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>
+										install-node-and-npm
+									</goal>
+								</goals>
+								<configuration>
+									<nodeVersion>${node.version}</nodeVersion>
+									<npmVersion>${npm.version}</npmVersion>
+								</configuration>
+							</execution>
+							<execution>
+								<id>npm install</id>
+								<goals>
+									<goal>npm</goal>
+								</goals>
+								<configuration>
+									<arguments>install</arguments>
+								</configuration>
+							</execution>
+							<execution>
+								<id>npm update</id>
+								<goals>
+									<goal>npm</goal>
+								</goals>
+								<configuration>
+									<arguments>update</arguments>
+								</configuration>
+							</execution>
+							<execution>
+								<id>bower install</id>
+								<goals>
+								 <goal>bower</goal>
+								</goals>
+								<configuration>
+								 <arguments>install</arguments>
+								</configuration>
+							</execution>
+							<execution>
+								<id>bower update</id>
+								<goals>
+									<goal>bower</goal>
+								</goals>
+								<configuration>
+									<arguments>update</arguments>
+								</configuration>
+							</execution>
+							<!--<execution>-->
+							    <!--<id>ember test</id>-->
+							    <!--<phase>test</phase>-->
+							    <!--<goals>-->
+							      <!--<goal>npm</goal>-->
+							    <!--</goals>-->
+							    <!--<configuration>-->
+							      <!--<arguments>run test</arguments>-->
+							    <!--</configuration>-->
+							<!--</execution>-->
+							<execution>
+								<id>build-frontend</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>npm</goal>
+								</goals>
+								<configuration>
+									<arguments>run ${ember.build.script}</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-clean-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>clean</phase>
+								<goals>
+									<goal>clean</goal>
+								</goals>
+								<configuration>
+									<filesets>
+										<fileset>
+											<directory>tmp</directory>
+										</fileset>
+										<fileset>
+											<directory>dist</directory>
+										</fileset>
+									</filesets>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+					  <groupId>org.apache.maven.plugins</groupId>
+					  <artifactId>maven-war-plugin</artifactId>
+					  <version>2.6</version>
+					  <configuration>
+					    <webResources>
+					      <resource>
+					        <!-- this is relative to the pom.xml directory -->
+						    <directory>dist</directory>
+						    <targetPath>./</targetPath>
+						  </resource>
+						  <!-- copy the maven build info into the properties directory -->
+						  <resource>
+						    <directory>buildInfo</directory>
+					    	<filtering>true</filtering>
+					    	<targetPath>./properties/</targetPath>
+						  </resource>
+						  <resource>
+					    	<!-- this is relative to the pom.xml directory -->
+					        <directory>WEB-INF</directory>
+					        <targetPath>WEB-INF</targetPath>
+						  </resource>
+					    </webResources>
+					  </configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<version>2.1</version>
+						<configuration>
+						  <warFile>${project.build.directory}/${project.build.finalName}.war</warFile>
+						</configuration>
+					</plugin>
+					<plugin>
+					    <groupId>com.github.klieber</groupId>
+					    <artifactId>phantomjs-maven-plugin</artifactId>
+					    <executions>
+					        <execution>
+					            <goals>
+					                <goal>install</goal>
+					            </goals>
+					        </execution>
+					    </executions>
+					    <configuration>
+					        <version>1.9.8</version>
+					    </configuration>
+					</plugin>
+				</plugins>
+				<resources>
+					<resource>
+						<directory>${basedir}/dist/</directory>
+						<excludes>
+							<exclude>tests/</exclude>
+							<exclude>**/.gitkeep</exclude>
+							<exclude>testem.js</exclude>
+						</excludes>
+						<targetPath>META-INF/resources/</targetPath>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+	</profiles>
+</project>

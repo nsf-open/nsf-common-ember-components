@@ -1,0 +1,52 @@
+{{#sort-list ascendingValue="th-sort-asc" descendingValue="th-sort-desc" records=model as |sorter|}}
+  {{#paged-list records=sorter.sortRecords as |pager|}}
+      <div class="row">
+          <div class="col-xs-12">
+              <table id="sortTable" class="table table-bordered table-striped table-sm">
+                  <thead>
+                  <tr>
+                    {{#with sorter.rules.firstName as |fName|}}
+                        <th class="th-sort {{fName.value}}" tabindex="0" aria-controls="sortTable" aria-sort={{fName.directionLabel}} onclick={{action sorter.sort 'firstName'}}>First Name</th>
+                    {{/with}}
+
+                    {{#with sorter.rules.lastName as |lName|}}
+                        <th class="th-sort {{lName.value}}" tabindex="0" aria-controls="sortTable" aria-sort={{lName.directionLabel}} onclick={{action sorter.sort 'lastName'}}>Last Name</th>
+                    {{/with}}
+
+                    {{#with sorter.rules.character as |charClass|}}
+                        <th class="th-sort {{charClass.value}}" tabindex="0" aria-controls="sortTable" aria-sort={{charClass.directionLabel}} onclick={{action sorter.sort 'character'}}>Character Class</th>
+                    {{/with}}
+
+                    {{#with sorter.rules.rank as |charRank|}}
+                        <th class="th-sort {{charRank.value}}" tabindex="0" aria-controls="sortTable" aria-sort={{charRank.directionLabel}} onclick={{action sorter.sort 'rank' (hash subSort='hours' subSortPin='asc')}}>Rank</th>
+                    {{/with}}
+
+                      <th>Hours Played</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {{#each pager.pageRecords as |row|}}
+                      <tr role="row">
+                          <td>{{row.firstName}}</td>
+                          <td>{{row.lastName}}</td>
+                          <td>{{row.character}}</td>
+                          <td>{{row.rank}}</td>
+                          <td>{{row.hours}}</td>
+                      </tr>
+                  {{/each}}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-5">
+              <p>Showing {{pager.start}} through {{pager.end}} of {{pager.total}} records</p>
+          </div>
+
+          <div class="col-md-7">
+            {{pager.toolbar class='btn-group float-md-right' btnClass='btn btn-secondary'}}
+          </div>
+      </div>
+  {{/paged-list}}
+{{/sort-list}}

@@ -1,0 +1,75 @@
+$select-input-bg                  : $input-bg !default;
+$select-input-bg-disabled         : $input-bg-disabled !default;
+$select-input-border              : $input-border !default;
+$select-input-height              : $input-height-base !default;
+$select-input-padding-vertical    : $padding-base-vertical !default;
+$select-input-padding-horizontal  : $padding-base-horizontal !default;
+$select-input-error-color         : $state-danger-text !default;
+
+
+.select-input{
+  .select-input-loading, .select-input-error{
+    background-color: $select-input-bg;
+    border: solid 1px $select-input-border;
+    height: $select-input-height;
+    padding: $select-input-padding-vertical $select-input-padding-horizontal;
+
+    @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+  }
+
+  .select-input-error{
+    border-color: $select-input-error-color;
+    color: $select-input-error-color;
+  }
+
+  .input-group{
+    background-color: $select-input-bg;
+    height: $select-input-height;
+    position: relative;
+    width: 100%;
+
+    select{
+      background: transparent none repeat scroll 0 0;
+      cursor: pointer;
+      padding-right: $select-input-height + 1;
+      position: relative;
+      z-index: 4;
+
+       -ms-text-overflow: ellipsis;
+      -webkit-appearance: none;
+         -moz-appearance: none;
+              appearance: none;
+
+      &::-ms-expand {
+        display: none;
+      }
+    }
+
+    .input-group-addon{
+      border-width: 0;
+      border-left: solid 1px $select-input-border;
+      bottom: 0;
+      font-size: 170%;
+      line-height: $select-input-height;
+      padding:  0 0 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: $select-input-height + 1;
+      z-index: 2;
+    }
+
+    &.disabled{
+      background: $select-input-bg-disabled;
+      opacity: 1;
+
+      select{
+        cursor: not-allowed;
+      }
+
+      .input-group-addon{
+        opacity: 0.5;
+      }
+    }
+  }
+}

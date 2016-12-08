@@ -1,0 +1,11 @@
+{
+  "name": "nsf-ember-commons",
+  "dependencies": {
+    "ember": "~2.8.0",
+    "ember-cli-shims": "0.1.1",
+    "tooltipster": "^3.3.0",
+    "ckeditor": "^4.5.10",
+    "bootstrap": "v4.0.0-alpha.5",
+    "font-awesome": "^4.6.3"
+  }
+}

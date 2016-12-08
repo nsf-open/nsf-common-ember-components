@@ -1,0 +1,83 @@
+$header-height: 72px;
+$footer-height: 50px;
+
+html{
+  box-sizing: border-box;
+  height: 100%;
+}
+
+body{
+  background-color: #F2F5F7;
+  position: relative;
+  margin: 0;
+  min-height: 100%;
+  padding-bottom: $footer-height;
+
+  &::after{
+    content: "";
+    background: url(../images/Ember.js_Logo_and_Mascot.png) no-repeat;
+    position: absolute;
+    width: 324px;
+    height: 308px;
+    bottom: $footer-height + 20;
+    right: 20px;
+    opacity: 0.1;
+    z-index: -1;
+  }
+
+  header{
+    background-color: #FFF;
+    height: $header-height;
+    margin-bottom: $spacer-y;
+    padding-top: 10px;
+
+    -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.1);
+
+    h1{
+      line-height: 3rem;
+      font-size: 1.4rem;
+      font-weight: 300;
+
+      img{
+        margin-top: -6px;
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    .nav{
+      margin-top: 15px;
+    }
+  }
+
+  footer{
+    background-color: #17212a;
+    height: $footer-height;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    -webkit-box-shadow: 0px -2px 10px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px -2px 10px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px -2px 10px 0px rgba(0,0,0,0.1);
+  }
+}
+
+pre{
+  border: solid 1px #CCC;
+  padding: 20px;
+}
+
+.site-home{
+  h1, h3{
+    font-weight: 300;
+    line-height: 3rem;
+  }
+}
+
+.text-nowrap{
+  white-space: nowrap;
+}

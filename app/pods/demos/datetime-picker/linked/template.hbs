@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="display-3">DateTime Picker</h1>
+        <p class="lead">Two datetime pickers joined to create time ranges</p>
+        <p>The need to create a time range is a pretty common use case, right? You don't want your users inputting wonky data though: start date after the end date, or end date after the start date. With the datetime picker component you can easily bind two instances together to keep the inputs making sense.</p>
+        <p>In the demo below, once a start date is selected no end date prior to it can be chosen. Moving the opposite way, once an end date is selected only start dates before it can be chosen.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>Start</label>
+            {{datetime-picker useCurrent=false date=startDate minDate=rightNow maxDate=endDate allowInputToggle=true viewDate=rightNow sideBySide=true onChange=(action 'onStartDateChange')}}
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>End</label>
+            {{datetime-picker useCurrent=false date=endDate minDate=startDate allowInputToggle=true disabled=(unless startDate true) sideBySide=true}}
+        </div>
+    </div>
+</div>

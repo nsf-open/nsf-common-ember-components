@@ -1,0 +1,26 @@
+<div class="card">
+    {{#if modules}}
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+            {{#modules}}
+                <a class="list-group-item list-group-item-action" href="{{../projectRoot}}modules/{{name}}.html">{{displayName}}</a>
+            {{/modules}}
+        </div>
+    {{/if}}
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+        {{#classes}}
+            <a class="list-group-item list-group-item-action" href="{{../projectRoot}}classes/{{name}}.html">{{displayName}}</a>
+        {{/classes}}
+    </div>
+
+    {{#if elements}}
+        <p class="card-header">Elements</p>
+        <div class="list-group list-group-flush">
+            {{#elements}}
+                <a class="list-group-item list-group-item-action" href="{{../projectRoot}}elements/{{name}}.html">{{displayName}}</a>
+            {{/elements}}
+        </div>
+    {{/if}}
+</div>

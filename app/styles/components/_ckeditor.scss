@@ -1,0 +1,32 @@
+.editor-block{
+  background-color: $gray-lighter;
+
+  *[contenteditable="true"]{
+    background-color: #FFF;
+    border: solid 1px #FFF;
+
+    &:hover{
+      border: dashed 1px $gray;
+    }
+
+    &.cke_focus:hover{
+      border: solid 1px #FFF;
+    }
+  }
+}
+
+*[data-editor-readonly]{
+  color: #0000ff;
+}
+
+.cke_widget_wrapper:hover > *[data-editor-readonly]{
+  outline-color: #0000ff !important;
+}
+
+*[data-editor-noaccess]{
+  color: #ff0000;
+}
+
+.cke_widget_wrapper:hover > *[data-editor-noaccess]{
+  outline-color: #ff0000 !important;
+}

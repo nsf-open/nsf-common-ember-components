@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>lib/tool-tip/addon/components/tool-tip.js - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h1 class="file-heading">File: lib/tool-tip/addon/components/tool-tip.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+
+/**
+ * Component that creates a tooltip.
+ *
+ * @class ToolTip
+ * @namespace Components
+ * @module tool-tip
+ * @submodule components
+ * @extends Ember.Component
+ * @public
+ */
+export default Ember.Component.extend({
+    tagName: &#x27;span&#x27;,
+    classNames: [&#x27;nsf-tooltip&#x27;],
+    attributeBindings: [&#x27;title&#x27;, &#x27;data-test-id&#x27;, &#x27;ariaHidden:aria-hidden&#x27;],
+
+    /**
+     * The data attribute set on the root element to be used for testing.
+     *
+     * @property data-test-id
+     * @type string
+     * @default &quot;tooltip&quot;
+     * @static
+     */
+    &#x27;data-test-id&#x27;: &#x27;tooltip&#x27;,
+
+    /**
+     * Indicates whether an HTML button element which closes the tooltip should be rendered. This is only
+     * potentially useful for tooltips which are not triggered via hover.
+     *
+     * @property showCloseButton
+     * @type boolean
+     * @default true
+     */
+    showCloseButton: true,
+
+    /**
+     *
+     *
+     * @property text
+     * @type string
+     * @default null
+     */
+    text: null,
+
+    /**
+     *
+     *
+     * @property title
+     * @type string
+     * @default null
+     */
+    title: null,
+
+    /**
+     *
+     *
+     * @property content
+     * @type string
+     * @default null
+     */
+    content: null,
+
+    /**
+     *
+     *
+     * @property enabled
+     * @type boolean
+     * @default true
+     */
+    enabled: true,
+
+    /**
+     *
+     *
+     * @property tipTextAttr
+     * @type string
+     * @default &quot;data-tooltip-content&quot;
+     */
+    tipTextAttr: &#x27;data-tooltip-content&#x27;,
+
+    /**
+     *
+     * @property ariaHidden
+     * @type boolean
+     * @default true
+     * @readOnly
+     */
+    ariaHidden: Ember.computed(&#x27;hasBlock&#x27;, &#x27;text&#x27;, function(){
+        let hasBlock = this.get(&#x27;hasBlock&#x27;),
+            text     = this.get(&#x27;text&#x27;);
+
+        return !hasBlock &amp;&amp; Ember.isEmpty(text);
+    }).readOnly(),
+
+    // These are properties that have special update methods in Tooltipster
+    functionProperties: Ember.computed(function(){
+        return [&#x27;enabled&#x27;, &#x27;title&#x27;, &#x27;content&#x27;];
+    }).readOnly(),
+
+
+    // These are properties that accept functions as their value and are used as callbacks throughout the Tooltip&#x27;s lifespan.
+    callbackProperties: Ember.computed(function(){
+        return [&#x27;functionInit&#x27;, &#x27;functionBefore&#x27;, &#x27;functionReady&#x27;, &#x27;functionAfter&#x27;];
+    }).readOnly(),
+
+
+    // These are properties that may be set by calling this.$().tooltipster(&#x27;option&#x27;, name, value)
+    settableProperties: Ember.computed(function(){
+        return [&#x27;animation&#x27;, &#x27;arrow&#x27;, &#x27;arrowColor&#x27;, &#x27;autoClose&#x27;, &#x27;debug&#x27;, &#x27;delay&#x27;, &#x27;minWidth&#x27;, &#x27;maxWidth&#x27;,
+            &#x27;hideOnClick&#x27;, &#x27;interactive&#x27;, &#x27;interactiveTolerance&#x27;, &#x27;offsetX&#x27;, &#x27;offsetY&#x27;,
+            &#x27;onlyOne&#x27;, &#x27;position&#x27;, &#x27;positionTracker&#x27;, &#x27;restoration&#x27;, &#x27;speed&#x27;, &#x27;timer&#x27;, &#x27;theme&#x27;,
+            &#x27;touchDevices&#x27;, &#x27;tipTrigger&#x27;, &#x27;updateAnimation&#x27;, &#x27;contentAsHTML&#x27;];
+    }).readOnly(),
+
+
+    // See https://iamceege.github.io/tooltipster/ for more information on these config options.
+    animation: &#x27;fade&#x27;,
+    arrow: true,
+    arrowColor: null,
+    autoClose: true,
+    debug: false,
+    delay: 200,
+    minWidth: 0,
+    maxWidth: null,
+    hideOnClick: false,
+    interactive: false,
+    interactiveTolerance: 350,
+    offsetX: 0,
+    offsetY: 0,
+    onlyOne: false,
+    position: &#x27;top&#x27;,
+    positionTracker: false,
+    restoration: &#x27;current&#x27;,
+    speed: 350,
+    timer: 0,
+    theme: &#x27;tooltipster-default&#x27;,
+    touchDevices: true,
+    tipTrigger: &#x27;hover&#x27;,
+    updateAnimation: true,
+    contentAsHTML: false,
+
+
+    functionInit: null,
+    functionBefore: null,
+    functionReady: null,
+    functionAfter: null,
+
+
+    _onDidInsertElement: Ember.on(&#x27;didInsertElement&#x27;, function(){
+        this._super(...arguments);
+
+        Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, ()=&gt;{
+            let tipContent = this.$(&#x60;[${this.get(&#x27;tipTextAttr&#x27;)}]&#x60;),
+                content    = this.get(&#x27;content&#x27;);
+
+            if(tipContent.length){
+                this.set(&#x27;contentAsHTML&#x27;, true);
+                this.$().tooltipster(this._buildConfig(tipContent.detach()));
+            }
+            else if(!Ember.isEmpty(content)){
+                this.set(&#x27;contentAsHTML&#x27;, true);
+                this.$().tooltipster(this._buildConfig(content));
+            }
+            else{
+                this.$().tooltipster(this._buildConfig());
+            }
+
+            if(!this.get(&#x27;enabled&#x27;)){
+                this.$().tooltipster(&#x27;disable&#x27;);
+            }
+        });
+    }),
+
+
+    _onWillDestroyElement: Ember.on(&#x27;willDestroyElement&#x27;, function(){
+        this._super(...arguments);
+        this.$().tooltipster(&#x27;destroy&#x27;);
+    }),
+
+
+    _onDidUpdateAttrs: Ember.on(&#x27;didUpdateAttrs&#x27;, function(){
+        this._super(...arguments);
+
+        let funcs = this.get(&#x27;functionProperties&#x27;),
+            props = this.get(&#x27;settableProperties&#x27;),
+            changed = {},
+            oldVals = arguments[0].oldAttrs,
+            newVals = arguments[0].newAttrs;
+
+        // Step 1: Figure out what changed
+        for(let key in newVals){
+            switch(Ember.typeOf(newVals[key])){
+                case &#x27;string&#x27;:
+                case &#x27;number&#x27;:
+                case &#x27;boolean&#x27;:
+                    if(newVals[key] !== oldVals[key]){
+                        changed[key] = newVals[key];
+                    }
+                    break;
+                case &#x27;object&#x27;:
+                    if(newVals[key].value !== oldVals[key].value){
+                        changed[key] = newVals[key].value;
+                    }
+                    break;
+            }
+        }
+
+        // Step 2: Apply changes
+        for(let key in changed){
+            // Function Properties have special hooks into Tooltipster.
+            if(funcs.indexOf(key) !== -1){
+                switch(key){
+                    case &#x27;enabled&#x27;:
+                        this.$().tooltipster((changed[key])? &#x27;enable&#x27; : &#x27;disable&#x27;);
+                        break;
+                    case &#x27;title&#x27;:
+                    case &#x27;content&#x27;:
+                        this.$().tooltipster(&#x27;content&#x27;, changed[key]);
+                        break;
+                }
+
+                continue;
+            }
+
+            // Other properties may all be passed to Tooltipster via its &#x27;option&#x27; hook.
+            if(props.indexOf(key) !== -1){
+                Ember.assert(&#x27;The trigger event for a tooltip cannot be set at runtime.&#x27;, key !== &#x27;tipTrigger&#x27;);
+                this.$().tooltipster(&#x27;option&#x27;, key, changed[key]);
+            }
+        }
+    }),
+
+
+    _buildConfig(content){
+        let props     = this.get(&#x27;settableProperties&#x27;),
+            callbacks = this.get(&#x27;callbackProperties&#x27;),
+            config    = {};
+
+        for(let i = 0; i &lt; props.length; i++){
+            // Tooltipster requires that this either be set, or not be present (null is a no-no).
+            if(props[i] == &#x27;arrowColor&#x27;){
+                if(this.get(props[i])){
+                    config[props[i]] = this.get(props[i]);
+                }
+            }
+            // Trigger is a reserved word in Ember components, so we need to use something else.
+            else if(props[i] == &#x27;tipTrigger&#x27;){
+                config[&#x27;trigger&#x27;] = this.get(props[i]);
+            }
+            // Everything else can go on its merry way.
+            else{
+                config[props[i]] = this.get(props[i]);
+            }
+        }
+
+        for(let i = 0; i &lt; callbacks.length; i++){
+            let callback = this.get(callbacks[i]);
+
+            if(callbacks[i] !== &#x27;functionInit&#x27; &amp;&amp; Ember.typeOf(callback) == &#x27;function&#x27;){
+                config[callbacks[i]] = callback;
+            }
+        }
+
+        let initCallback    = this.get(&#x27;functionInit&#x27;),
+            hasInitCallback = Ember.typeOf(initCallback) == &#x27;function&#x27;;
+
+        if(this.get(&#x27;showCloseButton&#x27;)){
+            this.set(&#x27;contentAsHTML&#x27;, true);
+            config[&#x27;contentAsHTML&#x27;] = true;
+
+            config[&#x27;functionInit&#x27;] = function(tip, content){
+                let closeButton = Ember.$(&#x27;&lt;button&gt;&lt;/button&gt;&#x27;, {
+                    &#x27;type&#x27;: &#x27;button&#x27;,
+                    &#x27;class&#x27;: &#x27;close&#x27;,
+                    &#x27;aria-label&#x27;: &#x27;Close&#x27;}
+                ).prepend(&#x27;&lt;span&gt;x&lt;/span&gt;&#x27;);
+
+                closeButton.on(&#x27;click&#x27;, function(){
+                    tip.tooltipster(&#x27;hide&#x27;);
+                });
+
+                if(Ember.typeOf(content) === &#x27;string&#x27;){
+                    content = Ember.$.parseHTML(&#x60;&lt;div&gt;&lt;div&gt;${content}&lt;/div&gt;&lt;/div&gt;&#x60;);
+                    content = Ember.$(content[0]);
+                }
+                else{
+                    content = Ember.$(content);
+                }
+
+                content.prepend(closeButton);
+
+                if(hasInitCallback){
+                    content = initCallback(...arguments);
+                }
+
+                return content;
+            }
+        }
+        else{
+            if(hasInitCallback){
+                config[&#x27;functionInit&#x27;] = initCallback;
+            }
+        }
+
+        if(content){
+            config[&#x27;content&#x27;] = content;
+        }
+
+        return config;
+    },
+
+    click() {
+        this.sendAction();
+    }
+});
+    </pre>
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

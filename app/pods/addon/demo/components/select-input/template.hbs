@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-xs-3">
+        <p>An array of objects</p>
+        {{select-input prompt="Select One" options=objectSelectOptions}}
+    </div>
+
+    <div class="col-xs-3">
+        <p>An array of strings</p>
+        {{select-input prompt="Select One" options=stringSelectOptions}}
+    </div>
+
+    <div class="col-xs-3">
+        <p>A promise (15 seconds)</p>
+        {{select-input prompt="Select One" options=promiseSelectOptions}}
+    </div>
+
+    <div class="col-xs-3">
+        <p>A failed promise (5 seconds)</p>
+      {{select-input prompt="Select One" options=failedPromiseSelectOptions}}
+    </div>
+
+    <div class="col-xs-3">
+        <p>Disabled</p>
+      {{select-input prompt="Select One" options=objectSelectOptions disabled=true}}
+    </div>
+</div>

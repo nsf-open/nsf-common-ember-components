@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-xs-4">
+        <p>A Dropdown List</p>
+
+        {{#dropdown-list class='btn-group' as |isOpen|}}
+          {{dropdown-list-toggle (if isOpen 'Close' 'Open') class='btn btn-primary'}}
+          {{#dropdown-list-options}}
+              <li class="dropdown-item">Option A</li>
+              <li class="dropdown-item">Option B</li>
+              <li class="dropdown-item">Option C</li>
+          {{/dropdown-list-options}}
+        {{/dropdown-list}}
+    </div>
+
+    <div class="col-xs-4">
+        <p>A right aligned Dropdown List</p>
+
+      {{#dropdown-list class='btn-group' as |isOpen|}}
+        {{dropdown-list-toggle (if isOpen 'Close' 'Open') class='btn btn-primary'}}
+        {{#dropdown-list-options align='right'}}
+            <li class="dropdown-item">Option A</li>
+            <li class="dropdown-item">Option B</li>
+            <li class="dropdown-item">Option C</li>
+        {{/dropdown-list-options}}
+      {{/dropdown-list}}
+    </div>
+
+    <div class="col-xs-4">
+        <p>A Dropdown List which starts opened</p>
+
+        {{#dropdown-list class='btn-group' open=true as |isOpen|}}
+          {{dropdown-list-toggle (if isOpen 'Close' 'Open') class='btn btn-primary'}}
+          {{#dropdown-list-options}}
+              <li class="dropdown-item">Option A</li>
+              <li class="dropdown-item">Option B</li>
+              <li class="dropdown-item">Option C</li>
+          {{/dropdown-list-options}}
+        {{/dropdown-list}}
+    </div>
+</div>
+

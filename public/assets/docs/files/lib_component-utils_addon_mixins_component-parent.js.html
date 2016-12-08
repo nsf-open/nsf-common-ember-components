@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>lib/component-utils/addon/mixins/component-parent.js - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h1 class="file-heading">File: lib/component-utils/addon/mixins/component-parent.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+
+
+/**
+ * The ComponentParent mixin provides a reference array to all of its registered ComponentChild instances.
+ *
+ * @class ComponentParent
+ * @namespace Mixins
+ * @module component-utils
+ * @submodule mixins
+ * @extends Ember.Mixin
+ */
+export default Ember.Mixin.create({
+
+    /**
+     * An array of ComponentChild instances which are descendants of this component.
+     *
+     * @property children
+     * @type array
+     * @protected
+     */
+    children: null,
+
+
+    /**
+     * Listener for the &#x27;init&#x27; component lifecycle hook which prepares the children array.
+     *
+     * @method _onInit
+     * @private
+     * @final
+     */
+    _onInit: Ember.on(&#x27;init&#x27;, function() {
+        this.set(&#x27;children&#x27;, Ember.A());
+        this._super(...arguments);
+    }),
+
+
+    /**
+     * Register a component as a child of this parent
+     *
+     * @method registerChild
+     * @param child {ComponentUtils.ComponentChild}
+     * @public
+     */
+    registerChild: function(child) {
+        Ember.run.schedule(&#x27;sync&#x27;, this, function() {
+            this.get(&#x27;children&#x27;).addObject(child);
+        });
+    },
+
+
+    /**
+     * Remove the child component from this parent component
+     *
+     * @method removeChild
+     * @param child {ComponentUtils.ComponentChild}
+     * @public
+     */
+    removeChild: function(child) {
+        this.get(&#x27;children&#x27;).removeObject(child);
+    }
+});
+
+    </pre>
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

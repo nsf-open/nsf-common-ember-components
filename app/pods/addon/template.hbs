@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="display-3">{{model.prettyName}}</h1>
+        <p><span class="tag tag-default">{{model.version}}{{if model.isLatest ' (latest)'}}</span> <span class="tag tag-default">{{model.prettyType}}</span></p>
+        {{#if (is-component (concat 'addon/index/components/' model.name))}}
+            {{component (concat 'addon/index/components/' model.name) model=model}}
+        {{/if}}
+
+        <hr />
+        <ul class="nav nav-pills">
+            <li class="nav-item">{{link-to 'Setup' 'addon.index' model class='nav-link'}}</li>
+            {{#if (is-component (concat 'addon/usage/components/' model.name))}}
+                <li class="nav-item">{{link-to 'Usage' 'addon.usage' model class='nav-link'}}</li>
+            {{/if}}
+            {{#if (is-component (concat 'addon/demo/components/' model.name))}}
+                <li class="nav-item">{{link-to 'Demo' 'addon.demo' model class='nav-link'}}</li>
+            {{/if}}
+        </ul>
+        <hr />
+    </div>
+</div>
+
+{{outlet}}

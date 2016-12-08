@@ -1,0 +1,617 @@
+<div class="row">
+    <div class="col-xs-4">
+        <p>Have some time on your mind?</p>
+        {{datetime-picker
+            format=format.picker
+            extraFormats=extraFormats.picker
+            dayViewHeaderFormat=dayViewHeaderFormat.picker
+            useStrict=useStrict.picker
+            defaultDate=defaultDate.picker
+            useCurrent=useCurrent.picker
+            viewDate=viewDate.picker
+            minDate=minDate.picker
+            maxDate=maxDate.picker
+            daysOfWeekDisabled=daysOfWeekDisabled.picker
+            enabledDates=enabledDates.picker
+            disabledDates=disabledDates.picker
+            enabledHours=enabledHours.picker
+            disabledHours=disabledHours.picker
+            viewMode=viewMode.picker
+            toolbarPlacement=toolbarPlacement.picker
+            stepping=stepping.picker
+            collapse=collapse.picker
+            calendarWeeks=calendarWeeks.picker
+            showTodayButton=showTodayButton.picker
+            showClose=showClose.picker
+            showClear=showClear.picker
+            sideBySide=sideBySide.picker
+            keepOpen=keepOpen.picker
+            inline=inline.picker
+            keepInvalid=keepInvalid.picker
+            debug=debug.picker
+            ignoreReadonly=ignoreReadonly.picker
+            allowInputToggle=allowInputToggle.picker
+            focusOnShow=focusOnShow.picker
+            iconCalendar=iconCalendar.picker
+            iconTime=iconTime.picker
+            iconDate=iconDate.picker
+            iconUp=iconUp.picker
+            iconDown=iconDown.picker
+            iconPrevious=iconPrevious.picker
+            iconNext=iconNext.picker
+            iconToday=iconToday.picker
+            iconClear=iconClear.picker
+            iconClose=iconClose.picker
+            tooltipToday=tooltipToday.picker
+            tooltipClose=tooltipClose.picker
+            tooltipClear=tooltipClear.picker
+            tooltipSelectMonth=tooltipSelectMonth.picker
+            tooltipPrevMonth=tooltipPrevMonth.picker
+            tooltipNextMonth=tooltipNextMonth.picker
+            tooltipSelectYear=tooltipSelectYear.picker
+            tooltipPrevYear=tooltipPrevYear.picker
+            tooltipNextYear=tooltipNextYear.picker
+            tooltipSelectDecade=tooltipSelectDecade.picker
+            tooltipPrevDecade=tooltipPrevDecade.picker
+            tooltipNextDecade=tooltipNextDecade.picker
+            tooltipSelectCentury=tooltipSelectCentury.picker
+            tooltipPrevCentury=tooltipPrevCentury.picker
+            tooltipNextCentury=tooltipNextCentury.picker}}
+    </div>
+
+    <div class="col-xs-8">
+        {{#collapse-pane class="card" open=false as |isOpen|}}
+            <div class="card-header">
+                <h4 class="mb-0 float-xs-left">Input/Output Formats</h4>
+                {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Show Less' 'Show More')}}
+            </div>
+            {{#collapse-pane-body class="card-block"}}
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Output Format</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=format.field class="form-control"}}
+                            <span><code>{{format.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Alternate Input Formats <small class="text-muted">One per line</small></label>
+                        <div class="col-sm-7">
+                            {{textarea value=extraFormats.field rows=1 class="form-control"}}
+                            <span><code>{{extraFormats.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Day View Header Format</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=dayViewHeaderFormat.field class="form-control"}}
+                            <span><code>{{dayViewHeaderFormat.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Use Strict Formatting</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=useStrict.field}} <span><code>{{useStrict.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Default Date</label>
+                        <div class="col-sm-7">
+                            {{datetime-picker useCurrent=false onChange=(action 'onDefaultDateChange')}}
+                            <span><code>{{defaultDate.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Use Current Date <small class="text-muted">Or limit to day, month, etc.</small></label>
+                        <div class="col-sm-7">
+                            <select class="form-control" onchange={{action (mut useCurrent.field) value='target.value'}}>
+                                <option value="true" selected>Yes</option>
+                                <option value="false">No</option>
+                                <option value="year">Year</option>
+                                <option value="month">Month</option>
+                                <option value="day">Day</option>
+                                <option value="hour">Hour</option>
+                                <option value="minute">Minute</option>
+                            </select>
+                            <span><code>{{useCurrent.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">View Date</label>
+                        <div class="col-sm-7">
+                            {{datetime-picker useCurrent=false onChange=(action 'onViewDateChange')}}
+                            <span><code>{{viewDate.pretty}}</code></span>
+                        </div>
+                    </div>
+                </form>
+            {{/collapse-pane-body}}
+        {{/collapse-pane}}
+
+
+        {{#collapse-pane class="card" open=false as |isOpen|}}
+            <div class="card-header">
+                <h4 class="mb-0 float-xs-left">Allow/Disable Selections</h4>
+                {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Show Less' 'Show More')}}
+            </div>
+            {{#collapse-pane-body class="card-block"}}
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Disable all on and before</label>
+                        <div class="col-sm-7">
+                            {{datetime-picker useCurrent=false onChange=(action 'onMinDateChange')}}
+                            <span><code>{{minDate.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Disable all on and after</label>
+                        <div class="col-sm-7">
+                            {{datetime-picker useCurrent=false onChange=(action 'onMaxDateChange')}}
+                            <span><code>{{maxDate.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Disabled Dates <small class="text-muted">One per line</small></label>
+                        <div class="col-sm-7">
+                            {{textarea value=disabledDates.field rows=1 class="form-control"}}
+                            <span><code>{{disabledDates.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Enabled Dates <small class="text-muted">One per line</small></label>
+                        <div class="col-sm-7">
+                            {{textarea value=enabledDates.field rows=1 class="form-control"}}
+                            <span><code>{{enabledDates.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Disabled Hours <small class="text-muted">One per line</small></label>
+                        <div class="col-sm-7">
+                            {{textarea value=disabledHours.field rows=1 class="form-control"}}
+                            <span><code>{{disabledHours.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Enabled Hours <small class="text-muted">One per line</small></label>
+                        <div class="col-sm-7">
+
+                            {{textarea value=enabledHours.field rows=1 class="form-control"}}
+                            <span><code>{{enabledHours.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Days of week disabled</label>
+                        <div class="col-sm-7">
+                            <label class="form-check-inline">
+                                {{input type="checkbox" class="form-check-input" checked=daysOfWeekDisabled.field.sunday}} Sunday
+                            </label>
+
+                            <label class="form-check-inline">
+                                {{input type="checkbox" class="form-check-input" checked=daysOfWeekDisabled.field.monday}} Monday
+                            </label>
+
+                            <label class="form-check-inline">
+                                {{input type="checkbox" class="form-check-input" checked=daysOfWeekDisabled.field.tuesday}} Tuesday
+                            </label>
+
+                            <label class="form-check-inline">
+                                {{input type="checkbox" class="form-check-input" checked=daysOfWeekDisabled.field.wednesday}} Wednesday
+                            </label>
+
+                            <label class="form-check-inline">
+                                {{input type="checkbox" class="form-check-input" checked=daysOfWeekDisabled.field.thursday}} Thursday
+                            </label>
+
+                            <label class="form-check-inline">
+                                {{input type="checkbox" class="form-check-input" checked=daysOfWeekDisabled.field.friday}} Friday
+                            </label>
+
+                            <label class="form-check-inline">
+                                {{input type="checkbox" class="form-check-input" checked=daysOfWeekDisabled.field.saturday}} Saturday
+                            </label>
+
+                            <br />
+                            <span><code>{{daysOfWeekDisabled.pretty}}</code></span>
+                        </div>
+                    </div>
+                </form>
+            {{/collapse-pane-body}}
+        {{/collapse-pane}}
+
+
+        {{#collapse-pane class="card" open=false as |isOpen|}}
+            <div class="card-header">
+                <h4 class="mb-0 float-xs-left">UI and Interaction</h4>
+                {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Show Less' 'Show More')}}
+            </div>
+            {{#collapse-pane-body class="card-block"}}
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Starting Date View</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" onchange={{action (mut viewMode.field) value='target.value'}}>
+                                <option value="days" selected>Days</option>
+                                <option value="months">Months</option>
+                                <option value="years">Years</option>
+                                <option value="decades">Decades</option>
+                            </select>
+                            <span><code>{{viewMode.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Toolbar Placement</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" onchange={{action (mut toolbarPlacement.field) value='target.value'}}>
+                                <option value="default" selected>Default</option>
+                                <option value="top">Top</option>
+                                <option value="bottom">Bottom</option>
+                            </select>
+                            <span><code>{{toolbarPlacement.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Minutes Stepping</label>
+                        <div class="col-sm-7">
+                            {{input type="number" value=stepping.field step=1 min=1 max=60 class="form-control"}}
+                            <span><code>{{stepping.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Use Collapse Effect</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=collapse.field}} <span><code>{{collapse.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Show Calendar Weeks</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=calendarWeeks.field}} <span><code>{{calendarWeeks.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Show Today Button</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=showTodayButton.field}} <span><code>{{showTodayButton.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Show Close Button</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=showClose.field}} <span><code>{{showClose.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Show Clear Button</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=showClear.field}} <span><code>{{showClear.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Show Side by Side</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=sideBySide.field}} <span><code>{{sideBySide.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Keep Open</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=keepOpen.field}} <span><code>{{keepOpen.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Display Inline</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=inline.field}} <span><code>{{inline.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Keep Invalid Entries</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=keepInvalid.field}} <span><code>{{keepInvalid.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Debug <small class="text-muted">Picker will stay open after blur</small></label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=debug.field}} <span><code>{{debug.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Ignore Readonly</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=ignoreReadonly.field}} <span><code>{{ignoreReadonly.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Allow Input Toggle</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=allowInputToggle.field}} <span><code>{{allowInputToggle.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Focus on Show</label>
+                        <div class="col-sm-7">
+                            <label class="form-check">
+                                {{input type="checkbox" checked=focusOnShow.field}} <span><code>{{focusOnShow.pretty}}</code></span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            {{/collapse-pane-body}}
+        {{/collapse-pane}}
+
+
+        {{#collapse-pane class="card" open=false as |isOpen|}}
+            <div class="card-header">
+                <h4 class="mb-0 float-xs-left">Icons</h4>
+                {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Show Less' 'Show More')}}
+            </div>
+            {{#collapse-pane-body class="card-block"}}
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Calendar Icon</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=iconCalendar.field class="form-control"}}
+                            <span><code>{{iconCalendar.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Time Icon</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=iconTime.field class="form-control"}}
+                            <span><code>{{iconTime.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Date Icon</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=iconDate.field class="form-control"}}
+                            <span><code>{{iconDate.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Up Icon</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=iconUp.field class="form-control"}}
+                            <span><code>{{iconUp.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Down Icon</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=iconDown.field class="form-control"}}
+                            <span><code>{{iconDown.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Previous Icon</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=iconPrevious.field class="form-control"}}
+                            <span><code>{{iconPrevious.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Next Icon</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=iconNext.field class="form-control"}}
+                            <span><code>{{iconNext.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Today Icon</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=iconToday.field class="form-control"}}
+                            <span><code>{{iconToday.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Clear Icon</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=iconClear.field class="form-control"}}
+                            <span><code>{{iconClear.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Close Icon</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=iconClose.field class="form-control"}}
+                            <span><code>{{iconClose.pretty}}</code></span>
+                        </div>
+                    </div>
+                </form>
+            {{/collapse-pane-body}}
+        {{/collapse-pane}}
+
+
+        {{#collapse-pane class="card" open=false as |isOpen|}}
+            <div class="card-header">
+                <h4 class="mb-0 float-xs-left">Tooltips</h4>
+                {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Show Less' 'Show More')}}
+            </div>
+            {{#collapse-pane-body class="card-block"}}
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Today Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipToday.field class="form-control"}}
+                            <span><code>{{tooltipToday.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Clear Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipClear.field class="form-control"}}
+                            <span><code>{{tooltipClear.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Close Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipClose.field class="form-control"}}
+                            <span><code>{{tooltipClose.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Select Month Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipSelectMonth.field class="form-control"}}
+                            <span><code>{{tooltipSelectMonth.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Previous Month Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipPrevMonth.field class="form-control"}}
+                            <span><code>{{tooltipPrevMonth.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Next Month Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipNextMonth.field class="form-control"}}
+                            <span><code>{{tooltipNextMonth.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Select Year Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipSelectYear.field class="form-control"}}
+                            <span><code>{{tooltipSelectYear.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Previous Year Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipPrevYear.field class="form-control"}}
+                            <span><code>{{tooltipPrevYear.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Next Year Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipNextYear.field class="form-control"}}
+                            <span><code>{{tooltipNextYear.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Select Decade Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipSelectDecade.field class="form-control"}}
+                            <span><code>{{tooltipSelectDecade.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Previous Decade Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipPrevDecade.field class="form-control"}}
+                            <span><code>{{tooltipPrevDecade.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Next Decade Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipNextDecade.field class="form-control"}}
+                            <span><code>{{tooltipNextDecade.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Select Century Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipSelectCentury.field class="form-control"}}
+                            <span><code>{{tooltipSelectCentury.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Previous Century Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipPrevCentury.field class="form-control"}}
+                            <span><code>{{tooltipPrevCentury.pretty}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-5 col-form-label">Next Century Tooltip</label>
+                        <div class="col-sm-7">
+                            {{input type="text" value=tooltipNextCentury.field class="form-control"}}
+                            <span><code>{{tooltipNextCentury.pretty}}</code></span>
+                        </div>
+                    </div>
+                </form>
+            {{/collapse-pane-body}}
+        {{/collapse-pane}}
+    </div>
+</div>

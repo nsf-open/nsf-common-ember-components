@@ -1,0 +1,70 @@
+.tree-view{
+  > ul{
+    border-top: solid 1px #CCC;
+  }
+
+  ul{
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .tv-leaf-node-disabled{
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .tv-trunk > .tv-leaf-node{
+    .tv-leaf-node-wrapper{
+      padding: 4px 4px 4px 24px;
+    }
+  }
+
+  .tv-branch-node{
+    .tv-branch-node-wrapper{
+      background: #F2F5F7;
+      border: solid 1px #CCC;
+      border-top: none;
+      padding: 13px 6px;
+    }
+
+    &.tv-branch-node-collapsible{
+      cursor: pointer;
+    }
+
+    .tv-branch-node{
+      .tv-branch-node-wrapper{
+        padding-left: 30px;
+      }
+
+      .tv-leaf-node-wrapper{
+        padding-left: 78px;
+      }
+    }
+  }
+
+  .tv-leaf-node{
+    .tv-leaf-node-wrapper{
+      border:solid 1px #CCC;
+      border-top: none;
+      padding: 4px 4px 4px 38px;
+
+      &[draggable]{
+        cursor: move;
+      }
+    }
+
+    &.tv-leaf-node-with-desc{
+      .tv-leaf-node-wrapper{
+        border-bottom: none;
+      }
+
+      .tv-leaf-node-description{
+        border:solid 1px #CCC;
+        border-top: none;
+        cursor: default;
+        font-size: 80%;
+        padding: 4px 4px 4px 48px;
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+body{
+    font-size: 12px;
+}
+
+table.properties-table tbody th{
+    white-space: nowrap;
+}
+
+table.properties-table th,
+table.properties-table td{
+    padding: 0.1rem 0.5rem 0.1rem 0;
+}
+
+table.properties-table code{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.sidebar .card-header{
+    font-size: 1.15rem;
+}
+
+.sidebar .card-header,
+.sidebar .list-group-item{
+    padding: 0.25rem;
+}
+
+.tag.tag-default,
+.tag.tag-primary,
+.tag.tag-success,
+.tag.tag-info,
+.tag.tag-warning,
+.tag.tag-danger{
+    color: #FFF;
+    font-weight: 300;
+}
+
+pre{
+    padding: 10px;
+}
+
+/*
+body{
+    font-size: 12px;
+}
+
+.sidebar .card .list-group-item{
+    padding: 0.5rem;
+}
+
+.card h4, .card .h4{
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+.api-options{
+    font-size: 80%;
+    vertical-align: baseline;
+}
+
+.api-options label{
+    vertical-align: baseline;
+}
+
+.tag.tag-outline{
+    background-color: transparent;
+    border-color: #818a91;
+}
+*/

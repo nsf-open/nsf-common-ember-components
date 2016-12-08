@@ -1,0 +1,80 @@
+<h4>Usage Examples</h4>
+<ul>
+    <li>{{anchor-to href="#basic" text="The basics"}}</li>
+    <li>{{anchor-to href="#icon" text="As an icon"}}</li>
+    <li>{{anchor-to href="#content" text="Setting content"}}</li>
+    <li>{{anchor-to href="#configuration" text="Other configuration"}}</li>
+</ul>
+
+<h5 id="basic">The basics</h5>
+<p>By default, the <code>tool-tip</code> component renders a <code>span</code> span element and uses the <code>title</code> attribute to derive tip content. This makes it easy to include tooltips within a paragraph of text. The display content which acts as the trigger for the tooltip can either come from the yield block of that component, or from its <code>text</code> attribute, making it possible to define tips in a very compact fashion.</p>
+
+<div class="card">
+    <div class="card-block">
+        <p class="card-text">The quick brown {{#tool-tip title="who is quick and brown"}}fox{{/tool-tip}} jumped over the lazy dog.</p>
+        <p class="card-text">The quick brown {{tool-tip text="fox" title="who is quick and brown"}} jumped over the lazy dog.</p>
+    </div>
+</div>
+
+{{code-snippet name="tooltip-basic.hbs"}}
+
+
+<h5 id="icon">As an icon</h5>
+<p>Tooltips are also often used to annotate "help" or "more information" iconography. To tip-ify an icon, simply add the required class names to the component from your typography library of choice. Here we are using Font Awesome. If the component has neither a yield block or text content to display, its <code>aria-hidden</code> attribute will be set in order to preserve accessibility of the page.</p>
+
+<div class="card">
+    <div class="card-block">
+        <p class="card-text">This sentence leaves a great many things unclear. {{tool-tip class='fa fa-question-circle' title='And this tooltip is not particularly helpful either.'}}</p>
+    </div>
+</div>
+
+{{code-snippet name="tooltip-icon.hbs"}}
+
+
+<h5 id="content">Setting content</h5>
+<p>The <code>title</code> attribute is the easiest way to provide a tooltip its content, but it is not the only way. There are many scenarios where you will want to display images, media, or other formatted HTML that the title attribute is just not cut out to handle. Luckily, the <code>tool-tip</code> component provides you with two other options: the <code>content</code> attribute, and the <code>data-tooltip-content</code> child node.</p>
+
+<p>The <code>content</code> attribute works the same as <code>title</code>, but without the possibility of it showing up as an attribute on the rendered DOM element. Use this when you need to display dynamic HTML in your tooltip that may change at any time.</p>
+
+<div class="card">
+    <div class="card-block">
+        <p class="card-text">The quick brown {{tool-tip text="fox" content=foxFacts}} jumped over the lazy dog.</p>
+    </div>
+</div>
+
+{{code-snippet name="tooltip-html-content.hbs"}}
+
+<p>If you have a large chunk of HTML content that you want displayed as the content of a tooltip, and you would like to define it in your template, you may do so by creating an element with the attribute <code>data-tooltip-content</code> as a child node within the yield block of that tooltip. If such an element is found it will be detached from its current location and given to the tooltip to serve as its content. This approach makes creating rich tip content easy, with the current downside being that once created, the content is static.</p>
+
+<div class="card">
+    <div class="card-block">
+    <p class="card-text">The quick brown
+        {{#tool-tip}}
+            fox
+            <div data-tooltip-content>
+                <p>Remember:</p>
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr role="row">
+                        <th>Fox</th>
+                        <td>quick</td>
+                        <td>brown</td>
+                    </tr>
+                    <tr role="row">
+                        <th>Dog</th>
+                        <td>lazy</td>
+                        <td>old (probably)</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        {{/tool-tip}}
+        jumped over the lazy dog.</p>
+    </div>
+</div>
+
+{{code-snippet name="tooltip-html-data-attribute.hbs"}}
+
+
+<h5 id="configuration">Other configuration</h5>
+<p>There are a ton of configuration options available for ToolTip that will let you customize each tip as needed. Check them out in the {{link-to 'demo' 'addon.demo' model}}.</p>

@@ -1,0 +1,78 @@
+{{#sort-list records=dsRecords sortsAreExclusive=false ascendingValue="fa-sort-asc" descendingValue="fa-sort-desc" as |sorter|}}
+  <div class="row">
+      <div class="col-xs-6">
+          <table class="table">
+              <thead>
+              <tr>
+                  <th>Last Name</th>
+                  <th>First Name</th>
+                  <th>Character Class</th>
+              </tr>
+              </thead>
+              <tbody>
+                {{#each sorter.sortRecords as |user|}}
+                    <tr role="row">
+                        <td>{{user.lastName}}</td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.character}}</td>
+                    </tr>
+                {{/each}}
+              </tbody>
+          </table>
+      </div>
+
+      <div class="col-xs-6">
+          <div class="card">
+              <h4 class="card-header">Parameters</h4>
+              <div class="card-block">
+                {{#with sorter.rules.firstName as |fName|}}
+                    <div class="input-group mb-1">
+                        <input type="text" class="form-control" value="Sort First Name{{if fName.order (concat ' (#' fName.order ')')}}" readonly />
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-secondary" onclick={{action sorter.sort 'firstName'}}>
+                              <span class="fa fa-sort {{fName.value}}" aria-hidden="true"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-secondary" disabled={{fName.isOff}} onclick={{action sorter.cancel 'firstName'}}>
+                            <span class="fa fa-times" aria-hidden="true"></span>
+                        </button>
+                      </span>
+                    </div>
+                {{/with}}
+
+
+                {{#with sorter.rules.lastName as |lName|}}
+                    <div class="input-group mb-1">
+                        <input type="text" class="form-control" value="Sort Last Name{{if lName.order (concat ' (#' lName.order ')')}}" readonly />
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-secondary" onclick={{action sorter.sort 'lastName'}}>
+                              <span class="fa fa-sort {{lName.value}}" aria-hidden="true"></span>
+                          </button>
+
+                          <button type="button" class="btn btn-secondary" disabled={{lName.isOff}} onclick={{action sorter.cancel 'lastName'}}>
+                              <span class="fa fa-times" aria-hidden="true"></span>
+                          </button>
+                      </span>
+                    </div>
+                {{/with}}
+
+
+                {{#with sorter.rules.character as |char|}}
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="Sort Character Class{{if char.order (concat ' (#' char.order ')')}}" readonly />
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-secondary" onclick={{action sorter.sort 'character'}}>
+                              <span class="fa fa-sort {{char.value}}" aria-hidden="true"></span>
+                          </button>
+
+                          <button type="button" class="btn btn-secondary" disabled={{char.isOff}} onclick={{action sorter.cancel 'character'}}>
+                              <span class="fa fa-times" aria-hidden="true"></span>
+                          </button>
+                      </span>
+                    </div>
+                {{/with}}
+              </div>
+          </div>
+      </div>
+  </div>
+{{/sort-list}}

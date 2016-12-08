@@ -1,0 +1,522 @@
+<h4>Usage Examples</h4>
+<ul>
+    <li>{{anchor-to href="#terminology" text="Terminology"}}</li>
+    <li>{{anchor-to href="#implementing" text="Basic Implemention"}}</li>
+    <li>{{anchor-to href="#defaults" text="Default Configuration"}}</li>
+    <li>{{anchor-to href="#override" text="Node by Node Configuration"}}</li>
+    <li>{{anchor-to href="#actions" text="Actions"}}</li>
+</ul>
+
+
+<h5 id="terminology" class="mt-3">Structure and Terminology</h5>
+<p>The TreeView component works with the concepts of <code>branches</code> and <code>leaves</code> (like a tree, get it). The basic HTML of a rendered TreeView will look something like this:</p>
+{{#collapse-pane class="card" open=false as |isOpen|}}
+    <div class="card-header">
+        <h4 class="float-xs-left mb-0">HTML Structure</h4>
+        {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Hide' 'Show')}}
+    </div>
+
+    {{#collapse-pane-body}}
+        {{code-snippet name="tree-view-html-structure.hbs" class="mb-0"}}
+    {{/collapse-pane-body}}
+{{/collapse-pane}}
+
+
+<p>There is a lot contained in the HTML snippet above, but the important concepts to remember are:</p>
+<ul>
+    <li><strong>Trunk:</strong> The trunk is the foundation of your tree. All trees have one trunk which is the parent to all other branches and leaves, and the trunk will always be the branch of <code>depth=1</code>.</li>
+    <li><strong>Node:</strong> A node is a list element that can either be of type <code>branch</code> or <code>leaf</code>.</li>
+    <li><strong>Branch:</strong> A branch is a node that has one or more children.</li>
+    <li><strong>Leaf:</strong> A leaf is a node with no children.</li>
+</ul>
+
+
+<h5 id="implementing" class="mt-3">Basic Implementation</h5>
+{{code-snippet rawSource="{{tree-view data=dataArray}}" language="hbs"}}
+<p>A TreeView component expects an array of objects to define its structure. At minimum, each object in the array should have a <code>name</code> property which will be used as the label for the node it represents. With only a <code>name</code> the result will be a <code>leafNode</code>. To define a
+<code>branchNode</code> you will also need to supply a <code>children</code> array in the object. This pattern can be repeated as many times as needed, as deeply as needed, to give the desired output.</p>
+<p>In the example below <em>Option A</em>, and <em>Option B</em> will be rendered as top level leaf nodes. <em>Option C</em> will be rendered as a top level branch node with the children <em>Option C.1</em>, and <em>Option C.3</em> as leaf nodes, and <em>Option C.2</em> as a branch node. <em>Option C.2.a</em> will be rendered as a child leaf node of <em>Option C.2</em>.</p>
+<p>The TreeView component doesn't perform any sorting, or take preference in branches vs. leaves, so the order in which you supply your data array will be the order in which it is rendered.</p>
+
+{{#collapse-pane class="card" open=false as |isOpen|}}
+    <div class="card-header">
+        <h4 class="float-xs-left mb-0">Example Data</h4>
+        {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Hide' 'Show')}}
+    </div>
+
+    {{#collapse-pane-body}}
+        {{code-snippet name="tree-view-data-object.js" class="mb-0"}}
+    {{/collapse-pane-body}}
+{{/collapse-pane}}
+
+{{#collapse-pane class="card" open=false as |isOpen|}}
+    <div class="card-header">
+        <h4 class="float-xs-left mb-0">Demo</h4>
+        {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Hide' 'Show')}}
+    </div>
+
+    {{#collapse-pane-body class="card-block"}}
+        {{tree-view data=basicData}}
+    {{/collapse-pane-body}}
+{{/collapse-pane}}
+
+
+<h5 id="defaults" class="mt-3">Default Configuration</h5>
+<table class="table table-bordered">
+    <thead class="thead-inverse">
+        <tr>
+            <th width="1%">Property</th>
+            <th width="1%">Type</th>
+            <th width="1%">Default</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr role="row">
+            <td><strong>Disabled</strong></td>
+            <td>Boolean</td>
+            <td><span class="text-darnger text-nowrap">false</span></td>
+            <td>Whether or not this tree is disabled. Disabling the tree node effectively freezes it in place, allowing no interaction.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>labelField</strong></td>
+            <td>String</td>
+            <td><span class="text-success text-nowrap">"name"</span></td>
+            <td>The name of the property within each data object whole value should be used as the value of its node's label.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>childField</strong></td>
+            <td>String</td>
+            <td><span class="text-success text-nowrap">"children"</span></td>
+            <td>The name of the property within each data object whose value should be used to derive its node's children from.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>titleField</strong></td>
+            <td>String</td>
+            <td><span class="text-success text-nowrap">"title"</span></td>
+            <td>The name of the property within each data object whose value should be set as the title attribute its node's label wrapper.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>descField</strong></td>
+            <td>String</td>
+            <td><span class="text-success text-nowrap">"description"</span></td>
+            <td>The name of the property within each data object whose value should be used to generate content below its node's label wrapper.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>descAsHtml</strong></td>
+            <td>Boolean</td>
+            <td><span class="text-danger">false</span></td>
+            <td>Whether or not description text contains HTML and should be output with escaping.</td>
+        </tr>
+
+
+        <tr role="row">
+            <td colspan="4" class="table-info text-xs-center">
+                <strong>Class Names</strong>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>branchClass</strong></td>
+            <td>String</td>
+            <td><span class="text-success text-nowrap">"tv-branch"</span></td>
+            <td>The base class name for branch nodes. Additional class names may be derived from this for additional states such as <span class="text-success">"tv-branch-clickable"</span>, or <span class="text-success">"tv-branch-disabled"</span>.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>leafClass</strong></td>
+            <td>String</td>
+            <td><span class="text-success text-nowrap">"tv-leaf"</span></td>
+            <td>The base class name for leaf nodes. Additional class names may be derived from this for additional states such as <span class="text-success">"tv-leaf-clickable"</span>, or <span class="text-success">"tv-leaf-disabled"</span>.</td>
+        </tr>
+
+
+        <tr role="row">
+            <td colspan="4" class="table-info text-xs-center">
+                <strong>Iconography</strong>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>branchIconClass</strong></td>
+            <td>String</td>
+            <td><span class="text-warning">null</span></td>
+            <td>The font icon class name to give a branch node's icon element.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>branchIconCloseClass</strong></td>
+            <td>String</td>
+            <td><span class="text-success text-nowrap">"fa fa-plus-circle"</span></td>
+            <td>The font icon class name to give a branch node's icon element if the branch node is collapsible and it is in the collapsed state.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>branchIconOpenClass</strong></td>
+            <td>String</td>
+            <td><span class="text-success text-nowrap">"fa fa-minus-circle"</span></td>
+            <td>The fond icon class name to give a branch node's icon element if the branch node is collapsible and it is in the expanded state.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>leafIconClass</strong></td>
+            <td>String</td>
+            <td><span class="text-warning">null</span></td>
+            <td>The font icon class name to give a leaf node's icon element.</td>
+        </tr>
+
+
+        <tr role="row">
+            <td colspan="4" class="table-info text-xs-center">
+                <strong>Branch Interaction</strong>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>branchClickable</strong></td>
+            <td>Boolean</td>
+            <td><span class="text-danger">false</span></td>
+            <td>Whether or not clicking (or equivalent keyboard interaction) on a branch node will result in click actions being emitted from the component.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>branchDraggable</strong></td>
+            <td>Boolean</td>
+            <td><span class="text-danger">false</span></td>
+            <td>Whether or not branch nodes are draggable. If true, only the <em>wrapper</em> portion of the branch node is made draggable (the icon and label) so that interaction can still occur with child nodes.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>collapsible</strong></td>
+            <td>Boolean</td>
+            <td><span class="text-danger">true</span></td>
+            <td>Whether or not branch nodes may be collapsed/expanded to hide/show their child content.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>startCollapsed</strong></td>
+            <td>Boolean</td>
+            <td><span class="text-danger">true</span></td>
+            <td>Whether or not branch nodes should start in their collapsed state. Note that this is not influenced by whether or not they are collapsible, so a branch node with starts collapsed and is not collapsible will never be able to be expanded.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>collapseOn</strong></td>
+            <td>String</td>
+            <td><span class="text-success text-nowrap">"click"</span></td>
+            <td>The event type that will trigger a branch node collapse/expand change. Only <span class="text-success">"click"</span> is currently supported (if the <em>collapseTarget</em> is in focus then the keyboard's space bar or enter keys will also work).</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>collapseTarget</strong></td>
+            <td>String</td>
+            <td><span class="text-success text-nowrap">"wrapper"</span></td>
+            <td>The HTML element that will need to be interacted with in order to trigger a branch node collapse/expand change. The values <span class="text-success">"wrapper"</span>, and <span class="text-success">"icon"</span> are supported. If <span class="text-success">"wrapper"</span> then interaction anywhere on the branch node's label or icon of the type defined by <em>collapseOn</em> will trigger the change. If <span class="text-success">"icon"</span> then only interaction with the branch node's icon will trigger the change.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>collapseDuration</strong></td>
+            <td>Number</td>
+            <td><span class="text-info">250</span></td>
+            <td>The duration of a branch node collapse/expand animation, in milliseconds. Setting this to 0 (zero) removes the animation.</td>
+        </tr>
+
+
+        <tr role="row">
+            <td colspan="4" class="table-info text-xs-center">
+                <strong>Leaf Interaction</strong>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>leafClickable</strong></td>
+            <td>Boolean</td>
+            <td><span class="text-danger">true</span></td>
+            <td>Whether or not clicking (or equivalent keyboard interaction) on a leaf node will result in click actions being emitted from the component.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>leafDraggable</strong></td>
+            <td>Boolean</td>
+            <td><span class="text-danger">true</span></td>
+            <td>Whether or not leaf nodes are draggable.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h5 id="override" class="mt-3">Node by Node Configuration</h5>
+<p>Alright, lots of global configuration is good, but what if you have one branch node that you would rather not allow someone to collapse? Or a single leaf node that should be disabled, or have a different icon than the rest, or whatever else? In these cases and more, the global tree configuration can be overridden by providing a <code>treeView</code> property in the object that you want to behave differently. <code>treeView</code> is an object which may contain any of the properties outlined further down. All of these properties will be bound into the rendered node, so if you need to change a value on the fly then go for it.</p>
+
+<div class="alert alert-warning">
+    It should be noted that for maximum flexibility the only property that will cascade from parent branch to child leaf is <code>disabled</code>.
+</div>
+
+<p>For example:</p>
+
+{{#collapse-pane class="card" open=false as |isOpen|}}
+    <div class="card-header">
+        <h4 class="float-xs-left mb-0">Example Data</h4>
+        {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Hide' 'Show')}}
+    </div>
+
+    {{#collapse-pane-body}}
+        {{code-snippet name="tree-view-custom-data-object.js" class="mb-0"}}
+    {{/collapse-pane-body}}
+{{/collapse-pane}}
+
+{{#collapse-pane class="card" open=false as |isOpen|}}
+    <div class="card-header">
+        <h4 class="float-xs-left mb-0">Demo</h4>
+        {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Hide' 'Show')}}
+    </div>
+
+    {{#collapse-pane-body class="card-block"}}
+        {{tree-view data=customData}}
+    {{/collapse-pane-body}}
+{{/collapse-pane}}
+
+<p>So what exactly can be overridden?</p>
+<table class="table table-bordered">
+    <thead class="thead-inverse">
+        <tr>
+            <th width="1%"><span class="text-nowrap"><code>treeView</code> Property</span></th>
+            <th>Overrides</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr role="row">
+            <td><strong>labelField</strong></td>
+            <td><code>labelField</code> global property.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>childField</strong></td>
+            <td><code>childField</code> global property.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>titleField</strong></td>
+            <td><code>titleField</code> global property.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>descField</strong></td>
+            <td><code>descField</code> global property.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>descAsHtml</strong></td>
+            <td><code>descAsHtml</code> global property.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>collapsible</strong></td>
+            <td><code>collapsible</code> global property for a branch node and is ignored by leaf nodes.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>startCollapsed</strong></td>
+            <td><code>startCollapsed</code> global property for a branch node and is ignored by leaf nodes.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>collapseOn</strong></td>
+            <td><code>collapseOn</code> global property for a branch node and is ignored by leaf nodes.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>collapseTarget</strong></td>
+            <td><code>collapseTarget</code> global property for a branch node and is ignored by leaf nodes.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>collapseDuration</strong></td>
+            <td><code>collapseDuration</code> global property for a branch node and is ignored by leaf nodes.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>clickable</strong></td>
+            <td><code>branchClickable</code> global property for a branch node and <code>leafClickable</code> global property for a leaf node.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>draggable</strong></td>
+            <td><code>branchDraggable</code> global property for a branch node and <code>leafDraggable</code> global property for a leaf node.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>icon</strong></td>
+            <td><code>branchIcon</code> global property for a branch node and <code>leafIcon</code> global property for a leaf node.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>iconOpen</strong></td>
+            <td><code>branchIconOpenClass</code> global property for a branch node and is ignored by leaf nodes.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>iconClose</strong></td>
+            <td><code>branchIconCloseClass</code> global property for a branch node and is ignored by leaf nodes.</td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>disabled</strong></td>
+            <td>This one is special. <code>disabled</code> is both one-way bound and inherited. That is, setting <code>disabled</code> to <code>false</code> on a node definition when the global property is set to <code>true</code> will have no effect - you cannot enable the child of something which is disabled. Moving the other way - with the global property <code>false</code> and the node definition <code>true</code> - is fine though. Branch nodes will pass this property along to all of their descendants.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h5 id="actions" class="mt-3">Actions</h5>
+<p>You can always expect actions to be triggered in a particular order.</p>
+<p>For actions that have a generic <em>node</em> as well as more specific <em>branch</em> and <em>leaf</em> variants:</p>
+<ol>
+    <li>The generic <em>node</em> action will trigger.</li>
+    <li>The <em>branch</em> action will trigger.</li>
+    <li>The <em>leaf</em> action will trigger.</li>
+</ol>
+
+<p>For focus actions in particular (limited by the firing order of events in JavaScript):</p>
+<ol>
+    <li>The <em>on[Node, Branch, Leaf]FocusOut</em> group of actions will trigger.</li>
+    <li>The <em>on[Node, Branch, Leaf]FocusIn</em> group of actions will trigger.</li>
+    <li>The action or group of actions which started the focus change will trigger (e.g. <em>on[Node, Branch, Leaf]Click</em>)</li>
+</ol>
+
+<p>The TreeView component provides the following actions:</p>
+
+<table class="table table-bordered">
+    <thead class="thead-inverse">
+    <tr>
+        <th width="1%">Action</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr role="row">
+            <td><strong>onNodeClick</strong></td>
+            <td>
+                <p>This action is triggered when a click or equivalent keyboard input occurs on any enabled and clickable TreeView node.</p>
+                <code>onNodeClick(component, withKey)</code>
+                <ul class="mb-0">
+                    <li><em>component</em>: A reference to the node instance which triggered the action.</li>
+                    <li><em>eventType</em>: A boolean indicating whether the action was trigger with keyboard input.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>onBranchClick</strong></td>
+            <td>
+                <p>This action is triggered when a click or equivalent keyboard input occurs on an enabled and clickable TreeView <em>branch</em> node.</p>
+                <code>onBranchClick(component, withKey)</code>
+                <ul class="mb-0">
+                    <li><em>component</em>: A reference to the branch node instance which triggered the action.</li>
+                    <li><em>eventType</em>: A boolean indicating whether the action was trigger with keyboard input.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>onLeafClick</strong></td>
+            <td>
+                <p>This action is triggered when a click or equivalent keyboard input occurs on an enabled and clickable TreeView <em>leaf</em> node.</p>
+                <code>onLeafClick(component, withKey)</code>
+                <ul class="mb-0">
+                    <li><em>component</em>: A reference to the leaf node instance which triggered the action.</li>
+                    <li><em>eventType</em>: A boolean indicating whether the action was trigger with keyboard input.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>onBranchToggle</strong></td>
+            <td>
+                <p>This action is triggered when a branch node is toggle to its collapsed or expanded state. Note that this action can occur regardless of whether or not the branch is also <em>clickable</em>, since <em>clickable</em> and <em>collapsible</em> branch states can exist independant of each other.</p>
+                <code>onBranchToggle(component, withKey)</code>
+                <ul class="mb-0">
+                    <li><em>component</em>: A reference to the leaf node instance which triggered the action.</li>
+                    <li><em>eventType</em>: A boolean indicating whether the action was trigger with keyboard input.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>onNodeFocusIn</strong></td>
+            <td>
+                <p>This action is triggered when a click or equivalent keyboard input brings any enabled and focusable TreeView node into focus.</p>
+                <code>onNodeFocusIn(component, withKey)</code>
+                <ul class="mb-0">
+                    <li><em>component</em>: A reference to the leaf node instance which triggered the action.</li>
+                    <li><em>eventType</em>: A boolean indicating whether the action was trigger with keyboard input.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>onBranchFocusIn</strong></td>
+            <td>
+                <p>This action is triggered when a click or equivalent keyboard input brings any enabled and focusable <em>branch</em> TreeView node into focus.</p>
+                <code>onBranchFocusIn(component, withKey)</code>
+                <ul class="mb-0">
+                    <li><em>component</em>: A reference to the leaf node instance which triggered the action.</li>
+                    <li><em>eventType</em>: A boolean indicating whether the action was trigger with keyboard input.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>onLeafFocusIn</strong></td>
+            <td>
+                <p>This action is triggered when a click or equivalent keyboard input brings any enabled and focusable TreeView <em>leaf</em> node into focus.</p>
+                <code>onLeafFocusIn(component, withKey)</code>
+                <ul class="mb-0">
+                    <li><em>component</em>: A reference to the leaf node instance which triggered the action.</li>
+                    <li><em>eventType</em>: A boolean indicating whether the action was trigger with keyboard input.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>onNodeFocusOut</strong></td>
+            <td>
+                <p>This action is triggered when a click or equivalent keyboard input brings any enabled and focusable TreeView node out of focus.</p>
+                <code>onNodeFocusOut(component, withKey)</code>
+                <ul class="mb-0">
+                    <li><em>component</em>: A reference to the leaf node instance which triggered the action.</li>
+                    <li><em>eventType</em>: A boolean indicating whether the action was trigger with keyboard input.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>onBranchFocusOut</strong></td>
+            <td>
+                <p>This action is triggered when a click or equivalent keyboard input brings any enabled and focusable TreeView <em>branch</em> node out of focus.</p>
+                <code>onBranchFocusOut(component, withKey)</code>
+                <ul class="mb-0">
+                    <li><em>component</em>: A reference to the leaf node instance which triggered the action.</li>
+                    <li><em>eventType</em>: A boolean indicating whether the action was trigger with keyboard input.</li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr role="row">
+            <td><strong>onLeafFocusOut</strong></td>
+            <td>
+                <p>This action is triggered when a click or equivalent keyboard input brings any enabled and focusable TreeView <em>leaf</em> node out of focus.</p>
+                <code>onLeafFocusOut(component, withKey)</code>
+                <ul class="mb-0">
+                    <li><em>component</em>: A reference to the leaf node instance which triggered the action.</li>
+                    <li><em>eventType</em>: A boolean indicating whether the action was trigger with keyboard input.</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>

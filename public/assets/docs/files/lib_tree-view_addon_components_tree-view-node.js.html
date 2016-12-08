@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>lib/tree-view/addon/components/tree-view-node.js - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h1 class="file-heading">File: lib/tree-view/addon/components/tree-view-node.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+
+export default Ember.Component.extend({
+    tagName: &#x27;li&#x27;,
+    classNameBindings: [&#x27;nodeClass&#x27;, &#x27;disabledClass&#x27;, &#x27;clickableClass&#x27;, &#x27;collapsibleClass&#x27;, &#x27;collapsibleStateClass&#x27;, &#x27;data.treeView.extraClasses&#x27;],
+
+    init() {
+        this._super(...arguments);
+
+        let labelPath = &#x27;data.&#x27; + this.get(&#x27;nodeLabelField&#x27;),
+            childPath = &#x27;data.&#x27; + this.get(&#x27;nodeChildField&#x27;);
+
+        Ember.defineProperty(this, &#x27;label&#x27;, Ember.computed(labelPath, function(){
+            return this.get(labelPath);
+        }));
+
+        Ember.defineProperty(this, &#x27;children&#x27;, Ember.computed(childPath, function(){
+            return this.get(childPath);
+        }));
+
+        this.set(&#x27;isCollapsed&#x27;, this.get(&#x27;nodeStartsCollapsed&#x27;));
+    },
+
+
+    /**
+     *
+     */
+    isCollapsed: false,
+
+
+    /**
+     *
+     */
+    nodeLabelField: Ember.computed(&#x27;data.treeView.labelField&#x27;, &#x27;labelField&#x27;, function(){
+        return this.get(&#x27;data.treeView.labelField&#x27;) || this.get(&#x27;labelField&#x27;);
+    }).readOnly(),
+
+
+    /**
+     *
+     */
+    nodeChildField: Ember.computed(&#x27;data.treeView.childField&#x27;, &#x27;childField&#x27;, function(){
+        return this.get(&#x27;data.treeView.childField&#x27;) || this.get(&#x27;childField&#x27;);
+    }).readOnly(),
+
+    nodeIsDisabled: Ember.computed(&#x27;data.treeView.disabled&#x27;, &#x27;disabled&#x27;, function(){
+        return this.get(&#x27;disabled&#x27;) || this.get(&#x27;data.treeView.disabled&#x27;);
+    }).readOnly(),
+
+    nodeIsClickable: Ember.computed(&#x27;nodeIsDisabled&#x27;, &#x27;data.treeView.clickable&#x27;, &#x27;clickable&#x27;, function(){
+        return !this.get(&#x27;nodeIsDisabled&#x27;) &amp;&amp; (this.get(&#x27;data.treeView.clickable&#x27;) || this.get(&#x27;clickable&#x27;));
+    }).readOnly(),
+
+    nodeIsCollapsible: Ember.computed(&#x27;hasChildren&#x27;, &#x27;nodeIsDisabled&#x27;, &#x27;data.treeView.collapsible&#x27;, &#x27;collapsible&#x27;, function(){
+        return this.get(&#x27;hasChildren&#x27;) &amp;&amp; (this.get(&#x27;data.treeView.collapsible&#x27;) || this.get(&#x27;collapsible&#x27;));
+    }).readOnly(),
+
+    nodeStartsCollapsed: Ember.computed(&#x27;nodeIsCollapsible&#x27;, &#x27;data.treeView.startCollapsed&#x27;, &#x27;startCollapsed&#x27;, function(){
+        return this.get(&#x27;nodeIsCollapsible&#x27;) &amp;&amp; (this.get(&#x27;data.treeView.startCollapsed&#x27;) || this.get(&#x27;startCollapsed&#x27;));
+    }).readOnly(),
+
+    nodeIsSelectable: Ember.computed(&#x27;data.treeView.selectable&#x27;, &#x27;hasChildren&#x27;, &#x27;branchesSelectable&#x27;, &#x27;leavesSelectable&#x27;, function(){
+        if(this.get(&#x27;hasChildren&#x27;)){
+            return this.get(&#x27;data.treeView.selectable&#x27;) || this.get(&#x27;branchesSelectable&#x27;);
+        }
+        else{
+            return this.get(&#x27;data.treeView.selectable&#x27;) || this.get(&#x27;leavesSelectable&#x27;);
+        }
+    }).readOnly(),
+
+    nodeIsDraggable: Ember.computed(&#x27;data.treeView.draggable&#x27;, &#x27;hasChildren&#x27;, &#x27;branchesDraggable&#x27;, &#x27;leavesDraggable&#x27;, &#x27;nodeIsDisabled&#x27;, function(){
+        if(this.get(&#x27;nodeIsDisabled&#x27;)){
+            return false;
+        }
+
+        if(this.get(&#x27;hasChildren&#x27;)){
+            return this.get(&#x27;data.treeView.draggable&#x27;) || this.get(&#x27;branchesDraggable&#x27;);
+        }
+        else{
+            return this.get(&#x27;data.treeView.draggable&#x27;) || this.get(&#x27;leavesDraggable&#x27;);
+        }
+    }).readOnly(),
+
+
+    /**
+     *
+     */
+    nextDepth: Ember.computed(&#x27;depth&#x27;, function(){
+        return this.get(&#x27;depth&#x27;) + 1;
+    }).readOnly(),
+
+
+    /**
+     * Boolean indicating whether this node&#x27;s data contains a children array which is not empty (making it a &#x60;branch&#x60; instead
+     * of a &#x60;leaf&#x60;).
+     *
+     * @property hasChildren
+     * @type boolean
+     * @default false
+     * @readOnly
+     */
+    hasChildren: Ember.computed(&#x27;children.[]&#x27;, function(){
+        return !Ember.isEmpty(this.get(&#x27;children&#x27;));
+    }).readOnly(),
+
+
+    /**
+     * The type of this node, either &#x60;branch&#x60; (if it has children) or &#x60;leaf&#x60; (if it does not have children).
+     *
+     * @property nodeType
+     * @type string
+     * @default &quot;branch&quot;|&quot;leaf&quot;
+     * @readOnly
+     */
+    nodeType: Ember.computed(&#x27;hasChildren&#x27;, function(){
+        return this.get(&#x27;hasChildren&#x27;) ? &#x27;branch&#x27; : &#x27;leaf&#x27;;
+    }).readOnly(),
+
+
+    /**
+     * The value of the ARIA hasPopup attribute for the icon of this node, if this node has children and can be collapsed.
+     *
+     * @property iconAriaHasPopup
+     * @type boolean
+     * @default false
+     * @readOnly
+     */
+    iconAriaHasPopup: Ember.computed(&#x27;nodeIsCollapsible&#x27;, &#x27;nodeIsDisabled&#x27;, function(){
+        return (this.get(&#x27;nodeIsCollapsible&#x27;) &amp;&amp; !this.get(&#x27;nodeIsDisabled&#x27;))? &quot;true&quot; : false;
+    }).readOnly(),
+
+
+    /**
+     * The value of the ARIA isExpanded attribute for the icon of this node. If this node has children and can be
+     * collapsed then this boolean value will toggle to reflect its current state.
+     *
+     * @property iconAriaIsExpanded
+     * @type string|boolean
+     * @default false
+     * @readOnly
+     */
+    iconAriaIsExpanded: Ember.computed(&#x27;nodeIsCollapsible&#x27;, &#x27;nodeIsDisabled&#x27;, &#x27;isCollapsed&#x27;, function(){
+        if(this.get(&#x27;nodeIsCollapsible&#x27;) &amp;&amp; !this.get(&#x27;nodeIsDisabled&#x27;)){
+            return this.get(&#x27;isCollapsed&#x27;)? &#x27;false&#x27; : &#x27;true&#x27;;
+        }
+
+        return false;
+    }).readOnly(),
+
+
+    /**
+     *
+     */
+    iconTabIndex: Ember.computed(&#x27;nodeIsCollapsible&#x27;, &#x27;nodeIsDisabled&#x27;, function(){
+        return (this.get(&#x27;nodeIsCollapsible&#x27;) &amp;&amp; !this.get(&#x27;nodeIsDisabled&#x27;))? &quot;0&quot; : false;
+    }).readOnly(),
+
+
+    /**
+     *
+     */
+    iconTitle: Ember.computed(&#x27;nodeIsCollapsible&#x27;, &#x27;nodeIsDisabled&#x27;, &#x27;isCollapsed&#x27;, function(){
+        if(this.get(&#x27;nodeIsCollapsible&#x27;) &amp;&amp; !this.get(&#x27;nodeIsDisabled&#x27;)){
+            return this.get(&#x27;isCollapsed&#x27;)? &#x27;Open this folder&#x27; : &#x27;Close this folder&#x27;;
+        }
+
+        return null;
+    }).readOnly(),
+
+
+    /**
+     *
+     */
+    nodeClass: Ember.computed(&#x27;hasChildren&#x27;, function(){
+        return this.get(&#x27;hasChildren&#x27;) ? this.get(&#x27;branchClass&#x27;) : this.get(&#x27;leafClass&#x27;);
+    }).readOnly(),
+
+
+    /**
+     *
+     */
+    wrapperClass: Ember.computed(&#x27;nodeClass&#x27;, function(){
+        return this.get(&#x27;nodeClass&#x27;) + &#x27;-wrapper&#x27;;
+    }).readOnly(),
+
+
+    /**
+     *
+     */
+    labelClass: Ember.computed(&#x27;nodeClass&#x27;, function(){
+        return this.get(&#x27;nodeClass&#x27;) + &#x27;-label&#x27;;
+    }).readOnly(),
+
+
+    /**
+     *
+     */
+    iconClass: Ember.computed(&#x27;hasChildren&#x27;, &#x27;nodeIsCollapsible&#x27;, &#x27;isCollapsed&#x27;, function(){
+        if(this.get(&#x27;hasChildren&#x27;)){
+            if(this.get(&#x27;nodeIsCollapsible&#x27;)){
+                return this.get(&#x27;isCollapsed&#x27;)? this.get(&#x27;branchIconCloseClass&#x27;) : this.get(&#x27;branchIconOpenClass&#x27;);
+            }
+
+            return this.get(&#x27;branchIconClass&#x27;);
+        }
+
+        return this.get(&#x27;leafIconClass&#x27;);
+    }).readOnly(),
+
+
+    /**
+     * The class name given to the element which wraps the node icon, if one is present. The wrapper is needed for accessibility
+     * if the icon can be interacted with. The generated string will be equal to either the &#x60;branchClass&#x60; or &#x60;leafClass&#x60;
+     * properties set on the tree-view root - dependant on which type of node this is - suffixed with &#x27;-icon-wrapper&#x27;.
+     *
+     * @property iconWrapperClass
+     * @type string
+     * @default &quot;tv-branch-icon-wrapper&quot;|&quot;tv-leaf-icon-wrapper&quot;
+     * @readOnly
+     */
+    iconWrapperClass: Ember.computed(&#x27;nodeClass&#x27;, function(){
+        return this.get(&#x27;nodeClass&#x27;) + &#x27;-icon-wrapper&#x27;;
+    }).readOnly(),
+
+
+    /**
+     * The class name given to this element when it is disabled and not allowed to be interacted with. The generated string
+     * will be equal to either the &#x60;branchClass&#x60; or &#x60;leafClass&#x60; properties set on the tree-view root - dependant on which
+     * type of node this is - suffixed with &#x27;-disabled&#x27;.
+     *
+     * @property disabledClass
+     * @type string
+     * @default &quot;tv-branch-disabled&quot;|&quot;tv-leaf-disabled&quot;
+     */
+    disabledClass: Ember.computed(&#x27;nodeIsDisabled&#x27;, &#x27;nodeClass&#x27;, function(){
+        return this.get(&#x27;nodeIsDisabled&#x27;)? this.get(&#x27;nodeClass&#x27;) + &#x27;-disabled&#x27; : null;
+    }).readOnly(),
+
+
+    /**
+     * The class name given to this element when it is able to trigger nodeClick actions for the tree-view root. The generated
+     * string will be equal to either the &#x60;branchClass&#x60; or &#x60;leafClass&#x60; properties set on the tree-view root - dependant on which
+     * type of node this is - suffixed with &#x27;-clickable&#x27;.
+     *
+     * @property clickableClass
+     * @type string
+     * @default null|&quot;tv-branch-clickable&quot;|&quot;tv-leaf-clickable&quot;
+     * @readOnly
+     */
+    clickableClass: Ember.computed(&#x27;nodeIsClickable&#x27;, &#x27;nodeClass&#x27;, function(){
+        if(this.get(&#x27;nodeIsClickable&#x27;)){
+            return this.get(&#x27;nodeClass&#x27;) + &#x27;-clickable&#x27;;
+        }
+
+        return null;
+    }).readOnly(),
+
+
+    /**
+     * The class name given to this element when it is able to toggle a collapse event (a branch node which is not disabled).
+     * The generated string will be equal to the &#x60;branchClass&#x60; property set on the tree-view root suffixed with &#x27;-collapsible&#x27;.
+     *
+     * @property collapsibleClass
+     * @type string
+     * @default null|&quot;tv-branch-collapsible&quot;
+     * @readOnly
+     */
+    collapsibleClass: Ember.computed(&#x27;nodeIsCollapsible&#x27;, &#x27;nodeClass&#x27;, function(){
+        return this.get(&#x27;nodeIsCollapsible&#x27;)? this.get(&#x27;nodeClass&#x27;) + &#x27;-collapsible&#x27; : null;
+    }).readOnly(),
+
+
+    /**
+     *  The class name given to this element to indicate its current collapse state (opened or closed). Only elements that are
+     *  able to toggle a collapse event (a branch node which is not disabled) will be given this class. The generated string
+     *  will be equal to the &#x60;branchClass&#x60; property set on the tree-view root suffixed with either &#x27;-collapse-close&#x27;, or &#x27;-collapse-open&#x27;
+     *  depending on the current value of the &#x60;isCollapsed&#x60; property.
+     *
+     *  @property collapsibleStateClass
+     *  @type string
+     *  @default null|&quot;tv-branch-collapse-close&quot;
+     *  @readOnly
+     */
+    collapsibleStateClass: Ember.computed(&#x27;nodeIsCollapsible&#x27;, &#x27;isCollapsed&#x27;, &#x27;nodeClass&#x27;, function(){
+        if(this.get(&#x27;nodeIsCollapsible&#x27;)){
+            return this.get(&#x27;isCollapsed&#x27;) ? this.get(&#x27;nodeClass&#x27;) + &#x27;-collapse-close&#x27; : this.get(&#x27;nodeClass&#x27;) + &#x27;-collapse-open&#x27;;
+        }
+
+        return null;
+    }).readOnly(),
+
+
+    /**
+     * Creates the data object which is added to the provided event before it bubbles up to the tree-view root. That root then uses the
+     * properties of this data object to determine which actions to fire.
+     *
+     * @method eventBuilder
+     * @param {Event} event The event object to annotate if needed.
+     * @private
+     */
+    eventBuilder(event){
+        if(event[&#x27;treeViewData&#x27;]){
+            return false;
+        }
+
+        if(this.get(&#x27;nodeIsDisabled&#x27;)){
+            return false;
+        }
+
+        let isIconClick    = event.target.className === this.get(&#x27;iconClass&#x27;) || event.target.className === this.get(&#x27;iconWrapperClass&#x27;),
+            isLabelClick   = event.target.className === this.get(&#x27;labelClass&#x27;),
+            isWrapperClick = event.target.className === this.get(&#x27;wrapperClass&#x27;),
+            dataPackage    = {nodeType: this.get(&#x27;nodeType&#x27;), data: this.get(&#x27;data&#x27;), disabled: this.get(&#x27;nodeIsDisabled&#x27;)};
+
+        if(isIconClick){
+            dataPackage.source = &#x27;icon&#x27;;
+
+            if(this.get(&#x27;nodeIsCollapsible&#x27;)){
+                dataPackage.collapsibleEvent = true;
+                dataPackage.isCollapsed      = !this.get(&#x27;isCollapsed&#x27;);
+            }
+        }
+
+        if(isLabelClick){
+            dataPackage.source = &#x27;label&#x27;;
+        }
+
+        if(isWrapperClick){
+            dataPackage.source = &#x27;wrapper&#x27;;
+        }
+
+        event.treeViewData = dataPackage;
+
+        return true;
+    },
+
+
+    /**
+     *
+     */
+    click(event){
+        if(this.eventBuilder(event)){
+            if(event.treeViewData.collapsibleEvent){
+                this.toggleProperty(&#x27;isCollapsed&#x27;);
+            }
+        }
+    },
+
+
+    /**
+     *
+     */
+    keyUp(event){
+        if(event.keyCode === 13 || event.keyCode === 32){
+            if(this.eventBuilder(event)){
+                if(event.treeViewData.collapsibleEvent){
+                    this.toggleProperty(&#x27;isCollapsed&#x27;);
+                }
+            }
+        }
+    }
+});
+    </pre>
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

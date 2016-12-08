@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>lib/anchor-to/addon/components/anchor-to.js - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h1 class="file-heading">File: lib/anchor-to/addon/components/anchor-to.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+
+/**
+ * The AnchorTo component lets you simulate the functionality of using an anchor to jump to another area of content within the
+ * same document while using [Ember&#x27;s &quot;hash&quot;](http://emberjs.com/api/classes/Ember.Location.html) location type.
+ *
+ * A simple example:
+ *
+ *     {{anchor-to href=&quot;#mainContent&quot;}}Jump to content{{anchor-to}}
+ *
+ *     .
+ *     .
+ *     .
+ *
+ *     {{!Further down the page}}
+ *     &lt;div id=&quot;mainContent&quot;&gt;
+ *         &lt;p&gt;Hello World!&lt;/p&gt;
+ *     &lt;/div&gt;
+ *
+ * @class AnchorTo
+ * @namespace Components
+ * @module anchor-to
+ * @submodule components
+ * @extends Ember.Component
+ * @public
+ */
+export default Ember.Component.extend({
+    tagName: &#x27;a&#x27;,
+    attributeBindings: [&#x27;href&#x27;, &#x27;title&#x27;],
+
+    /**
+     * The href attribute value for the link. Unlike a normal anchor, this fancy fellow can be any jQuery selector string.
+     *
+     * @property href
+     * @type string
+     * @default null
+     * @public
+     */
+    href: null,
+
+    /**
+     * An optional title attribute for the link.
+     *
+     * @property title
+     * @type string
+     * @default null
+     * @public
+     */
+    title: null,
+
+    /**
+     * An optional text property whose value will be used if this component has not been given a content block.
+     *
+     * @property text
+     * @type string
+     * @default null
+     * @public
+     */
+    text: null,
+
+
+    init() {
+        this._super(...arguments);
+        Ember.assert(&#x27;The href property must be set on an anchor-to component!&#x27;, Ember.typeOf(this.get(&#x27;href&#x27;)) === &#x27;string&#x27;);
+    },
+
+
+    click() {
+        let target = Ember.$(this.get(&#x27;href&#x27;));
+        Ember.$(&#x27;html, body&#x27;).scrollTop(target.offset().top);
+
+        return false;
+    }
+});
+    </pre>
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

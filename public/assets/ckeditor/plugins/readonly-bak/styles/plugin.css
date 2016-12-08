@@ -1,0 +1,16 @@
+.cke_widget_wrapper:hover > .cke_widget_element.cke_plugin_readonly{
+    outline: 2px solid #0000FF;
+}
+
+.cke_widget_wrapper > .cke_widget_element.cke_plugin_readonly{
+    background-color: #CCE1EF;
+    color: #333333;
+}
+
+.cke_widget_wrapper.cke_widget_focused > .cke_widget_element.cke_plugin_readonly{
+    outline: 2px solid #0000FF;
+}
+
+.cke_widget_wrapper.cke_widget_focused > .cke_widget_element.cke_plugin_readonly_editable{
+
+}

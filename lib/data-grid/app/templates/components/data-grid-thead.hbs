@@ -1,0 +1,15 @@
+<tr role="row">
+  {{#if hasBlock}}
+    {{yield
+      (hash
+        th=(component 'data-grid-th' tableId=tableId
+          sorter=sorter
+          registerColumn=registerColumn
+          deregisterColumn=deregisterColumn
+          columnVisibilityChange=columnVisibilityChange
+        )
+      )}}
+  {{else}}
+
+  {{/if}}
+</tr>

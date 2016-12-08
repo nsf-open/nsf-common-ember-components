@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Mixins.WindowScrollObserver - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h2>Mixins.WindowScrollObserver Class</h2>
+<hr />
+
+<table class="properties-table mb-2">
+    <tbody>
+            <tr role="row">
+                <th width="1%">Extends</th>
+                <td>Ember.Mixins</td>
+            </tr>
+
+
+            <tr role="row">
+                <th width="1%">Defined in</th>
+                <td><a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l3"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:3</code></a></td>
+            </tr>
+
+                <tr role="row">
+                    <th width="1%">Module</th>
+                    <td><a href="../modules/mixins.html">mixins</a></td>
+                </tr>
+                <tr role="row">
+                    <th width="1%">Parent Module</th>
+                    <td><a href="../modules/component-utils.html">component-utils</a></td>
+                </tr>
+
+
+    </tbody>
+</table>
+
+    <div class="description">
+        <p>The WindowScrollObserver mixin aims to make vertical scroll events in the browser easy to detect without being too taxing.
+It does this by wrapping jQuery's scroll event and then periodically polling its data for changes, which is important since
+a large volume of scroll events may be emitted (depending on the browser).</p>
+<p>In the implementing component, a <code>onWindowScroll()</code> callback method is provided which will be executed, at most, only as
+often as the <code>windowScrollCheckFrequency</code> property is set to. E.g. if <code>windowScrollCheckFrequency=500</code> then at most <code>onWindowScroll()</code>
+will only be executed every 500 milliseconds while scrolling occurs.</p>
+<p>The additional <code>windowScrollCoolOffPeriod</code> property will further temper the execution of <code>onWindowScroll()</code> by delaying its execution
+until a set time after the last scroll event has been emitted. E.g. if <code>windowScrollCoolOffPeriod=250</code> then <code>onWindowScroll()</code> will
+not be executed until 250 milliseconds after the last scroll event occurred. If additional scroll events are emitted during that interm
+the timer will reset.</p>
+
+    </div>
+
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs float-xs-left">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#index" role="tab">Index</a></li>
+
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods" role="tab">Methods</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties" role="tab">Properties</a></li>
+        </ul>
+    </div>
+
+    <div class="card-block">
+        <div class="tab-content">
+            <div class="tab-pane active" id="index" role="tabpanel">
+                <h3>Index</h3>
+
+                    <div class="index-list methods">
+                        <h4>Methods</h4>
+                        <ul>
+                                <li class="private">
+                                    <a href="#method__buildWindowScrollInvervalMachination">_buildWindowScrollInvervalMachination</a>
+
+
+                                </li>
+                                <li class="private">
+                                    <a href="#method__onDidInsertElement">_onDidInsertElement</a>
+
+
+                                </li>
+                                <li class="private">
+                                    <a href="#method__onWillDestroyElement">_onWillDestroyElement</a>
+
+
+                                </li>
+                                <li class="private">
+                                    <a href="#method_windowScrollDestroy">windowScrollDestroy</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#method_windowScrollDisable">windowScrollDisable</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#method_windowScrollEnable">windowScrollEnable</a>
+
+
+                                </li>
+                        </ul>
+                    </div>
+
+                    <div class="index-list properties">
+                        <h4>Properties</h4>
+                        <ul>
+                                <li class="private">
+                                    <a href="#property__windowScrollDestroyer">_windowScrollDestroyer</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#property_windowScrollCheckFrequency">windowScrollCheckFrequency</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#property_windowScrollCoolOffPeriod">windowScrollCoolOffPeriod</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#property_windowScrollEmitContinuous">windowScrollEmitContinuous</a>
+
+
+                                </li>
+                                <li class="">
+                                    <a href="#property_windowScrollEnabled">windowScrollEnabled</a>
+
+
+                                </li>
+                        </ul>
+                    </div>
+
+
+            </div>
+
+                <div class="tab-pane" id="methods" role="tabpanel">
+                    <h3>Methods</h3>
+                        <div id="method__buildWindowScrollInvervalMachination" class="method item private">
+                            <h3 class="name"><code>_buildWindowScrollInvervalMachination</code></h3>
+                        
+                                <span class="paren">()</span>
+                        
+                        
+                        
+                                <span class="flag private">private</span>
+                        
+                                <span class="flag final">final</span>
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l146"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:146</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                
+                            </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="method__onDidInsertElement" class="method item private">
+                            <h3 class="name"><code>_onDidInsertElement</code></h3>
+                        
+                                <span class="paren">()</span>
+                        
+                        
+                        
+                                <span class="flag private">private</span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l78"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:78</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                
+                            </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="method__onWillDestroyElement" class="method item private">
+                            <h3 class="name"><code>_onWillDestroyElement</code></h3>
+                        
+                                <span class="paren">()</span>
+                        
+                        
+                        
+                                <span class="flag private">private</span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l93"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:93</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Detach listeners and clear the interval when the component is destroyed.</p>
+                        
+                            </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="method_windowScrollDestroy" class="method item private">
+                            <h3 class="name"><code>windowScrollDestroy</code></h3>
+                        
+                                <span class="paren">()</span>
+                        
+                        
+                        
+                                <span class="flag private">private</span>
+                        
+                                <span class="flag final">final</span>
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l129"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:129</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                
+                            </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="method_windowScrollDisable" class="method item">
+                            <h3 class="name"><code>windowScrollDisable</code></h3>
+                        
+                                <span class="paren">()</span>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l117"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:117</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                
+                            </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="method_windowScrollEnable" class="method item">
+                            <h3 class="name"><code>windowScrollEnable</code></h3>
+                        
+                                <span class="paren">()</span>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l105"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:105</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                
+                            </div>
+                        
+                        
+                        
+                        
+                        </div>
+                </div>
+
+                <div class="tab-pane" id="properties" role="tabpanel">
+                    <h3>Properties</h3>
+                        <div id="property__windowScrollDestroyer" class="property item private">
+                            <h3 class="h5 name">
+                                <code>_windowScrollDestroyer</code> <small><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></small>
+                            </h3>
+                        
+                            <span class="tag tag-outline"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        
+                        
+                        
+                                <span class="flag private">private</span>
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l67"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:67</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                
+                            </div>
+                        
+                                <p><strong>Default:</strong> null</p>
+                        
+                        
+                        </div>
+                        <div id="property_windowScrollCheckFrequency" class="property item">
+                            <h3 class="h5 name">
+                                <code>windowScrollCheckFrequency</code> <small>Int</small>
+                            </h3>
+                        
+                            <span class="tag tag-outline">Int</span>
+                        
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l25"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:25</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>The frequency, in milliseconds, to poll for scroll updates.</p>
+                        
+                            </div>
+                        
+                                <p><strong>Default:</strong> 500</p>
+                        
+                        
+                        </div>
+                        <div id="property_windowScrollCoolOffPeriod" class="property item">
+                            <h3 class="h5 name">
+                                <code>windowScrollCoolOffPeriod</code> <small>Int</small>
+                            </h3>
+                        
+                            <span class="tag tag-outline">Int</span>
+                        
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l35"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:35</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>The amount of time to wait, in milliseconds, between when the last scroll event was emitted, and the 'onWindowScroll()' callback
+                        should be executed.</p>
+                        
+                            </div>
+                        
+                                <p><strong>Default:</strong> 250</p>
+                        
+                        
+                        </div>
+                        <div id="property_windowScrollEmitContinuous" class="property item">
+                            <h3 class="h5 name">
+                                <code>windowScrollEmitContinuous</code> <small><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></small>
+                            </h3>
+                        
+                            <span class="tag tag-outline"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l46"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:46</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>If true, <code>windowScrollCheckFrequency</code> and <code>windowScrollCoolOffPeriod</code> will be ignored, and <code>onWindowScroll()</code> will be executed as
+                        often as scroll events are emitted.</p>
+                        
+                            </div>
+                        
+                                <p><strong>Default:</strong> false</p>
+                        
+                        
+                        </div>
+                        <div id="property_windowScrollEnabled" class="property item">
+                            <h3 class="h5 name">
+                                <code>windowScrollEnabled</code> <small><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></small>
+                            </h3>
+                        
+                            <span class="tag tag-outline"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_window-scroll-observer.js.html#l57"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;window-scroll-observer.js:57</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                
+                            </div>
+                        
+                                <p><strong>Default:</strong> true</p>
+                        
+                        
+                        </div>
+                </div>
+
+
+        </div>
+    </div>
+</div>                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

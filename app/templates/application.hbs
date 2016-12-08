@@ -1,0 +1,40 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-xs-2">
+                <h1>{{#link-to 'index'}}<img src="assets/images/nsf-crest.gif">{{/link-to}}<span class="hidden-md-down"> Ember Commons</span></h1>
+            </div>
+
+            <div class="col-md-8 col-xs-10">
+                <ul class="nav nav-inline float-xs-right">
+                    <li class="nav-item">
+                        {{link-to 'Directory' 'directory' class='nav-link'}}
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{rootURL}}assets/docs/index.html" class="nav-link" target="_blank">API</a>
+                    </li>
+
+                    <li class="nav-item">
+                        {{link-to 'How To Use' 'use' class='nav-link'}}
+                    </li>
+
+                    <li class="nav-item">
+                        {{link-to 'Contributing' 'contributing' class='nav-link'}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        {{outlet}}
+    </div>
+</main>
+
+<footer>
+
+</footer>

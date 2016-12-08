@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="display-3">CKEditor Inline</h1>
+        <p class="lead">A series of CKEditor inline instances with the ability to insert read only content.</p>
+        <p>Double-click on an option from the list on the left side of the editor to have its content loaded into the editor at the cursor. You may also drag and drop the option onto the editor.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12" style="margin-bottom: 1rem;">
+        <button type="button" class="btn btn-primary" {{action 'saveContent'}}>Save</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-3">
+        <ul id="idiomsList" class="list-group" ondblclick={{action 'doubleClick'}}>
+            <li class="list-group-item list-group-item-action" draggable="true">
+                <h6 class="list-group-item-heading">Idiom 1</h6>
+                <p class="list-group-item-text">Let the cat out of the bag</p>
+            </li>
+
+            <li class="list-group-item list-group-item-action" draggable="true">
+                <h6 class="list-group-item-heading">Idiom 2</h6>
+                <p class="list-group-item-text">Elvis has left the building</p>
+            </li>
+
+            <li class="list-group-item list-group-item-action" draggable="true">
+                <h6 class="list-group-item-heading">Idiom 3</h6>
+                <p class="list-group-item-text">Not playing with a full deck</p>
+            </li>
+
+            <li class="list-group-item list-group-item-action" draggable="true">
+                <h6 class="list-group-item-heading">Idiom 4</h6>
+                <p class="list-group-item-text">Your guess is as good as mine</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-xs-9">
+        <div class="card">
+            <div class="card-block editor-block">
+                {{ck-editor-inline content=editorContent options=editorOptions ready=(action 'editorsReady') focusChange=(action 'editorFocusChange')}}
+            </div>
+        </div>
+    </div>
+</div>

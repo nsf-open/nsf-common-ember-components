@@ -1,0 +1,31 @@
+{{#if tableCss}}
+  <style type="text/css">{{tableCss}}</style>
+{{/if}}
+
+{{#sort-list records=records
+             sortsAreExclusive=sortsAreExclusive
+             defaultDirection=defaultSortDirection
+             ascendingValue=ascendingSortValue
+             descendingValue=descendingSortValue as |sorter|
+}}
+  {{#paged-list records=sorter.sortRecords
+                pageSize=pageSize
+                currentPage=currentPage
+                onPageChange=(action 'onPageChange') as |pager|
+  }}
+    {{yield
+      (hash
+        sorter=sorter
+        pager=pager
+        columns=columns
+        table=(component 'data-grid-table'
+          id=tableId
+          records=pager.pageRecords
+          sorter=sorter
+          registerColumn=(action 'registerColumn')
+          deregisterColumn=(action 'deregisterColumn')
+          columnVisibilityChange=(action 'columnVisibilityChange'))
+      )
+    }}
+  {{/paged-list}}
+{{/sort-list}}

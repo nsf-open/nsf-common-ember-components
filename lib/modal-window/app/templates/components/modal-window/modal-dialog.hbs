@@ -1,0 +1,15 @@
+<div class="modal-dialog {{sizeClass}}">
+    <div class="modal-content">
+        {{#if header}}
+            {{modal-window/modal-header title=title closeButton=closeButton}}
+        {{/if}}
+
+        {{#if body}}
+            {{#modal-window/modal-body}}
+                {{yield}}
+            {{/modal-window/modal-body}}
+        {{else}}
+            {{yield}}
+        {{/if}}
+    </div>
+</div>

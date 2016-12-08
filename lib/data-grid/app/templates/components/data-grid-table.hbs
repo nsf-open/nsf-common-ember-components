@@ -1,0 +1,11 @@
+{{yield
+  (hash
+    head=(component 'data-grid-thead' tableId=elementId
+      sorter=sorter
+      registerColumn=registerColumn
+      deregisterColumn=deregisterColumn
+      columnVisibilityChange=columnVisibilityChange
+    )
+    body=(component 'data-grid-tbody' tableId=elementId records=records)
+  )
+}}

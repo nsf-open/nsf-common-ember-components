@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>lib/ck-editor/addon/components/ck-editor-inline.js - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h1 class="file-heading">File: lib/ck-editor/addon/components/ck-editor-inline.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/* global CKEDITOR:true; */
+import Ember from &#x27;ember&#x27;;
+
+/**
+ * actions:
+ *   - ready: called after all the &#x27;instanceReady&#x27; events of each created editor fires.
+ *   - focusChange: called when a new editor gains focus. Useful for always knowing what the last selected editor was.
+ */
+export default Ember.Component.extend({
+    classNames: [&#x27;ck-editor-inline&#x27;],
+
+    content: null,
+
+    options: null,
+
+    editableBlockAttr: &#x27;data-editable-block&#x27;,
+
+    _editorInstances: null,
+
+    _focusedEditor: null,
+
+
+    didInsertElement() {
+        Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, function(){
+            let editableContent = this.$().find(&#x27;*[&#x27;+ this.get(&#x27;editableBlockAttr&#x27;) +&#x27;]&#x27;);
+
+            if(editableContent.length){
+                this.set(&#x27;_editorInstances&#x27;, []);
+                let readyCount = 0;
+
+                for(let i = 0; i &lt; editableContent.length; i++){
+                    let instance = this.createEditor(editableContent[i]);
+
+                    instance.once(&#x27;instanceReady&#x27;, () =&gt; {
+                        readyCount ++;
+
+                        if(readyCount === editableContent.length){
+                            this.sendAction(&#x27;ready&#x27;, this.get(&#x27;_editorInstances&#x27;), this.getFunctionPackage());
+                        }
+                    });
+                }
+            }
+        });
+
+        this._super(...arguments);
+    },
+
+
+    willDestroyElement() {
+        let instances = this.get(&#x27;_editorInstances&#x27;);
+
+        if(instances){
+            for(let i = 0; i &lt; instances.length; i ++){
+                instances[i].destroy();
+            }
+        }
+
+        this._super(...arguments);
+    },
+
+
+    getFunctionPackage() {
+        return {
+            create  : this.createEditor.bind(this),
+            destroy : this.destroyEditor.bind(this),
+            save    : this.saveContent.bind(this)
+        }
+    },
+
+
+    createEditor(rootNode) {
+        rootNode.id  = this.getRandomEditorId();
+        rootNode.contentEditable = true;
+        let instance = CKEDITOR.inline(rootNode, this.get(&#x27;options&#x27;) || {});
+
+        instance.on(&#x27;focus&#x27;, (event) =&gt; {
+            this.set(&#x27;_focusedEditor&#x27;, event.editor);
+            this.sendAction(&#x27;focusChange&#x27;, event.editor);
+        });
+
+        this.get(&#x27;_editorInstances&#x27;).push(instance);
+        return instance;
+    },
+
+
+    destroyEditor(obj, noUpdate) {
+        let editor = null;
+
+        if(!obj){
+            return false;
+        }
+
+        if(Ember.typeOf(obj) === &#x27;string&#x27;){
+            editor = CKEDITOR.instances[obj];
+        }
+        else if(obj instanceof CKEDITOR.editor){
+            editor = obj;
+        }
+        else if(obj.nodeType === 1){
+            editor = CKEDITOR.instances[obj.id];
+        }
+
+        if(editor){
+            let originalElement = editor.element.$;
+
+            if(originalElement){
+                let instances = this.get(&#x27;_editorInstances&#x27;);
+
+                for(var i = 0; i &lt; instances.length; i ++){
+                    if(instances[i].id === editor.id){
+                        break;
+                    }
+                }
+
+                instances.splice(i, 1);
+                editor.destroy(noUpdate);
+
+                if(editor === this.get(&#x27;_focusedEditor&#x27;)){
+                    this.set(&#x27;_focusedEditor&#x27;, null);
+                    this.sendAction(&#x27;focusChange&#x27;, null);
+                }
+
+                // Final cleanup of attributes that CKEDITOR added.
+                originalElement.removeAttribute(&#x27;id&#x27;);
+                originalElement.removeAttribute(&#x27;contenteditable&#x27;);
+                originalElement.removeAttribute(&#x27;style&#x27;);
+
+                this.set(&#x27;_editorInstances&#x27;, instances);
+                return instances;
+            }
+        }
+
+        return false;
+    },
+
+
+    /**
+     *
+     */
+    saveContent() {
+        let container = document.createElement(&#x27;div&#x27;);
+        container.innerHTML = this.$().html();
+
+        let editables = container.querySelectorAll(&#x27;*[&#x27;+ this.get(&#x27;editableBlockAttr&#x27;) +&#x27;]&#x27;);
+
+        for(let i = 0; i &lt; editables.length; i++){
+            let element = document.createElement(editables[i].tagName);
+            element.setAttribute(this.get(&#x27;editableBlockAttr&#x27;), &#x27;&#x27;);
+            element.innerHTML = CKEDITOR.instances[editables[i].id].getData();
+
+            editables[i].parentNode.replaceChild(element, editables[i]);
+        }
+
+        return container.innerHTML;
+    },
+
+
+    /**
+     * Creates a string comprised of a random assortment of uppercase, lowercase, and numbers prefixed with &quot;editor-&quot;.
+     * These results cannot be guaranteed perfectly unique, but it is quick, and the likelihood of ID collisions is
+     * pretty darn low.
+     *
+     * @param [length=8] {int}
+     * @returns {string}
+     */
+    getRandomEditorId(length = 8) {
+        let chars  = &#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890&#x27;,
+            result = [];
+
+        for(let i = 0; i &lt; length; i++){
+            result.push(chars.charAt(Math.floor(Math.random() * 62)));
+        }
+
+        return &#x27;editor-&#x27; + result.join(&#x27;&#x27;);
+    }
+});
+    </pre>
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

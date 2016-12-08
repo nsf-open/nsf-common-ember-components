@@ -1,0 +1,7 @@
+{{#if hasBlock}}
+    {{yield this}}
+{{else}}
+    <button type="button" class="nav-link{{if selected ' active'}}" disabled={{disabled}} {{action 'select'}}>
+        {{text}}
+    </button>
+{{/if}}

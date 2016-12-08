@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Mixins.ComponentParent - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h2>Mixins.ComponentParent Class</h2>
+<hr />
+
+<table class="properties-table mb-2">
+    <tbody>
+            <tr role="row">
+                <th width="1%">Extends</th>
+                <td>Ember.Mixin</td>
+            </tr>
+
+
+            <tr role="row">
+                <th width="1%">Defined in</th>
+                <td><a href="../files/lib_component-utils_addon_mixins_component-parent.js.html#l4"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;component-parent.js:4</code></a></td>
+            </tr>
+
+                <tr role="row">
+                    <th width="1%">Module</th>
+                    <td><a href="../modules/mixins.html">mixins</a></td>
+                </tr>
+                <tr role="row">
+                    <th width="1%">Parent Module</th>
+                    <td><a href="../modules/component-utils.html">component-utils</a></td>
+                </tr>
+
+
+    </tbody>
+</table>
+
+    <div class="description">
+        <p>The ComponentParent mixin provides a reference array to all of its registered ComponentChild instances.</p>
+
+    </div>
+
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs float-xs-left">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#index" role="tab">Index</a></li>
+
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#methods" role="tab">Methods</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#properties" role="tab">Properties</a></li>
+        </ul>
+    </div>
+
+    <div class="card-block">
+        <div class="tab-content">
+            <div class="tab-pane active" id="index" role="tabpanel">
+                <h3>Index</h3>
+
+                    <div class="index-list methods">
+                        <h4>Methods</h4>
+                        <ul>
+                                <li class="private">
+                                    <a href="#method__onInit">_onInit</a>
+
+
+                                </li>
+                                <li class="public">
+                                    <a href="#method_registerChild">registerChild</a>
+
+
+                                </li>
+                                <li class="public">
+                                    <a href="#method_removeChild">removeChild</a>
+
+
+                                </li>
+                        </ul>
+                    </div>
+
+                    <div class="index-list properties">
+                        <h4>Properties</h4>
+                        <ul>
+                                <li class="protected">
+                                    <a href="#property_children">children</a>
+
+
+                                </li>
+                        </ul>
+                    </div>
+
+
+            </div>
+
+                <div class="tab-pane" id="methods" role="tabpanel">
+                    <h3>Methods</h3>
+                        <div id="method__onInit" class="method item private">
+                            <h3 class="name"><code>_onInit</code></h3>
+                        
+                                <span class="paren">()</span>
+                        
+                        
+                        
+                                <span class="flag private">private</span>
+                        
+                                <span class="flag final">final</span>
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_component-parent.js.html#l25"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;component-parent.js:25</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Listener for the 'init' component lifecycle hook which prepares the children array.</p>
+                        
+                            </div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div id="method_registerChild" class="method item public">
+                            <h3 class="name"><code>registerChild</code></h3>
+                        
+                                <div class="args">
+                                    <span class="paren">(</span><ul class="args-list inline commas">
+                                        <li class="arg">
+                                                <code>child</code>
+                                        </li>
+                                    </ul><span class="paren">)</span>
+                                </div>
+                        
+                        
+                        
+                                <span class="flag public">public</span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_component-parent.js.html#l38"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;component-parent.js:38</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Register a component as a child of this parent</p>
+                        
+                            </div>
+                        
+                                <div class="params">
+                                    <h4>Parameters:</h4>
+                        
+                                    <ul class="params-list">
+                                        <li class="param">
+                                                <code class="param-name">child</code>
+                                                <span class="type">ComponentUtils.ComponentChild</span>
+                        
+                        
+                                            <div class="param-description">
+                                                
+                                            </div>
+                        
+                                        </li>
+                                    </ul>
+                                </div>
+                        
+                        
+                        
+                        </div>
+                        <div id="method_removeChild" class="method item public">
+                            <h3 class="name"><code>removeChild</code></h3>
+                        
+                                <div class="args">
+                                    <span class="paren">(</span><ul class="args-list inline commas">
+                                        <li class="arg">
+                                                <code>child</code>
+                                        </li>
+                                    </ul><span class="paren">)</span>
+                                </div>
+                        
+                        
+                        
+                                <span class="flag public">public</span>
+                        
+                        
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_component-parent.js.html#l52"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;component-parent.js:52</code></a>
+                                </p>
+                        
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>Remove the child component from this parent component</p>
+                        
+                            </div>
+                        
+                                <div class="params">
+                                    <h4>Parameters:</h4>
+                        
+                                    <ul class="params-list">
+                                        <li class="param">
+                                                <code class="param-name">child</code>
+                                                <span class="type">ComponentUtils.ComponentChild</span>
+                        
+                        
+                                            <div class="param-description">
+                                                
+                                            </div>
+                        
+                                        </li>
+                                    </ul>
+                                </div>
+                        
+                        
+                        
+                        </div>
+                </div>
+
+                <div class="tab-pane" id="properties" role="tabpanel">
+                    <h3>Properties</h3>
+                        <div id="property_children" class="property item protected">
+                            <h3 class="h5 name">
+                                <code>children</code> <small><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></small>
+                            </h3>
+                        
+                            <span class="tag tag-outline"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                        
+                        
+                        
+                                <span class="flag protected">protected</span>
+                        
+                        
+                        
+                            <div class="meta">
+                                        <p>
+                                        Defined in
+                                <a href="../files/lib_component-utils_addon_mixins_component-parent.js.html#l15"><code>lib&#x2F;component-utils&#x2F;addon&#x2F;mixins&#x2F;component-parent.js:15</code></a>
+                                </p>
+                        
+                        
+                            </div>
+                        
+                            <div class="description">
+                                <p>An array of ComponentChild instances which are descendants of this component.</p>
+                        
+                            </div>
+                        
+                        
+                        
+                        </div>
+                </div>
+
+
+        </div>
+    </div>
+</div>                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

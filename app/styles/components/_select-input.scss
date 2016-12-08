@@ -1,0 +1,91 @@
+$select-input-bg                  : $input-bg !default;
+$select-input-bg-disabled         : $input-bg-disabled !default;
+$select-input-border              : $input-border-color !default;
+$select-input-height              : $input-height !default;
+$select-input-padding-vertical    : $input-padding-y !default;
+$select-input-padding-horizontal  : $input-padding-x !default;
+$select-input-error-color         : $state-danger-text !default;
+
+
+.select-input{
+  .input-group{
+    background-color: $select-input-bg;
+    border: solid $input-btn-border-width $input-border-color;
+    border-radius: $input-border-radius;
+    height: calc(#{$select-input-height} - #{$input-btn-border-width * 2});
+    position: relative;
+    width: 100%;
+
+    select.form-control{
+      background: transparent none repeat scroll 0 0;
+      border: none;
+      cursor: pointer;
+      padding-right: $select-input-height + 1;
+      position: relative;
+      z-index: 4;
+
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+
+      &::-ms-expand {
+        display: none;
+      }
+
+      &:focus{
+        outline: thin dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+      }
+
+      &:not([size]):not([multiple]){
+        height: calc(#{$select-input-height} - #{$input-btn-border-width * 4});
+      }
+    }
+
+    .input-group-addon{
+      border-width: 0;
+      border-left: solid $input-btn-border-width $select-input-border;
+      bottom: 0;
+      font-size: 150%;
+      line-height: calc(#{$select-input-height} - #{$input-btn-border-width * 2});;
+      padding:  0 0 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: calc(#{$select-input-height} - #{$input-btn-border-width * 2});;
+      z-index: 2;
+    }
+  }
+
+  .select-input-loading, .select-input-error{
+    @extend .form-control;
+  }
+
+  &.has-error{
+    .select-input-error{
+      color: $select-input-error-color;
+      border-color: $select-input-error-color;
+    }
+  }
+
+  .disabled{
+    background-color: $select-input-bg-disabled;
+
+    select.form-control{
+      cursor: $cursor-disabled;
+    }
+
+    .input-group-addon{
+      background-color: $select-input-bg-disabled;
+      cursor: $cursor-disabled;
+
+      > *{
+        opacity: 0.5;
+      }
+    }
+  }
+}

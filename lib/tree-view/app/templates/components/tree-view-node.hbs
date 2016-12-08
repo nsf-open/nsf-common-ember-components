@@ -1,0 +1,15 @@
+<div data-treeview-node-wrapper class={{wrapperClass}} title={{title}} draggable={{nodeIsDraggable}} tabindex={{nodeTabIndex}} aria-haspopup={{nodeAriaHasPopup}} aria-expanded={{nodeAriaExpanded}}>
+    {{#if iconClass}}
+        <span data-treeview-node-icon-wrapper class={{iconWrapperClass}} tabindex={{iconTabIndex}} aria-haspopup={{iconAriaHasPopup}} aria-expanded={{iconAriaExpanded}}><span data-treeview-node-icon class={{iconClass}} aria-hidden="true"></span></span>
+    {{/if}}
+
+    <span data-treeview-node-label class={{labelClass}}>{{label}}</span>
+</div>
+
+{{#if description}}
+    <div data-treeview-node-description class={{descriptionClass}}>{{#if descAsHtml}}{{{description}}}{{else}}{{description}}{{/if}}</div>
+{{/if}}
+
+{{#if isBranch}}
+    {{tree-view-branch data=children disabled=nodeIsDisabled depth=nextDepth isCollapsed=isCollapsed collapseDuration=collapseDuration sharedProperties=sharedProperties}}
+{{/if}}

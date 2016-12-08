@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>lib/component-utils/addon/mixins/window-scroll-observer.js - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h1 class="file-heading">File: lib/component-utils/addon/mixins/window-scroll-observer.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+
+/**
+ * The WindowScrollObserver mixin aims to make vertical scroll events in the browser easy to detect without being too taxing.
+ * It does this by wrapping jQuery&#x27;s scroll event and then periodically polling its data for changes, which is important since
+ * a large volume of scroll events may be emitted (depending on the browser).
+ *
+ * In the implementing component, a &#x60;onWindowScroll()&#x60; callback method is provided which will be executed, at most, only as
+ * often as the &#x60;windowScrollCheckFrequency&#x60; property is set to. E.g. if &#x60;windowScrollCheckFrequency=500&#x60; then at most &#x60;onWindowScroll()&#x60;
+ * will only be executed every 500 milliseconds while scrolling occurs.
+ *
+ * The additional &#x60;windowScrollCoolOffPeriod&#x60; property will further temper the execution of &#x60;onWindowScroll()&#x60; by delaying its execution
+ * until a set time after the last scroll event has been emitted. E.g. if &#x60;windowScrollCoolOffPeriod=250&#x60; then &#x60;onWindowScroll()&#x60; will
+ * not be executed until 250 milliseconds after the last scroll event occurred. If additional scroll events are emitted during that interm
+ * the timer will reset.
+ *
+ * @class WindowScrollObserver
+ * @namespace Mixins
+ * @module component-utils
+ * @submodule mixins
+ * @extend Ember.Mixins
+ */
+export default Ember.Mixin.create({
+
+    /**
+     * The frequency, in milliseconds, to poll for scroll updates.
+     *
+     * @property windowScrollCheckFrequency
+     * @type int
+     * @default 500
+     */
+    windowScrollCheckFrequency: 500,
+
+
+    /**
+     * The amount of time to wait, in milliseconds, between when the last scroll event was emitted, and the &#x27;onWindowScroll()&#x27; callback
+     * should be executed.
+     *
+     * @property windowScrollCoolOffPeriod
+     * @type int
+     * @default 250
+     */
+    windowScrollCoolOffPeriod: 250,
+
+
+    /**
+     * If true, &#x60;windowScrollCheckFrequency&#x60; and &#x60;windowScrollCoolOffPeriod&#x60; will be ignored, and &#x60;onWindowScroll()&#x60; will be executed as
+     * often as scroll events are emitted.
+     *
+     * @property windowScrollEmitContinuous
+     * @type boolean
+     * @default false
+     */
+    windowScrollEmitContinuous: false,
+
+
+    /**
+     *
+     *
+     * @property windowScrollEnabled
+     * @type boolean
+     * @default true
+     */
+    windowScrollEnabled: true,
+
+
+    /**
+     *
+     *
+     * @property _windowScrollDestroyer
+     * @type Function
+     * @default null
+     * @private
+     */
+    _windowScrollDestroyer: null,
+
+
+    /**
+     * @method _onDidInsertElement
+     * @private
+     */
+    _onDidInsertElement: Ember.on(&#x27;didInsertElement&#x27;, function() {
+        Ember.run.next(this, function() {
+            if (this.get(&#x27;windowScrollEnabled&#x27;)) {
+                this._buildWindowScrollIntervalMachination();
+            }
+        });
+
+        this._super.apply(this, arguments);
+    }),
+
+
+    /**
+     * Detach listeners and clear the interval when the component is destroyed.
+     *
+     * @method _onWillDestroyElement
+     * @private
+     */
+    _onWillDestroyElement: Ember.on(&#x27;willDestroyElement&#x27;, function() {
+        this.windowScrollDestroy();
+        this._super.apply(this, arguments);
+    }),
+
+
+    /**
+     *
+     * @method windowScrollEnable
+     */
+    windowScrollEnable: function() {
+        if (!this.get(&#x27;windowScrollEnabled&#x27;)) {
+            this.set(&#x27;windowScrollEnabled&#x27;, true);
+            this._buildWindowScrollIntervalMachination();
+        }
+    },
+
+
+    /**
+     *
+     * @method windowScrollDisable
+     */
+    windowScrollDisable: function() {
+        if (this.get(&#x27;windowScrollEnabled&#x27;)) {
+            this.set(&#x27;windowScrollEnabled&#x27;, false);
+            this.windowScrollDestroy();
+        }
+    },
+
+
+    /**
+     *
+     *
+     * @method windowScrollDestroy
+     * @private
+     * @final
+     */
+    windowScrollDestroy: function() {
+        let destructor = this.get(&#x27;_windowScrollDestroyer&#x27;);
+
+        if (destructor) {
+            destructor.call();
+            this.set(&#x27;_windowScrollDestroyer&#x27;, null);
+        }
+    },
+
+
+    /**
+     *
+     *
+     * @method _buildWindowScrollInvervalMachination
+     * @private
+     * @final
+     */
+    _buildWindowScrollIntervalMachination: function() {
+        let frequency   = this.get(&#x27;windowScrollCheckFrequency&#x27;),
+            continuous  = this.get(&#x27;windowScrollEmitContinuous&#x27;),
+            coolOff     = this.get(&#x27;windowScrollCoolOffPeriod&#x27;),
+            self        = this;
+
+        // We&#x27;re scoping out this stuff so that we don&#x27;t have to deal with bind() when adding/removing listeners.
+        let scopedActivities = (function() {
+            let hasCallback = Ember.typeOf(self.onWindowScroll) === &#x27;function&#x27;,
+                windowScroll = false,
+                timeoutId = null;
+
+            let intervalId = setInterval(function() {
+                if (windowScroll) {
+                    if (continuous) {
+                        if (hasCallback) {
+                            self.onWindowScroll();
+                        }
+
+                        windowScroll = false;
+                    } else if (hasCallback) {
+                        if (timeoutId) {
+                            clearTimeout(timeoutId);
+                        }
+
+                        timeoutId = setTimeout(() =&gt; {
+                            self.onWindowScroll();
+                            windowScroll = false;
+                            timeoutId = null;
+                        }, coolOff);
+                    }
+                }
+            }, frequency);
+
+            /*
+             * @method scrollListener
+             * @returns {void}
+             */
+            function scrollListener() {
+                windowScroll = true;
+            }
+
+            Ember.$(window).scroll(scrollListener);
+
+            // Returns a scoped function to tear things down.
+            return function() {
+                Ember.$(window).off(&#x27;scroll&#x27;, scrollListener);
+                clearInterval(intervalId);
+                intervalId = null;
+            };
+        }());
+
+        this.set(&#x27;_windowScrollDestroyer&#x27;, scopedActivities);
+    }
+});
+
+    </pre>
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

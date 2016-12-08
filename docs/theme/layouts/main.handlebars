@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{{htmlTitle}}</title>
+        <link rel="stylesheet" href="{{projectAssets}}/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="{{projectAssets}}/css/main.css">
+        <link rel="stylesheet" href="{{projectAssets}}/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="{{projectAssets}}/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="{{projectAssets}}/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+{{>sidebar}}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    {{!>options}}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+{{>layout_content}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="{{projectAssets}}/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="{{projectAssets}}/../api.js"></script>
+        <script src="{{projectAssets}}/js/jquery-3.1.1.min.js"></script>
+        <script src="{{projectAssets}}/js/bootstrap/util.js"></script>
+        <script src="{{projectAssets}}/js/bootstrap/tab.js"></script>
+    </body>
+</html>

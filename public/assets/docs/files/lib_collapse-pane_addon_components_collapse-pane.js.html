@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>lib/collapse-pane/addon/components/collapse-pane.js - NSF Ember Commons</title>
+        <link rel="stylesheet" href="../assets/../../css/nsf-ember-commons.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/vendor/prettify-github/prettify.css">
+        <link rel="icon" href="../assets/favicon.ico">
+    </head>
+
+    <body>
+        <div id="doc">
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h1><img src="../assets/../../images/nsf-crest.gif"> Ember Commons API</h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="bd">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <div id="docs-sidebar" class="sidebar">
+<div class="card">
+        <p class="card-header">Modules</p>
+        <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action" href="../modules/anchor-to.html">anchor-to</a>
+                <a class="list-group-item list-group-item-action" href="../modules/ck-editor.html">ck-editor</a>
+                <a class="list-group-item list-group-item-action" href="../modules/collapse-pane.html">collapse-pane</a>
+                <a class="list-group-item list-group-item-action" href="../modules/component-utils.html">component-utils</a>
+                <a class="list-group-item list-group-item-action" href="../modules/tool-tip.html">tool-tip</a>
+        </div>
+
+    <p class="card-header">Classes</p>
+    <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" href="../classes/Components.AnchorTo.html">Components.AnchorTo</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CKEditor.html">Components.CKEditor</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePane.html">Components.CollapsePane</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneBody.html">Components.CollapsePaneBody</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.CollapsePaneToggle.html">Components.CollapsePaneToggle</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Components.ToolTip.html">Components.ToolTip</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentChild.html">Mixins.ComponentChild</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.ComponentParent.html">Mixins.ComponentParent</a>
+            <a class="list-group-item list-group-item-action" href="../classes/Mixins.WindowScrollObserver.html">Mixins.WindowScrollObserver</a>
+    </div>
+
+</div>                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="docs-main">
+<h1 class="file-heading">File: lib/collapse-pane/addon/components/collapse-pane.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import ComponentParentMixin from &#x27;component-utils/mixins/component-parent&#x27;;
+import CollapsePaneToggle from &#x27;./collapse-pane-toggle&#x27;;
+import CollapsePaneBody from &#x27;./collapse-pane-body&#x27;;
+
+/**
+ *
+ *
+ * @class CollapsePane
+ * @namespace Components
+ * @module collapse-pane
+ * @submodule components
+ * @extends Ember.Component
+ * @uses Mixins.ComponentParent
+ */
+export default Ember.Component.extend(ComponentParentMixin, {
+    attributeBindings: [&#x27;data-test-id&#x27;],
+
+    /**
+     * A string attribute that will be added to the root node of the collapse pane to act as a fixed
+     * query selector for testing purposes.
+     *
+     * @property data-test-id
+     * @type string
+     * @default collapse-pane
+     */
+    &#x27;data-test-id&#x27;: &#x27;collapse-pane&#x27;,
+
+
+    /**
+     * A boolean indicating the state of the collapse pane body.
+     *
+     * @property open
+     * @type boolean
+     * @default true
+     */
+    open: true,
+
+
+    /**
+     * A boolean indicating whether or not the toggling functionality of this collapse-pane is disabled.
+     *
+     * @property disabled
+     * @type boolean
+     * @default false
+     */
+    disabled: false,
+
+
+    /**
+     * A reference to the collapse pane&#x27;s toggle child component, if it exists.
+     *
+     * @property toggle
+     * @type CollapsePaneToggle
+     * @default null
+     * @readOnly
+     */
+    toggle: Ember.computed(&#x27;children.[]&#x27;, function(){
+        return this.get(&#x27;children&#x27;).find(item =&gt; { return item instanceof CollapsePaneToggle; });
+    }).readOnly(),
+
+
+    /**
+     * A reference to the collapse pane&#x27;s body child component, if it exists.
+     *
+     * @property body
+     * @type CollapsePaneBody
+     * @default null
+     * @readOnly
+     */
+    body: Ember.computed(&#x27;children.[]&#x27;, function(){
+        return this.get(&#x27;children&#x27;).find(item =&gt; { return item instanceof CollapsePaneBody; });
+    }).readOnly(),
+
+
+    /**
+     * An Ember observer that watches for changes in the open/close state of the collapse panel and dispatches actions
+     * accordingly.
+     *
+     * @method _onStateChange
+     * @private
+     */
+    _onStateChange: Ember.observer(&#x27;open&#x27;, function(){
+        if(this.get(&#x27;open&#x27;)){
+            this.get(&#x27;body&#x27;).openBody();
+
+            this.sendAction(&#x27;onOpen&#x27;);
+            this.sendAction(&#x27;onToggle&#x27;, true);
+        }
+        else{
+            this.get(&#x27;body&#x27;).closeBody();
+
+            this.sendAction(&#x27;onClose&#x27;);
+            this.sendAction(&#x27;onToggle&#x27;, false);
+        }
+    })
+});
+    </pre>
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="../assets/vendor/prettify/prettify-min.js"></script>
+        <script>prettyPrint();</script>
+
+        <script type="text/javascript">
+            window.YUI = (function(){
+                this.Y   = {};
+                this.add = function(name, fn){
+                    var self = this;
+
+                    this.Y[name] = function(){
+                        return fn.call(self, self.Y);
+                    }
+                };
+
+                return this;
+            })();
+        </script>
+
+        <script src="../assets/../api.js"></script>
+        <script src="../assets/js/jquery-3.1.1.min.js"></script>
+        <script src="../assets/js/bootstrap/util.js"></script>
+        <script src="../assets/js/bootstrap/tab.js"></script>
+    </body>
+</html>

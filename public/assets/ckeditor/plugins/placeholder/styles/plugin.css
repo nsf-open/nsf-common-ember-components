@@ -1,0 +1,7 @@
+.placeholder-property{
+    color: #0000ff;
+}
+
+.cke_widget_wrapper:hover > .placeholder-property{
+    outline-color: #0000ff !important;
+}

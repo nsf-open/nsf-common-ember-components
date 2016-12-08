@@ -1,0 +1,12 @@
+{
+  "name": "NSF Ember Commons",
+  "description": "",
+  "version": "1.0.0",
+  "url": "",
+  "options": {
+    "paths": ["./lib"],
+    "outdir": "./public/assets/docs",
+    "linkNatives": true,
+    "themedir": "./docs/theme"
+  }
+}

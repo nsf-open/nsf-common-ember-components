@@ -1,0 +1,45 @@
+<!-- The really simple version -->
+
+<div class="tree-view"> <!-- The component root element -->
+    <ul> <!-- The tree trunk -->
+        <li> <!-- A branch node, it has children -->
+            <ul> <!-- A tree branch -->
+                <li></li> <!-- A leaf node, no children -->
+                <li></li> <!-- A leaf node, no children -->
+            </ul>
+        </li>
+        <li></li> <!-- A leaf node, no children -->
+    </ul>
+</div>
+
+
+
+<!-- The really simple version with a bit more markup and some default classes -->
+
+<div class="tree-view">
+    <ul class="tv-trunk tv-branch tv-branch-depth-1">
+        <li class="tv-branch-node">
+            <div class="tv-branch-node-wrapper">
+                <span class="tv-branch-node-label">Branch Label</span>
+            </div>
+            <ul class="tv-branch tv-branch-depth-2">
+                <li class="tv-leaf-node">
+                    <div class="tv-leaf-node-wrapper">
+                        <span class="tv-leaf-node-label">Leaf Label</span>
+                    </div>
+                </li>
+                <li class="tv-leaf-node">
+                    <div class="tv-leaf-node-wrapper">
+                        <span class="tv-leaf-node-label">Leaf Label</span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+
+        <li class="tv-leaf-node">
+            <div class="tv-leaf-node-wrapper">
+                <span class="tv-leaf-node-label">Leaf Label</span>
+            </div>
+        </li>
+    </ul>
+</div>

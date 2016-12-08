@@ -1,0 +1,311 @@
+<div class="row">
+    <div class="col-xs-6">
+        {{#if isCreated}}
+            <div class="alert alert-info">
+                {{tool-tip animation=animation delay=delay minWidth=minWidth
+                    maxWidth=maxWidth position=position tipTrigger=tipTrigger
+                    theme=theme arrow=arrow arrowColor=arrowColor
+                    autoClose=autoClose debug=debug hideOnClick=hideOnClick
+                    interactive=interactive interactiveTolerance=interactiveTolerance multiple=multiple
+                    offsetX=offsetX offsetY=offsetY onlyOne=onlyOne
+                    positionTracker=positionTracker touchDevices=touchDevices updateAnimation=updateAnimation
+                    restoration=restoration title=title text="Using the title attribute. Hover your cursor here for more information!"
+                    functionInit=tipAFunctionInit functionBefore=tipAFunctionBefore functionReady=tipAFunctionReady functionAfter=tipAFunctionAfter
+                }}
+            </div>
+
+            <div class="alert alert-info">
+                {{#tool-tip animation=animation delay=delay minWidth=minWidth
+                    maxWidth=maxWidth position=position tipTrigger=tipTrigger
+                    theme=theme arrow=arrow arrowColor=arrowColor
+                    autoClose=autoClose debug=debug hideOnClick=hideOnClick
+                    interactive=interactive interactiveTolerance=interactiveTolerance multiple=multiple
+                    offsetX=offsetX offsetY=offsetY onlyOne=onlyOne
+                    positionTracker=positionTracker touchDevices=touchDevices updateAnimation=updateAnimation
+                    restoration=restoration
+                    functionInit=tipBFunctionInit functionBefore=tipBFunctionBefore functionReady=tipBFunctionReady functionAfter=tipBFunctionAfter
+                }}
+                    Using <code>data-tooltip-content</code> - content will not be dynamically updated :-/. Hover your cursor here for more information!
+                    <div data-tooltip-content>
+                        {{title}}
+                    </div>
+                {{/tool-tip}}
+            </div>
+
+            <div class="card" style="margin-bottom:0;">
+                <h5 class="card-header">Tooltip Events</h5>
+                <div class="card-block">
+                    <ul class="list-unstyled" style="height: 150px; overflow-y: scroll;">
+                        {{#each tipEventMessageQueue as |msg|}}
+                            <li>{{msg}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        {{else}}
+            <div class="alert alert-warning" style="margin-bottom:0;">
+                When you Create a tooltip it will appear here.
+            </div>
+        {{/if}}
+    </div>
+
+    <div class="col-xs-6">
+        <div class="card">
+            <h4 class="card-header">Parameters</h4>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{#if isCreated}}
+                            <button type="button" class="btn btn-danger btn-block" {{action 'destroyTooltip'}}>Destroy Tooltip</button>
+                        {{else}}
+                            <button type="button" class="btn btn-primary btn-block" {{action 'createTooltip'}}>Create Tooltip</button>
+                        {{/if}}
+                        <br />
+                    </div>
+                </div>
+
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Content" title="The content of the tooltip"}}
+                        <div class="col-sm-9">
+                            {{textarea class="form-control" rows="5" value=title}}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Trigger" title="Set how tooltips should be activated and closed. This can only be set on an uninitialized component."}}
+                        <div class="col-sm-9">
+                            <select class="form-control" onchange={{action (mut tipTrigger) value="target.value"}} disabled={{isCreated}}>
+                                <option value="hover">Hover</option>
+                                <option value="click">Click</option>
+                            </select>
+                            <span><code>tipTrigger="{{tipTrigger}}"</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Position" title="Set the position of the tooltip."}}
+                        <div class="col-sm-9">
+                            <select class="form-control" onchange={{action (mut position) value="target.value"}}>
+                                <option value="right">Right</option>
+                                <option value="top" selected>Top</option>
+                                <option value="left">Left</option>
+                                <option value="bottom">Bottom</option>
+                                <option value="top-right">Top Right</option>
+                                <option value="bottom-right">Bottom Right</option>
+                                <option value="top-left">Top Left</option>
+                                <option value="bottom-left">Bottom Left</option>
+                            </select>
+                            <span><code>position="{{position}}"</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Animation" title="Determines how the tooltip will animate in and out."}}
+                        <div class="col-sm-9">
+                            <select class="form-control" onchange={{action (mut animation) value="target.value"}}>
+                                <option value="fade" selected>Fade</option>
+                                <option value="grow">Grow</option>
+                                <option value="swing">Swing</option>
+                                <option value="slide">Slide</option>
+                                <option value="fall">Fall</option>
+                            </select>
+                            <span><code>animation="{{animation}}"</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Delay" title="How long it takes (in milliseconds) for the tooltip to start animating in."}}
+                        <div class="col-sm-9">
+                            {{input class="form-control" type="number" value=delay step="10"}}
+                            <span><code>delay={{delay}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Speed" title="Set the speed of the animation."}}
+                        <div class="col-sm-9">
+                            {{input class="form-control" type="number" value=speed step="10"}}
+                            <span><code>speed={{speed}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Timer" title="How long the tooltip should be allowed to live before closing."}}
+                        <div class="col-sm-9">
+                            {{input class="form-control" type="number" value=timer step="10"}}
+                            <span><code>timer={{timer}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Min Width" title="Set a minimum width for the tooltip."}}
+                        <div class="col-sm-9">
+                            {{input class="form-control" type="number" value=minWidth step="10"}}
+                            <span><code>minWidth={{minWidth}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Max Width" title="Set a maximum width for the tooltip."}}
+                        <div class="col-sm-9">
+                            {{input class="form-control" type="number" value=maxWidth step="10"}}
+                            <span>{{#if maxWidth}}<code>maxWidth={{maxWidth}}</code>{{/if}}&nbsp;</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Theme" title="Set the theme used for your tooltip (CSS class)."}}
+                        <div class="col-sm-9">
+                            {{input class="form-control" type="text" value=theme step="10"}}
+                            <span><code>theme="{{theme}}"</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Arrow" title="Adds the &qt;speech bubble arrow&qt; to the tooltip."}}
+                        <div class="col-sm-9">
+                            <label class="control-label">
+                                {{input type="checkbox" checked=arrow}}
+                            </label>
+                            <br />
+                            <span><code>arrow={{arrow}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Arrow Color" title="Select a specific color for the &qt;speech bubble arrow&qt;. By default the arrow will inherit the tooltip's background color"}}
+                        <div class="col-sm-9">
+                            {{input class="form-control" type="color" value=arrowColor}}
+                            <span>{{#if arrowColor}}<code>arrowColor="{{arrowColor}}"</code>{{/if}}&nbsp;</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Auto Close" title="If autoClose is set to false, the tooltip will never close unless you call the 'hide' method yourself."}}
+                        <div class="col-sm-9">
+                            <label class="control-label">
+                                {{input type="checkbox" checked=autoClose}}
+                            </label>
+                            <br />
+                            <span><code>autoClose={{autoClose}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Debug" title="Tooltipster logs notices into the console when you're doing something you ideally shouldn't be doing. Set to false to disable logging."}}
+                        <div class="col-sm-9">
+                            <label class="control-label">
+                                {{input type="checkbox" checked=debug}}
+                            </label>
+                            <br />
+                            <span><code>debug={{debug}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Hide on click" title="If true, the tooltip will close if its origin is clicked. This option only applies when 'trigger' is 'hover' and 'autoClose' is false."}}
+                        <div class="col-sm-9">
+                            <label class="control-label">
+                                {{input type="checkbox" checked=hideOnClick}}
+                            </label>
+                            <br />
+                            <span><code>hideOnClick={{hideOnClick}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Interactive" title="Give users the possibility to interact with the tooltip. Unless autoClose is set to false, the tooltip will still close if the user moves away from or clicks out of the tooltip."}}
+                        <div class="col-sm-9">
+                            <label class="control-label">
+                                {{input type="checkbox" checked=interactive}}
+                            </label>
+                            <br />
+                            <span><code>interactive={{interactive}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Interactive Tolerance" title="If the tooltip is interactive and activated by a hover event, set the amount of time (milliseconds) allowed for a user to hover off of the tooltip activator (origin) on to the tooltip itself - keeping the tooltip from closing."}}
+                        <div class="col-sm-9">
+                            {{input class="form-control" type="number" value=interactiveTolerance step="10"}}
+                            <span><code>interactiveTolerance={{interactiveTolerance}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Offset X" title="Offsets the tooltip (in pixels) farther left/right from the origin."}}
+                        <div class="col-sm-9">
+                            {{input class="form-control" type="number" value=offsetX step="1"}}
+                            <span><code>offsetX={{offsetX}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Offset Y" title="Offsets the tooltip (in pixels) farther up/down from the origin."}}
+                        <div class="col-sm-9">
+                            {{input class="form-control" type="number" value=offsetY step="1"}}
+                            <span><code>offsetY={{offsetY}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Only One" title="If true, only one tooltip will be allowed to be active at a time. Non-autoclosing tooltips will not be closed though."}}
+                        <div class="col-sm-9">
+                            <label class="control-label">
+                                {{input type="checkbox" checked=onlyOne}}
+                            </label>
+                            <br />
+                            <span><code>onlyOne={{onlyOne}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Position Tracker" title="Will reposition the tooltip if the origin moves. As this option may have an impact on performance, we suggest you enable it only if you need to."}}
+                        <div class="col-sm-9">
+                            <label class="control-label">
+                                {{input type="checkbox" checked=positionTracker}}
+                            </label>
+                            <br />
+                            <span><code>positionTracker={{positionTracker}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Touch Devices" title="If set to false, tooltips will not show on pure-touch devices, unless you open them yourself with the 'show' method. Touch gestures on devices which also have a mouse will still open the tooltips though."}}
+                        <div class="col-sm-9">
+                            <label class="control-label">
+                                {{input type="checkbox" checked=touchDevices}}
+                            </label>
+                            <br />
+                            <span><code>touchDevices={{touchDevices}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Update Animation" title="If a tooltip is open while its content is updated, play a subtle animation when the content changes."}}
+                        <div class="col-sm-9">
+                            <label class="control-label">
+                                {{input type="checkbox" checked=updateAnimation}}
+                            </label>
+                            <br />
+                            <span><code>updateAnimation={{updateAnimation}}</code></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{tool-tip tagName="label" class="col-sm-3 col-form-label" text="Restoration" title="Specify if a TITLE attribute should be restored on the HTML element after a call to the 'destroy' method. This attribute may be omitted, or be restored with the value that existed before Tooltipster was initialized, or be restored with the stringified value of the current content. Note: in case of multiple tooltips on a single element, only the last destroyed tooltip may trigger a restoration."}}
+                        <div class="col-sm-9">
+                            <select class="form-control" onchange={{action (mut restoration) value="target.value"}}>
+                                <option value="none">None</option>
+                                <option value="previous">Previous</option>
+                                <option value="current" selected>Current</option>
+                            </select>
+                            <span><code>restoration="{{restoration}}"</code></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

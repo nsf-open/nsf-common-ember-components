@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h1 class="display-3">CKEditor</h1>
+        <p class="lead">A CKEditor instance with the ability to insert read only content.</p>
+        <p>Drag and drop an option from the list on the left side of the editor to have its content loaded into the editor at the cursor.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 mb-1">
+        <button type="button" class="btn btn-primary" {{action 'saveContent'}}>Save</button>
+    </div>
+</div>
+
+<div class="row" style="background-color:white; padding-top:1rem; padding-bottom:1rem;">
+    <div class="col-xs-3">
+      {{#if model.mergeFields}}
+        {{tree-view data=model.mergeFields ready=(action 'treeViewReady') onLeafDragStart=(action 'leafDragStart')}}
+      {{else}}
+        No Merge Groups to display.
+      {{/if}}
+    </div>
+
+    <div class="col-xs-9">
+        {{ck-editor content=model.editorContent options=editorOptions ready=(action 'editorReady')}}
+    </div>
+</div>
+
+<hr />
+
+<h4>Source Code</h4>
+
+{{#collapse-pane class="card" open=false as |isOpen|}}
+    <div class="card-header">
+        <h5 class="mb-0 float-xs-left">Controller</h5>
+        {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Hide' 'Show')}}
+    </div>
+    {{#collapse-pane-body}}
+        {{code-snippet name="ck-editor-insert-demo-controller.js" class="mb-0"}}
+    {{/collapse-pane-body}}
+{{/collapse-pane}}
+
+{{#collapse-pane class="card" open=false as |isOpen|}}
+    <div class="card-header">
+        <h5 class="mb-0 float-xs-left">Template</h5>
+        {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Hide' 'Show')}}
+    </div>
+    {{#collapse-pane-body}}
+        {{code-snippet name="ck-editor-insert-demo-template.hbs" class="mb-0"}}
+    {{/collapse-pane-body}}
+{{/collapse-pane}}

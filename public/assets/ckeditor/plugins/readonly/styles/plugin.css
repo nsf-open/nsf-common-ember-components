@@ -1,0 +1,16 @@
+*[data-editor-readonly]{
+  color: #333333;
+  background-color: #cce1ef;
+}
+
+.cke_widget_wrapper:hover > *[data-editor-readonly]{
+    outline-color: #0000ff !important;
+}
+
+*[data-editor-noaccess]{
+  color: #2287C5;
+}
+
+.cke_widget_wrapper:hover > *[data-editor-noaccess]{
+    outline-color: #ff0000 !important;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "tool-tip",
+  "dependencies": {
+    "tooltipster": "^3.3.0"
+  }
+}

@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Directory</h1>
+        <p class="lead">Here you will find a list of all currently available addons, as well as some more advanced demos of them in action.</p>
+
+        <hr />
+
+        <h2>Addons</h2>
+
+        {{#each model as |group|}}
+            <h4>{{group.letter}}</h4>
+            <ul>
+                {{#each group.list as |addon|}}
+                    <li><li>{{link-to addon.prettyName 'addon' addon}} <span class="text-muted">({{addon.prettyType}})</span></li></li>
+                {{/each}}
+            </ul>
+        {{/each}}
+
+        <hr />
+
+        <h2>Advanced Demos</h2>
+        <ul>
+            <li>{{link-to 'CKEditor with insert support' 'demos.ck-editor.insert'}}</li>
+            <li>{{link-to 'CKEditor Inline with insert support' 'demos.ck-editor.inline-insert'}}</li>
+            <li>{{link-to 'DateTime Pickers linked to enforce valid time range' 'demos.datetime-picker.linked'}}</li>
+            <li>{{link-to 'Sort List + Paged List' 'demos.sort-list.paged-list'}}</li>
+        </ul>
+    </div>
+</div>

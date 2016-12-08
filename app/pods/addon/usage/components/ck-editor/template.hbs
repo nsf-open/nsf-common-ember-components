@@ -1,0 +1,38 @@
+<h4>Usage Examples</h4>
+<ul>
+    <li>{{anchor-to href="#basics" text="The basics"}}</li>
+    <li>{{anchor-to href="#custom" text="Custom plugins"}}</li>
+    <li>{{anchor-to href="#configuration" text="Editor config"}}</li>
+</ul>
+
+<h5 id="basics">The basics</h5>
+<p>At minimum you'll probably want to be able to do two things with your editor: display content, and save content. Due to the complexities of what's going on under the hood we will need to do a little more work than is usual (relying on bound properties), so lets break it down. Given the following implementation in your template:</p>
+{{code-snippet rawSource="{{ck-editor content=\"<p>Hello World!</p>\" ready=(action \"editorReady\")}}" language="hbs"}}
+
+<ol>
+    <li>The value of the <code>content</code> property is what gets passed into the editor as its initial value. The value of this may be a string of either plain text or raw HTML markup. Now, <code>content</code> is a one-way property: you can set it to update the content in the editor, but you cannot watch for changes on it to retrieve contents back out. This is because of the large amount of overhead which would be involved if the component were to monitor every change within the editor. Don't worry though, the <code>ready</code> action will give you what you need.<br /><br /></li>
+    <li>The <code>ready</code> action will be called after the editor's own <code>instanceReady</code> event is fired. This action is provided two arguments: a reference to the instantiated editor instance, and an object containing callback methods to make some common operations easier (such as... wait for it... saving).</li>
+</ol>
+
+<p>If, for instance, your <code>ready</code> action method may exists within the parent controller then it might look as follows.</p>
+{{code-snippet name="ck-editor-ready-action.js"}}
+
+<p>To then save your content from the editor at a later point, all you need to do is call the <code>save()</code> method within the provided callbacks object.</p>
+{{code-snippet rawSource="let newContent = this.get('callbacks').save();" language="js"}}
+
+
+<h5 id="custom">Custom plugins</h5>
+<p>You may find the need to further enhance CKEditor instances with third-party or custom plugins/skins/etc. While authoring CKEditor extensions is outside the scope of this documentation, here we will describe how to include those extensions with your project. Here we go:</p>
+<ol>
+    <li>Find your <code>/public/assets/ckeditor</code> directory. If you do not have one, create it.</li>
+    <li>Add your plugin code to this directory just as you would with a standard CKEditor implementation. See the <a href="http://docs.ckeditor.com/#!/guide/dev_advanced_installation" target="_blank">advanced installation guide</a> for more details. Wherever you see <code>&lt;CKEditor folder&gt;</code> in the documentation they are referring to this directory.</li>
+</ol>
+<p>For example, lets say we want to add the <code>office2013</code> CKEditor skin to our project. After downloading the extension we would need to add it to the <code>/public/assets/ckeditor/skins</code> directory.</p>
+
+
+<h5 id="configuration">Editor config</h5>
+<p>You may also provide configuration to the editor instance via the <code>options</code> property. This is handed directly to the editor instance when it is initialized, and supports anything described in <a href="http://docs.ckeditor.com/#!/api/CKEDITOR.config" target="_blank">CKEDITOR.config</a>. For example, lets say we added CKEditor's <code>office2013</code> skin to our project via the steps outlined in {{anchor-to href="#custom" text="custom plugins"}}. To use with an editor instance we would define an options object such as:</p>
+{{code-snippet rawSource=editorOptionsString language="json"}}
+
+<p>and then give it to the component:</p>
+{{code-snippet rawSource="{{ck-editor options=editorOptions content=\"<p>Hello World!</p>\" ready=(action \"editorReady\")}}" language="hbs"}}

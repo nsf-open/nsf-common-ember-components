@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-xs-6">
+        <div class="card">
+            <h4 class="card-header">Selection Tree</h4>
+            <div class="card-block" style="height: 300px; overflow-y: scroll;">
+                {{tree-view data=treeData onLeafClick=(action 'leafClick') onBranchToggle=(action 'branchToggle') onNodeFocusIn=(action 'nodeFocusIn') onNodeFocusOut=(action 'nodeFocusOut')}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+        <div class="card">
+            <h4 class="card-header">Actions</h4>
+            <div class="card-block" style="height: 300px; overflow-y: scroll;">
+                <ul>
+                    {{#each actionLog as |item|}}
+                        <li>{{{item}}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#collapse-pane class="card" open=false as |isOpen|}}
+    <div class="card-header">
+        <h5 class="mb-0 float-xs-left">Component</h5>
+        {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Hide' 'Show')}}
+    </div>
+    {{#collapse-pane-body}}
+        {{code-snippet name="tree-view-addon-demo-component.js" class="mb-0"}}
+    {{/collapse-pane-body}}
+{{/collapse-pane}}
+
+{{#collapse-pane class="card" open=false as |isOpen|}}
+    <div class="card-header">
+        <h5 class="mb-0 float-xs-left">Template</h5>
+        {{collapse-pane-toggle class="btn btn-primary btn-sm float-xs-right" text=(if isOpen 'Hide' 'Show')}}
+    </div>
+    {{#collapse-pane-body}}
+        {{code-snippet name="tree-view-addon-demo-template.hbs" class="mb-0"}}
+    {{/collapse-pane-body}}
+{{/collapse-pane}}

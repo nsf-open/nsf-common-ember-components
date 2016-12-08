@@ -1,0 +1,14 @@
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+  <filter>
+    <filter-name>noCache</filter-name>
+    <filter-class>com.samaxes.filter.NoCacheFilter</filter-class>
+  </filter>
+
+  <!-- Or URL mapping -->
+  <filter-mapping>
+    <filter-name>noCache</filter-name>
+    <url-pattern>/index.html</url-pattern>
+  </filter-mapping>
+
+</web-app>
